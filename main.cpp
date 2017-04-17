@@ -2,37 +2,65 @@
 #include <stdlib.h>
 #include "Emplacement.cpp"
 #include "Mouvement.cpp"
+#include "PlayerBot.cpp"
 
 #define TAILLE 9
 
+//GRILLE[X][Y]
+
 void printGrille(Emplacement grille[TAILLE][TAILLE]) {
-	printf("Affichage du plateau : \n");
-	int i,j;
-	for (i = 0; i < TAILLE; ++i)
+	printf("=========================\n");
+	printf("======== PLATEAU ========\n");
+	printf("=========================\n");
+	int x,y;
+	int score[2] = {0, 0};
+	printf("=    ==0== ==1== ==2== ==3== ==4== ==5== ==6== ==7== ==8==  =\n");
+	for (y = 0; y < TAILLE; ++y)
 	{
-		for (j = 0; j < TAILLE; ++j)
+		printf("= %d: ", y);
+		for (x = 0; x < TAILLE; ++x)
 		{
-			if (grille[j][i].valeur != 2)
-				printf("%d ", grille[j][i].valeur);
+			if (grille[x][y].valeur != 2) {
+				(grille[x][y].valeur)?printf("\033[31m"):printf("\033[32m");
+				printf("(%d:%d) ", grille[x][y].valeur, grille[x][y].hauteur);
+				printf("\033[39m");
+				score[grille[x][y].valeur]+=grille[x][y].hauteur;
+			}
 			else
-				printf("  ");
+				printf("      ");
 		}
-	printf("\n");
-}
+		printf(" =\n");
+	}
+	printf("==== 0 : %d | 1 : %d ====\n", score[0], score[1]);
 }
 
-
+void getPoints(int* point_zero, int* point_one, Emplacement grille[TAILLE][TAILLE]) {
+	int x,y;
+	*point_zero = 0;
+	*point_one = 0;
+	for (y = 0; y < TAILLE; ++y)
+	{
+		for (x = 0; x < TAILLE; ++x)
+		{
+			if(grille[x][y].valeur == 1) {
+				*point_one+=grille[x][y].hauteur;
+			} 
+			if(grille[x][y].valeur == 0) {
+				*point_zero+=grille[x][y].hauteur;
+			}	
+		}
+	}
+}
 
 void initGrille(Emplacement grille[TAILLE][TAILLE]) {
-	int i, j;
+	int x,y;
 
 	//on remplit case par case en changeant de couleur à chaque ligne
-	for (i = 0; i < TAILLE; ++i)
+	for (y = 0; y < TAILLE; ++y)
 	{
-		for (j = 0; j < TAILLE; ++j)
+		for (x = 0; x < TAILLE; ++x)
 		{
-			grille[j][i].init(i%2);
-			//grille[i][j].init(0);
+			grille[x][y].init(y%2);
 		}
 	}
 
@@ -54,7 +82,6 @@ void initGrille(Emplacement grille[TAILLE][TAILLE]) {
 	grille[7][2].valeur = 2;
 	grille[8][2].valeur = 2;
 	grille[0][3].valeur = 2;
-	grille[8][3].valeur = 2;
 	grille[8][5].valeur = 2;
 	grille[0][6].valeur = 2;
 	grille[1][6].valeur = 2;
@@ -74,7 +101,7 @@ void initGrille(Emplacement grille[TAILLE][TAILLE]) {
 
 
 	//custom -> à supprimer
-	grille[3][2].hauteur = 0;
+	//grille[3][2].hauteur = 0;
 }
 
 int main(int argc, char const *argv[])
@@ -85,8 +112,75 @@ int main(int argc, char const *argv[])
 
 	printGrille(grille);
 
-	Mouvement depart;
-	depart.init(2,3,0,0, grille);
+	int points_Martin = 0, points_Landry = 0;
+	int score_m = 0, score_l = 0;
+
+	PlayerBot Martin, Landry;
+	PlayerBot* actual;
+	Martin.init(0, "Martin");
+	Landry.init(1, "Landry");
+
+	int x_s,y_s,x_d,y_d;
+
+	while(true) {
+		if (actual == &Martin)
+			actual = &Landry;
+		else
+			actual = &Martin;
+
+		if(!actual->evaluate(grille)) {
+			getPoints(&points_Martin, &points_Landry, grille);
+			printf("\nM:%d, L:%d", points_Martin, points_Landry);
+			if(points_Martin>points_Landry){
+				printf("Martin");
+				score_m+=3;
+			} else if(points_Martin<points_Landry) {
+				printf("Landry");
+				score_l+=3;
+			} else {
+				printf("Match NUL");
+				score_m++;
+				score_l++;
+			}
+			printf(" gagne !\n");
+			printf("score : Martin : %d Landry : %d\n",score_m, score_l);
+			printGrille(grille);
+			initGrille(grille);
+			points_Martin = 0, points_Landry = 0;
+		}
+		//printGrille(grille);
+	}
+
+
+
+
+	// 1 VS 1
+
+	while(true) {
+	printGrille(grille);
+	Mouvement mvt;
+	printf("=========================\n");
+	printf("==========JOUER==========\n");
+	printf("=========================\n");
+	printf("====Quel pion bouger?====\n");
+	printf("> x : ");
+	scanf("%d", &x_s);
+	printf("> y : ");
+	scanf("%d", &y_s);
+	printf("==Vers quelle position?==\n");
+	printf("> x : ");
+	scanf("%d", &x_d);
+	printf("> y : ");
+	scanf("%d", &y_d);
+	if(!mvt.init(x_s, y_s, x_d, y_d, grille)) {
+		printf("==!Mouvement incorrect!==\n");
+	} else {
+		printf("===!Mouvement correct!===\n");
+		mvt.apply(grille);
+	}
+	}
+
+	printGrille(grille);
 
 	return 0;
 }
