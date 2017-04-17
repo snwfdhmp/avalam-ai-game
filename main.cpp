@@ -4,10 +4,20 @@
 #include "Mouvement.cpp"
 #include "PlayerBot.cpp"
 #include "PlayerIA.cpp"
+#include "Player.cpp"
 
 #define TAILLE 9
+#define CONSOLE_HEIGHT 80
 
 //GRILLE[X][Y]
+
+void clearConsole() {
+	int i;
+	for (i = 0; i < CONSOLE_HEIGHT/5; ++i)
+	{
+		printf("\n\n\n\n\n");
+	}
+}
 
 void printGrille(Emplacement grille[TAILLE][TAILLE]) {
 	printf("=========================\n");
@@ -117,7 +127,7 @@ int main(int argc, char const *argv[])
 	int score_m = 0, score_l = 0;
 
 	PlayerIA Martin;
-	PlayerBot Landry;
+	PlayerIA Landry;
 	//PlayerBot* actual;
 	Martin.init(0, "Martin");
 	Landry.init(1, "Landry");
@@ -126,12 +136,32 @@ int main(int argc, char const *argv[])
 
 	while(true) {
 		//printGrille(grille);
-		if(Martin.evaluate(grille) == -1 || Landry.evaluate(grille) == -1) {
+		//getchar();
+		if(Martin.evaluate(grille) == -1) {
+			printGrille(grille);
+			//getchar();
 			if(Martin.getScore(grille) > Landry.getScore(grille)) {
 				printf("Martin ");
 				Martin.points++;
 			}
-			else if (Martin.getScore(grille) > Landry.getScore(grille)){
+			else if (Martin.getScore(grille) < Landry.getScore(grille)){
+				printf("Landry ");
+				Landry.points++;
+			} else {
+				printf("Egalité ");
+			}
+			printf("remporte la partie !\n");
+			printf("M:%d | L:%d\n", Martin.points, Landry.points);
+			initGrille(grille);
+		}
+		if(Landry.evaluate(grille) == -1) {
+			printGrille(grille);
+			//getchar();
+			if(Martin.getScore(grille) > Landry.getScore(grille)) {
+				printf("Martin ");
+				Martin.points++;
+			}
+			else if (Martin.getScore(grille) < Landry.getScore(grille)){
 				printf("Landry ");
 				Landry.points++;
 			} else {

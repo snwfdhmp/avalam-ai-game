@@ -26,16 +26,24 @@ public:
 		return calcScore(grille);
 	}
 
-	int getPoints(Emplacement grille[TAILLE][TAILLE]) {
+	int getPoints(Emplacement grille[TAILLE][TAILLE], int whichTeam) {
 		int score=0, x, y;
-		for (x = 0; x < TAILLE; ++x)
-			for (y = 0; y < TAILLE; ++y)
-				if(grille[x][y].valeur == team)
-					score++;
+		for (x = 0; x < TAILLE; ++x) {
+			for (y = 0; y < TAILLE; ++y) {
+				if(grille[x][y].valeur == whichTeam)
+					score+= grille[x][y].hauteur;
+			}
+		}
 		return score;
 	}
-	
+
+
+
 	int calcScore(Emplacement grille[TAILLE][TAILLE]) {
+		if(!mvt.verify(grille)) {
+			score = -1;
+			return -1;
+		}
 		int x,y;
 		Emplacement tmp[TAILLE][TAILLE];
 
@@ -48,9 +56,9 @@ public:
 			}
 		}
 
-		//applying
+		//applyinga
 		mvt.apply(tmp);
-		score = getPoints(tmp);
+		score = getPoints(tmp, team) - (getPoints(tmp, !team) - getPoints(grille, !team));
 		return score;
 	}
 
