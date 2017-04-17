@@ -19,6 +19,7 @@ public:
 	int team;
 	string name;
 	int delay;
+	int points;
 
 	//int pions[TAILLE*TAILLE][2] = {-1};
 
@@ -26,6 +27,7 @@ public:
 		srand(time(NULL));
 		team = newTeam;
 		name = newName;
+		points = 0;
 		cout << "Bot " << name << " initialisé ! (équipe : "<< team <<")\n";
 
 
@@ -87,7 +89,7 @@ public:
 		}
 
 		if(len<=0)
-			return 0;
+			return -1;
 		
 
 			// now scoring and picking the best
@@ -115,5 +117,18 @@ public:
 		free(correct_moves);
 
 		return 1;
+	}
+
+
+
+
+	//Imported and adapted from PlayerIA
+	int getScore(Emplacement grille[TAILLE][TAILLE]) {
+		int score=0, x, y;
+		for (x = 0; x < TAILLE; ++x)
+			for (y = 0; y < TAILLE; ++y)
+				if(grille[x][y].valeur == team)
+					score++;
+		return score;
 	}
 };

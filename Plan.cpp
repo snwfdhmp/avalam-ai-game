@@ -9,7 +9,9 @@ class Plan
 {
 public:
 	Mouvement mvt;
-	int score;
+	int score, team;
+
+	
 
 	int init(int x_s, int y_s, int x_d, int y_d, Emplacement grille[TAILLE][TAILLE], int newScore) {
 		score = newScore;
