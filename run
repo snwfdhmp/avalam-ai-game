@@ -1,5 +1,5 @@
 #!/bin/bash
 
-game=build/$(cat config/last_version)
+game=$(cat config/last_version)
 echo "Running $game..."
 ./$game
