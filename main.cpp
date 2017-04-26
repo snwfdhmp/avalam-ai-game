@@ -127,7 +127,7 @@ int main(int argc, char const *argv[])
 	int score_m = 0, score_l = 0;
 
 	PlayerIA Martin;
-	PlayerIA Landry;
+	Player Landry;
 	//PlayerBot* actual;
 	Martin.init(0, "Martin");
 	Landry.init(1, "Landry");
@@ -135,8 +135,8 @@ int main(int argc, char const *argv[])
 	int x_s,y_s,x_d,y_d;
 
 	while(true) {
-		//printGrille(grille);
-		//getchar();
+		printGrille(grille);
+		getchar();
 		if(Martin.evaluate(grille) == -1) {
 			printGrille(grille);
 			//getchar();
@@ -154,6 +154,7 @@ int main(int argc, char const *argv[])
 			printf("M:%d | L:%d\n", Martin.points, Landry.points);
 			initGrille(grille);
 		}
+		printGrille(grille);
 		if(Landry.evaluate(grille) == -1) {
 			printGrille(grille);
 			//getchar();
