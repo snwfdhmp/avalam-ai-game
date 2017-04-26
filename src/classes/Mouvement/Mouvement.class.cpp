@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "../Emplacement/Emplacement.class.h"
+#include "Mouvement.class.h"
 
 #define TAILLE 9
 
