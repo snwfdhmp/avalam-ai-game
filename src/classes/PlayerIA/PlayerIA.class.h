@@ -1,6 +1,8 @@
 #ifndef PLAYERIA_H
 #define PLAYERIA_H
 
+#include <string.h>
+
 #include "../Emplacement/Emplacement.class.h"
 
 #define TAILLE 9

@@ -10,7 +10,7 @@ GraphicComponent::GraphicComponent(int set_x, int set_y, int set_width, int set_
 	width = set_width;
 	height = set_height;
 }
-GraphicComponent::~GraphicComponent();
+GraphicComponent::~GraphicComponent(){};
 
 void GraphicComponent::onClick() {
 	printf("Element at [%d;%d] has fired the onClick() function.\n", x, y);

@@ -6,6 +6,8 @@ suffix=$(($suffix+1))
 
 echo "[$(date)] ++ Compilation de 'build/release-$version.$suffix.exe' ..." >> logs/compile
 
+echo "build/release-$version.$suffix.exe" > config/last_version
+
 g++ src/main.cpp src/classes/*/*.cpp -o build/release-$version.$suffix.exe 
 
 git add logs/compile > /dev/null 2> /dev/null

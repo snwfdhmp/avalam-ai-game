@@ -1,6 +1,8 @@
 #ifndef PLAYERBOT_H
 #define PLAYERBOT_H
 
+#include <string>
+
 #include "../Emplacement/Emplacement.class.h"
 
 #define TAILLE 9

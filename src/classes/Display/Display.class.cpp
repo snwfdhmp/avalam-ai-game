@@ -41,6 +41,8 @@ Display* Display::updateWindow() {
 	{
 			// Ajouter le components[i] à la fenetre
 	}
+
+	return this;
 };
 
 GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
