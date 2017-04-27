@@ -21,6 +21,10 @@ int Player::init(int newTeam, string newName) {
 	return 1;
 }
 
+string Player::getName() {
+	return name;
+}
+
 int Player::getScore(Emplacement grille[TAILLE][TAILLE]) {
 	int score=0, x, y;
 	for (x = 0; x < TAILLE; ++x)
@@ -49,7 +53,7 @@ int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
 		return -1;
 
 	mvt.apply(grille);
-	return 0;
+	return 1;
 }
 
 #endif

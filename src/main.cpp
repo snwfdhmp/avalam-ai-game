@@ -1,3 +1,4 @@
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include "classes/Emplacement/Emplacement.class.h"
@@ -7,6 +8,8 @@
 #include "classes/Player/Player.class.h"
 #include "config/macros.h"
 
+using namespace std;
+
 //GRILLE[X][Y]
 
 void clearConsole() {
@@ -15,7 +18,7 @@ void clearConsole() {
 		printf("\n\n\n\n\n");
 }
 
-void printGrille(Emplacement grille[TAILLE][TAILLE]) {
+int printGrille(Emplacement grille[TAILLE][TAILLE]) {
 	printf("=========================\n");
 	printf("======== PLATEAU ========\n");
 	printf("=========================\n");
@@ -39,6 +42,7 @@ void printGrille(Emplacement grille[TAILLE][TAILLE]) {
 		printf(" =\n");
 	}
 	printf("==== 0 : %d | 1 : %d ====\n", score[0], score[1]);
+	return 1;
 }
 
 void initGrille(Emplacement grille[TAILLE][TAILLE]) {
@@ -54,134 +58,81 @@ void initGrille(Emplacement grille[TAILLE][TAILLE]) {
 	}
 
 	//maintenant on définit les cases qui sont vides par défaut
-	grille[4][4].valeur = 2;
-	grille[0][0].valeur = 2;
-	grille[1][0].valeur = 2;
-	grille[4][0].valeur = 2;
-	grille[5][0].valeur = 2;
-	grille[6][0].valeur = 2;
-	grille[7][0].valeur = 2;
-	grille[8][0].valeur = 2;
-	grille[0][1].valeur = 2;
-	grille[5][1].valeur = 2;
-	grille[6][1].valeur = 2;
-	grille[7][1].valeur = 2;
-	grille[8][1].valeur = 2;
-	grille[0][2].valeur = 2;
-	grille[7][2].valeur = 2;
-	grille[8][2].valeur = 2;
-	grille[0][3].valeur = 2;
-	grille[8][5].valeur = 2;
-	grille[0][6].valeur = 2;
-	grille[1][6].valeur = 2;
-	grille[8][6].valeur = 2;
-	grille[0][7].valeur = 2;
-	grille[1][7].valeur = 2;
-	grille[2][7].valeur = 2;
-	grille[3][7].valeur = 2;
-	grille[8][7].valeur = 2;
-	grille[0][8].valeur = 2;
-	grille[1][8].valeur = 2;
-	grille[2][8].valeur = 2;
-	grille[3][8].valeur = 2;
-	grille[4][8].valeur = 2;
-	grille[7][8].valeur = 2;
-	grille[8][8].valeur = 2;
+	APPLY_DEFAULT_EMPTY(grille);
 
-
-	//custom -> à supprimer
-	//grille[3][2].hauteur = 0;
 }
 
-int main(int argc, char const *argv[])
-{
+int onFinishHvH(Emplacement grille[TAILLE][TAILLE], Player playerA, Player playerB) {
+	printGrille(grille);
+	//getchar();
+	if(playerA.getScore(grille) > playerB.getScore(grille))
+		cout << playerA.getName() << " remporte la partie ! (points -> "<< playerA.points++ << "+1)\n";
+	else if (playerA.getScore(grille) < playerB.getScore(grille))
+		cout << playerB.getName() << " remporte la partie ! (points -> "<< playerB.points++ << "+1)\n";
+	else
+		printf("Egalité !");
+
+	printf("M:%d | L:%d\n", playerA.points, playerB.points);
+
+	initGrille(grille);
+	return 1;
+}
+
+int HumanVsHuman() {
 	Emplacement grille[TAILLE][TAILLE];
 
 	initGrille(grille);
 
-	printGrille(grille);
-
-	int points_Martin = 0, points_Landry = 0;
-	int score_m = 0, score_l = 0;
-
-	PlayerIA Martin;
-	Player Landry;
+	Player playerA;
+	Player playerB;
 	//PlayerBot* actual;
-	Martin.init(0, "Martin");
-	Landry.init(1, "Landry");
-
-	int x_s,y_s,x_d,y_d;
-
-	while(true) {
-		printGrille(grille);
-		getchar();
-		if(Martin.evaluate(grille) == -1) {
-			printGrille(grille);
-			//getchar();
-			if(Martin.getScore(grille) > Landry.getScore(grille)) {
-				printf("Martin ");
-				Martin.points++;
-			}
-			else if (Martin.getScore(grille) < Landry.getScore(grille)){
-				printf("Landry ");
-				Landry.points++;
-			} else {
-				printf("Egalité ");
-			}
-			printf("remporte la partie !\n");
-			printf("M:%d | L:%d\n", Martin.points, Landry.points);
-			initGrille(grille);
-		}
-		printGrille(grille);
-		if(Landry.evaluate(grille) == -1) {
-			printGrille(grille);
-			//getchar();
-			if(Martin.getScore(grille) > Landry.getScore(grille)) {
-				printf("Martin ");
-				Martin.points++;
-			}
-			else if (Martin.getScore(grille) < Landry.getScore(grille)){
-				printf("Landry ");
-				Landry.points++;
-			} else {
-				printf("Egalité ");
-			}
-			printf("remporte la partie !\n");
-			printf("M:%d | L:%d\n", Martin.points, Landry.points);
-			initGrille(grille);
-		}
-	}
-
-
-
-
-	// 1 VS 1
-
-	while(true) {
-	printGrille(grille);
-	Mouvement mvt;
-	printf("=========================\n");
-	printf("==========JOUER==========\n");
-	printf("=========================\n");
-	printf("====Quel pion bouger?====\n");
-	printf("> x : ");
-	scanf("%d", &x_s);
-	printf("> y : ");
-	scanf("%d", &y_s);
-	printf("==Vers quelle position?==\n");
-	printf("> x : ");
-	scanf("%d", &x_d);
-	printf("> y : ");
-	scanf("%d", &y_d);
-	if(!mvt.init(x_s, y_s, x_d, y_d, grille)) {
-		printf("==!Mouvement incorrect!==\n");
+	if(ENV_DEV) {
+		playerA.init(0, "Martin");
+		playerB.init(1, "Landry");
 	} else {
-		printf("===!Mouvement correct!===\n");
-		mvt.apply(grille);
-	}
+		string nameA, nameB;
+		cout << "Player 1 name : ";
+		cin >> nameA;
+		cout << "Player 2 name : ";
+		cin >> nameB;
+		playerA.init(0, nameA);
+		playerB.init(1, nameB);
 	}
 
-	printGrille(grille);
+	while(true)
+		if(printGrille(grille) && playerA.evaluate(grille) == -1 &&
+			printGrille(grille) && playerB.evaluate(grille) == -1)
+			onFinishHvH(grille, playerA, playerB);
+}
 
-	return 0;
+int main(int argc, char const *argv[])
+{
+	int choice;
+	printf("Welcome to AVALAM Game !\n");
+	printf("Select a game mode :\n");
+
+	do{
+	printf("1:Human vs Human\n2:Human vs IA\n3:IA vs IA\n");
+	printf("4:Quit\nChoose : ");
+	scanf("%d", &choice);
+	switch(choice) {
+		case 1:
+			HumanVsHuman();
+			break;
+		case 2:
+			printf("Not available now.\n");
+			break;
+		case 3:
+			printf("Not available now.\n");
+			break;
+		case 4:
+			printf("See you soon !\n");
+			break;
+		default :
+			printf("Please enter a choice between 1 and 4...\n");
+			break;
+	}
+	} while(choice != 4);
+
+	return 1;
 }

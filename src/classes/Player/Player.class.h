@@ -23,6 +23,8 @@ public:
 
 	int init(int newTeam, string newName); //initialise le joueur
 
+	string getName(); //returns name
+
 	int getScore(Emplacement grille[TAILLE][TAILLE]); //return le score de l'équipe du joueur
 
 	int evaluate(Emplacement grille[TAILLE][TAILLE]); //input un mouvement par le choisir
