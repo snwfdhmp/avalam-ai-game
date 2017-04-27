@@ -5,7 +5,8 @@
 
 #include "../Emplacement/Emplacement.class.h"
 
-#define TAILLE 9
+// include global constants
+#include "../../config/constants.h"
 
 using namespace std;
 

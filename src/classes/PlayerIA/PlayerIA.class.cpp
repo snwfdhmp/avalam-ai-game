@@ -12,7 +12,8 @@
 #include "../MovePlan/MovePlan.class.h"
 #include "PlayerIA.class.h"
 
-#define TAILLE 9
+// include global constants
+#include "../../config/constants.h"
 
 using namespace std;
 

@@ -5,7 +5,8 @@
 #include "../Emplacement/Emplacement.class.h"
 #include "Mouvement.class.h"
 
-#define TAILLE 9
+// include global constants
+#include "../../config/constants.h"
 
 bool Mouvement::isInTheField(int coor) {
 	return coor < TAILLE && coor >= 0;

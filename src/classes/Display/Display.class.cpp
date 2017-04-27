@@ -1,11 +1,14 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "../GraphicComponent/GraphicComponent.class.h"
 #include "Display.class.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+// include global constants
+#include "../../config/constants.h"
 
 Display::Display(int set_x, int set_y, int set_width, int set_height) {
 	components = (GraphicComponent**) malloc(sizeof(GraphicComponent*));
@@ -35,22 +38,25 @@ Display* Display::initWindow() {
 };
 
 Display* Display::updateWindow() {
+	bool error = false;
 		// SDL clear la fenetre
 
 	for (int i = 0; i < size; ++i)
 	{
 			// Ajouter le components[i] à la fenetre
+			// error = true si erreur
 	}
 
+	if(error)
+		return NULL;
 	return this;
 };
 
 GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
-	components = (GraphicComponent**) malloc(sizeof(GraphicComponent) * size + 1);
+	components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
 	components[size] = componentToAdd;
 	printf("Component [%d;%d] has been added to display [%d;%d] (%d:%d) [size : %d]\n", components[size]->x, components[size]->y, x, y, width, height, size);
-	size++;
-	return components[size];
+	return components[size++]; //size is incremented after he gets injected as index of array (post inc)
 };
 
 GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
@@ -62,6 +68,7 @@ GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
 				continue;
 			else
 				return components[i];
-			return NULL;
+	return NULL;
 };
+
 #endif

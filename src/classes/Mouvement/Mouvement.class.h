@@ -1,7 +1,8 @@
 #ifndef MOUVEMENT_H
 #define MOUVEMENT_H
 
-#define TAILLE 9
+// include global constants
+#include "../../config/constants.h"
 
 class Mouvement
 {

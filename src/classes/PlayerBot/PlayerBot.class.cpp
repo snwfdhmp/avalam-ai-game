@@ -11,7 +11,8 @@
 #include "../Emplacement/Emplacement.class.h"
 #include "PlayerBot.class.h"
 
-#define TAILLE 9
+// include global constants
+#include "../../config/constants.h"
 
 using namespace std;
 

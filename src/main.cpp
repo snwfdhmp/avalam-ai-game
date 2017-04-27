@@ -5,18 +5,14 @@
 #include "classes/PlayerBot/PlayerBot.class.h"
 #include "classes/PlayerIA/PlayerIA.class.h"
 #include "classes/Player/Player.class.h"
-
-#define TAILLE 9
-#define CONSOLE_HEIGHT 80
+#include "config/macros.h"
 
 //GRILLE[X][Y]
 
 void clearConsole() {
 	int i;
 	for (i = 0; i < CONSOLE_HEIGHT/5; ++i)
-	{
 		printf("\n\n\n\n\n");
-	}
 }
 
 void printGrille(Emplacement grille[TAILLE][TAILLE]) {
@@ -43,24 +39,6 @@ void printGrille(Emplacement grille[TAILLE][TAILLE]) {
 		printf(" =\n");
 	}
 	printf("==== 0 : %d | 1 : %d ====\n", score[0], score[1]);
-}
-
-void getPoints(int* point_zero, int* point_one, Emplacement grille[TAILLE][TAILLE]) {
-	int x,y;
-	*point_zero = 0;
-	*point_one = 0;
-	for (y = 0; y < TAILLE; ++y)
-	{
-		for (x = 0; x < TAILLE; ++x)
-		{
-			if(grille[x][y].valeur == 1) {
-				*point_one+=grille[x][y].hauteur;
-			} 
-			if(grille[x][y].valeur == 0) {
-				*point_zero+=grille[x][y].hauteur;
-			}	
-		}
-	}
 }
 
 void initGrille(Emplacement grille[TAILLE][TAILLE]) {

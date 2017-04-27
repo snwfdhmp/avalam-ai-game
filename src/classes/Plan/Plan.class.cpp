@@ -8,7 +8,8 @@
 #include "../Mouvement/Mouvement.class.h"
 #include "Plan.class.h"
 
-#define TAILLE 9
+// include global constants
+#include "../../config/constants.h"
 
 Plan::Plan() {
 	score = -1;

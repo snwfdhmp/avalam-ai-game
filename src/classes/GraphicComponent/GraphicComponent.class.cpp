@@ -13,15 +13,15 @@ GraphicComponent::GraphicComponent(int set_x, int set_y, int set_width, int set_
 GraphicComponent::~GraphicComponent(){};
 
 void GraphicComponent::onClick() {
-	printf("Element at [%d;%d] has fired the onClick() function.\n", x, y);
+	printf("GraphicComponent at [%d;%d] has fired the onClick() function.\n", x, y);
 }
 
 void GraphicComponent::onMouseOver() {
-	printf("Element at [%d;%d] has fired the onMouseOver() function.\n", x, y);
+	printf("GraphicComponent at [%d;%d] has fired the onMouseOver() function.\n", x, y);
 }
 
 void GraphicComponent::onMouseOut() {
-	printf("Element at [%d;%d] has fired the onMouseOut() function.\n", x, y);
+	printf("GraphicComponent at [%d;%d] has fired the onMouseOut() function.\n", x, y);
 }
 
 #endif

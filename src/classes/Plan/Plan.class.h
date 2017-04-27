@@ -4,7 +4,8 @@
 #include "../Emplacement/Emplacement.class.h"
 #include "../Mouvement/Mouvement.class.h"
 
-#define TAILLE 9
+// include global constants
+#include "../../config/constants.h"
 
 class Plan
 {
