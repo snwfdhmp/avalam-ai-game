@@ -28,6 +28,6 @@ if [ $? -eq 0 ]; then
 	echo "Compilation réussie"
 fi
 
-git add logs/compile > /dev/null 2> /dev/null
+git add logs/compile build/$AVALAM_COMPILE_ENV-$version.$suffix.exe > /dev/null 2> /dev/null
 git commit -m "[AUTO]Compilation de 'build/dev-$version.$suffix.exe' ..." > /dev/null 2> /dev/null
 git push > /dev/null 2> /dev/null

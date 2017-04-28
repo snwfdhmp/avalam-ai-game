@@ -25,7 +25,7 @@ public:
 
 	//int pions[TAILLE*TAILLE][2] = {-1};
 
-	int init(int newTeam, string newName); //initialise le PlayerBot
+	int init(int newTeam, string newName = "Bot"); //initialise le PlayerBot
 
 	int getScore(Emplacement grille[TAILLE][TAILLE]); //return le score de l'équipe du PlayerBot
 

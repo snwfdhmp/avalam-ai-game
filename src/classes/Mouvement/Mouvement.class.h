@@ -3,6 +3,7 @@
 
 // include global constants
 #include "../../config/constants.h"
+#include "../Emplacement/Emplacement.class.h"
 
 class Mouvement
 {

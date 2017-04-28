@@ -4,12 +4,13 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "../Emplacement/Emplacement.class.h"
 #include "../Mouvement/Mouvement.class.h"
+#include "../Emplacement/Emplacement.class.h"
 #include "MovePlan.class.h"
 
 // include global constants
 #include "../../config/constants.h"
+#include "../../config/macros.h"
 
 MovePlan::MovePlan() {
 	score = -1;
@@ -17,8 +18,7 @@ MovePlan::MovePlan() {
 }
 
 int MovePlan::init(int x_s, int y_s, int x_d, int y_d, int newTeam, Emplacement grille[TAILLE][TAILLE]) {
-	team = newTeam;
-	if(!mvt.init(x_s, y_s, x_d, y_d, grille)) return -1;
+	(AVAILABLE_TEAM(newTeam) && mvt.init(x_s, y_s, x_d, y_d, grille) ? team = newTeam : return -1);
 	return calcScore(grille);
 }
 
@@ -30,8 +30,6 @@ int MovePlan::getPoints(Emplacement grille[TAILLE][TAILLE], int whichTeam) {
 				score+= grille[x][y].hauteur;
 	return score;
 }
-
-
 
 int MovePlan::calcScore(Emplacement grille[TAILLE][TAILLE]) {
 	if(!mvt.verify(grille)) {

@@ -19,7 +19,7 @@ using namespace std;
 
 /* Version en dev de l'IA */
 
-int PlayerIA::init(int newTeam, string newName) {
+int PlayerIA::init(int newTeam, string newName = "IA") {
 	srand(time(NULL));
 	team = newTeam;
 	name = newName;

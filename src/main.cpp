@@ -19,12 +19,12 @@ void clearConsole() {
 }
 
 int printGrille(Emplacement grille[TAILLE][TAILLE]) {
-	printf("=========================\n");
-	printf("======== PLATEAU ========\n");
-	printf("=========================\n");
+	puts("=========================\n");
+	puts("======== PLATEAU ========\n");
+	puts("=========================\n");
 	int x,y;
 	int score[2] = {0, 0};
-	printf("=    ==0== ==1== ==2== ==3== ==4== ==5== ==6== ==7== ==8==  =\n");
+	puts("=    ==0== ==1== ==2== ==3== ==4== ==5== ==6== ==7== ==8==  =\n");
 	for (y = 0; y < TAILLE; ++y)
 	{
 		printf("= %d: ", y);
@@ -37,9 +37,9 @@ int printGrille(Emplacement grille[TAILLE][TAILLE]) {
 				score[grille[x][y].valeur]+=grille[x][y].hauteur;
 			}
 			else
-				printf("      ");
+				puts("      ");
 		}
-		printf(" =\n");
+		puts(" =\n");
 	}
 	printf("==== 0 : %d | 1 : %d ====\n", score[0], score[1]);
 	return 1;
@@ -62,32 +62,32 @@ void initGrille(Emplacement grille[TAILLE][TAILLE]) {
 
 }
 
-int onFinishHvH(Emplacement grille[TAILLE][TAILLE], Player playerA, Player playerB) {
-	printGrille(grille);
+int onFinish(Emplacement grille[TAILLE][TAILLE], void *playerA, void *playerB) {
+	printf("OnFinish !\n");
+	/*printGrille(grille);
 	//getchar();
-	if(playerA.getScore(grille) > playerB.getScore(grille))
-		cout << playerA.getName() << " remporte la partie ! (points -> "<< playerA.points++ << "+1)\n";
-	else if (playerA.getScore(grille) < playerB.getScore(grille))
-		cout << playerB.getName() << " remporte la partie ! (points -> "<< playerB.points++ << "+1)\n";
+	if(playerA->getScore(grille) > playerB->getScore(grille))
+		cout << playerA->getName() << " remporte la partie ! (points -> "<< playerA->points++ << "+1)\n";
+	else if (playerA->getScore(grille) < playerB->getScore(grille))
+		cout << playerB->getName() << " remporte la partie ! (points -> "<< playerB->points++ << "+1)\n";
 	else
 		printf("Egalité !");
 
-	printf("M:%d | L:%d\n", playerA.points, playerB.points);
+	printf("M:%d | L:%d\n", playerA->points, playerB->points);
 
-	initGrille(grille);
+	initGrille(grille);*/
 	return 1;
 }
+int play(void* playerA, void* playerB) {
 
-int HumanVsHuman() {
+	Player playerB;
+
 	Emplacement grille[TAILLE][TAILLE];
 
 	initGrille(grille);
-
-	Player playerA;
-	Player playerB;
 	//PlayerBot* actual;
 	if(ENV_DEV) {
-		playerA.init(0, "Martin");
+		playerA->init(0, "Martin");
 		playerB.init(1, "Landry");
 	} else {
 		string nameA, nameB;
@@ -95,14 +95,16 @@ int HumanVsHuman() {
 		cin >> nameA;
 		cout << "Player 2 name : ";
 		cin >> nameB;
-		playerA.init(0, nameA);
+		playerA->init(0, nameA);
 		playerB.init(1, nameB);
 	}
 
+	//TODO : explain C++ tricks
 	while(true)
-		if(printGrille(grille) && playerA.evaluate(grille) == -1 &&
+		if(printGrille(grille) && playerA->evaluate(grille) == -1 &&
 			printGrille(grille) && playerB.evaluate(grille) == -1)
-			onFinishHvH(grille, playerA, playerB);
+			onFinishHvH(grille, &playerA, &playerB);
+	return 0;
 }
 
 int main(int argc, char const *argv[])
@@ -111,16 +113,20 @@ int main(int argc, char const *argv[])
 	printf("Welcome to AVALAM Game !\n");
 	printf("Select a game mode :\n");
 
+	void* playerA, playerB;
+
 	do{
 	printf("1:Human vs Human\n2:Human vs IA\n3:IA vs IA\n");
 	printf("4:Quit\nChoose : ");
 	scanf("%d", &choice);
 	switch(choice) {
 		case 1:
-			HumanVsHuman();
+			playerA = malloc(sizeof(Player));
+			playerB = &b;
+			//play("human", "human");
 			break;
 		case 2:
-			printf("Not available now.\n");
+			Player playerA, PlayerIA playerB;
 			break;
 		case 3:
 			printf("Not available now.\n");
@@ -131,6 +137,9 @@ int main(int argc, char const *argv[])
 		default :
 			printf("Please enter a choice between 1 and 4...\n");
 			break;
+	}
+	if(playerA && playerB) {
+		play(&playerA, &playerB);
 	}
 	} while(choice != 4);
 

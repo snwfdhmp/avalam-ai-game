@@ -21,7 +21,7 @@ public:
 
 	//int pions[TAILLE*TAILLE][2] = {-1};
 
-	int init(int newTeam, string newName); // initialise l'IA
+	int init(int newTeam, string newName = "IA"); // initialise l'IA
 
 	int getScore(Emplacement grille[TAILLE][TAILLE]); //return le score de l'équipe de l'IA
 

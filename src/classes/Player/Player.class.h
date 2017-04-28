@@ -21,7 +21,7 @@ public:
 
 	//int pions[TAILLE*TAILLE][2] = {-1};
 
-	int init(int newTeam, string newName); //initialise le joueur
+	int init(int newTeam, string newName = "Joueur"); //initialise le joueur
 
 	string getName(); //returns name
 

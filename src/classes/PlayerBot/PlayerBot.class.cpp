@@ -20,7 +20,7 @@ using namespace std;
 	Premier algo de bot
 */
 
-int PlayerBot::init(int newTeam, string newName) {
+int PlayerBot::init(int newTeam, string newName = "Bot") {
 	srand(time(NULL));
 	team = newTeam;
 	name = newName;

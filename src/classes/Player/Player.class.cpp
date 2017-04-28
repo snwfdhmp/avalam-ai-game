@@ -13,7 +13,7 @@
 
 using namespace std;
 
-int Player::init(int newTeam, string newName) {
+int Player::init(int newTeam, string newName = "Joueur") {
 	team = newTeam;
 	name = newName;
 	points = 0;
@@ -38,15 +38,15 @@ int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
 	Mouvement mvt;
 	int x_s, y_s, x_d, y_d;
 
-	printf("====Quel pion bouger?====\n");
-	printf("> x : ");
+	puts("====Quel pion bouger?====\n");
+	puts("> x : ");
 	scanf("%d", &x_s);
-	printf("> y : ");
+	puts("> y : ");
 	scanf("%d", &y_s);
-	printf("==Vers quelle position?==\n");
-	printf("> x : ");
+	puts("==Vers quelle position?==\n");
+	puts("> x : ");
 	scanf("%d", &x_d);
-	printf("> y : ");
+	puts("> y : ");
 	scanf("%d", &y_d);
 
 	if(!mvt.init(x_s, y_s, x_d, y_d, grille))
