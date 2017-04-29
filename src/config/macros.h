@@ -37,6 +37,5 @@ a[4][4].valeur = 2;\
 	a[7][8].valeur = 2;\
 	a[8][8].valeur = 2;
 #define AVAILABLE_TEAM(a)\
-	return (a==1 || a==0)
-#define 
+	(a==1 || a==0)
 #endif

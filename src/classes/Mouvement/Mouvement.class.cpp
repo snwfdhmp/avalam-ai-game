@@ -5,28 +5,37 @@
 #include "../Emplacement/Emplacement.class.h"
 #include "Mouvement.class.h"
 
+
 // include global constants
 #include "../../config/constants.h"
 
-bool Mouvement::isInTheField(int coor) {
-	return coor < TAILLE && coor >= 0;
+int Mouvement::isInTheField(int coor) {
+	return (coor < TAILLE && coor >= 0)?0:-1;
 }
 
-bool Mouvement::isCorrect(int x_s, int y_s, int x_d, int y_d, Emplacement grille[TAILLE][TAILLE]) {
-	bool field = (isInTheField(x_s) && isInTheField(y_s) && isInTheField(x_d) && isInTheField(y_d) && grille[x_s][y_s].valeur != 2 && grille[x_d][y_d].valeur != 2 && x_s-x_d >= -1 && x_s-x_d <= 1 && y_s-y_d >= -1 && y_s-y_d <= 1);
+int Mouvement::isCorrect(int x_s, int y_s, int x_d, int y_d, Emplacement grille[TAILLE][TAILLE]) {
+	if(isInTheField(x_s) == -1 || isInTheField(y_s) == -1 || isInTheField(x_d) == -1 || isInTheField(y_d) == -1)
+		return -1;
+	if(grille[x_s][y_s].valeur == 2 || grille[x_d][y_d].valeur == 2)
+		return -1;
+	 if (!(x_s-x_d >= -1 && x_s-x_d <= 1 && y_s-y_d >= -1 && y_s-y_d <= 1))
+	 	return -1;
 	    //if(!field)
 	    //	printf("==!Position incorrecte [%d:%d]=>[%d:%d]!==\n", x_s, y_s, x_d, y_d);
-	bool different = (x_s != x_d || y_s != y_d);
+	if(x_s == x_d && y_s == y_d)
+		return -1;
 		//if(!different)
 		//	printf("==!C'est la même pièce!==\n");
-	bool hauteurLegale = (grille[x_d][y_d].hauteur > 0 && grille[x_s][y_s].hauteur > 0 && grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur <= 5);
+	if(!(grille[x_d][y_d].hauteur > 0 && grille[x_s][y_s].hauteur > 0 && grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur <= 5))
+		return -1;
 		//if(!hauteurLegale && grille[x_d][y_d].hauteur > 0 && grille[x_s][y_s].hauteur > 0)
 		//	printf("grille[x_d][y_d].hauteur [%d] > 0 && grille[x_s][y_s].hauteur [%d] > 0 && grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur [%d] <= 5\n",grille[x_d][y_d].hauteur, grille[x_s][y_s].hauteur, grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur);
-	return field && different && hauteurLegale;
+	return 0;
 }
 
 int Mouvement::init(int x_s, int y_s, int x_d, int y_d, Emplacement grille[TAILLE][TAILLE]) { //s = src, d= des 
-	if (!isCorrect(x_s, y_s, x_d, y_d, grille))
+	printf("\tinit %d %d %d %d\n", x_s, y_s, x_d, y_d);
+	if (isCorrect(x_s, y_s, x_d, y_d, grille) == -1)
 		return -1;
 
 	src[0] = x_s;
@@ -34,7 +43,7 @@ int Mouvement::init(int x_s, int y_s, int x_d, int y_d, Emplacement grille[TAILL
 	des[0] = x_d;
 	des[1] = y_d;
 
-	return 1;
+	return 0;
 }
 
 int Mouvement::apply(Emplacement grille[TAILLE][TAILLE]) {
@@ -47,7 +56,7 @@ int Mouvement::apply(Emplacement grille[TAILLE][TAILLE]) {
 	grille[src[0]][src[1]].valeur = 2;
 	grille[src[0]][src[1]].hauteur = 0;
 		//printf("executing\n");
-	return 1;
+	return 0;
 }
 
 int Mouvement::verify(Emplacement grille[TAILLE][TAILLE]) {
