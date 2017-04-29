@@ -29,7 +29,7 @@ do
 		g++ $i -o "$tests_dir/$version-$testName.test" > /dev/null 2> /dev/null
         if [ $? -eq -1 ]; then
                 echo "$testName : Compilation failed."
-                echo "[$(date)] => $testName : Compilation failed." >> $log_runtest_path
+                echo "[$(date)] -- $testName : Compilation failed." >> $log_runtest_path
         	echo "g++ $i -o $tests_dir/$version-$testName.test" >> $log_fail_path
 	else
 		chmod +x $tests_dir/$version-$testName.test > /dev/null
@@ -37,10 +37,10 @@ do
 		err=$?
 		if [ $err -eq -0 ]; then
 			echo "$testName : Run test success."
-			echo "[$(date)] => $testName : Run test success." >> $log_runtest_path
+			echo "[$(date)] ++ $testName : Run test success." >> $log_runtest_path
 		else
 			echo "$testName : Run test failed. (error code : $err)"
-			echo "[$(date)] => $testName : Run test success." >> $log_runtest_path
+			echo "[$(date)] -- $testName : Run test failed. (error code : $err)" >> $log_runtest_path
 		fi
 	fi
 done
