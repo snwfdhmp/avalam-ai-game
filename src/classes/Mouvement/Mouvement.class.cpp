@@ -49,7 +49,7 @@ int Mouvement::init(int x_s, int y_s, int x_d, int y_d, Emplacement grille[TAILL
 }
 
 int Mouvement::apply(Emplacement grille[TAILLE][TAILLE]) {
-	if(!isCorrect(src[0], src[1], des[0], des[1], grille))
+	if(isCorrect(src[0], src[1], des[0], des[1], grille) == -1)
 		return -1;
 		//printf("grille[%d][%d].valeur (:%d) = grille[%d][%d].valeur (:%d)\n", des[0], des[1], grille[des[0]][des[1]].valeur, src[0], src[1], grille[src[0]][src[1]].valeur);
 		//printf("grille[%d][%d].hauteur (:%d) += grille[%d[%d].hauteur (:%d)\n", des[0], des[1], grille[des[0]][des[1]].hauteur, src[0], src[1], grille[src[0]][src[1]].hauteur);

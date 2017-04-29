@@ -3,10 +3,9 @@
 #include <stdlib.h>
 #include "classes/Emplacement/Emplacement.class.h"
 #include "classes/Mouvement/Mouvement.class.h"
-#include "classes/PlayerBot/PlayerBot.class.h"
-#include "classes/PlayerIA/PlayerIA.class.h"
 #include "classes/Player/Player.class.h"
 #include "config/macros.h"
+#include "config/constants.h"
 
 using namespace std;
 
@@ -19,12 +18,12 @@ void clearConsole() {
 }
 
 int printGrille(Emplacement grille[TAILLE][TAILLE]) {
-	puts("=========================\n");
-	puts("======== PLATEAU ========\n");
-	puts("=========================\n");
+	printf("=========================\n");
+	printf("======== PLATEAU ========\n");
+	printf("=========================\n");
 	int x,y;
 	int score[2] = {0, 0};
-	puts("=    ==0== ==1== ==2== ==3== ==4== ==5== ==6== ==7== ==8==  =\n");
+	printf("=    ==0== ==1== ==2== ==3== ==4== ==5== ==6== ==7== ==8==  =\n");
 	for (y = 0; y < TAILLE; ++y)
 	{
 		printf("= %d: ", y);
@@ -37,9 +36,9 @@ int printGrille(Emplacement grille[TAILLE][TAILLE]) {
 				score[grille[x][y].valeur]+=grille[x][y].hauteur;
 			}
 			else
-				puts("      ");
+				printf("      ");
 		}
-		puts(" =\n");
+		printf(" =\n");
 	}
 	printf("==== 0 : %d | 1 : %d ====\n", score[0], score[1]);
 	return 1;
@@ -62,9 +61,9 @@ void initGrille(Emplacement grille[TAILLE][TAILLE]) {
 
 }
 
-int onFinish(Emplacement grille[TAILLE][TAILLE], void *playerA, void *playerB) {
+int onFinish(Emplacement grille[TAILLE][TAILLE], Player* playerA, Player* playerB) {
 	printf("OnFinish !\n");
-	/*printGrille(grille);
+	printGrille(grille);
 	//getchar();
 	if(playerA->getScore(grille) > playerB->getScore(grille))
 		cout << playerA->getName() << " remporte la partie ! (points -> "<< playerA->points++ << "+1)\n";
@@ -75,35 +74,34 @@ int onFinish(Emplacement grille[TAILLE][TAILLE], void *playerA, void *playerB) {
 
 	printf("M:%d | L:%d\n", playerA->points, playerB->points);
 
-	initGrille(grille);*/
-	return 1;
+	initGrille(grille);
+	return 0;
 }
-int play(void* playerA, void* playerB) {
-
-	Player playerB;
+int play(int playerAType = PLAYER_TYPE_HUMAN, int playerBType = PLAYER_TYPE_HUMAN) {
+	Player playerA, playerB;
 
 	Emplacement grille[TAILLE][TAILLE];
 
 	initGrille(grille);
 	//PlayerBot* actual;
 	if(ENV_DEV) {
-		playerA->init(0, "Martin");
-		playerB.init(1, "Landry");
+		playerA.init(0, "Martin",playerAType);
+		playerB.init(1, "Landry",playerBType);
 	} else {
 		string nameA, nameB;
 		cout << "Player 1 name : ";
 		cin >> nameA;
 		cout << "Player 2 name : ";
 		cin >> nameB;
-		playerA->init(0, nameA);
-		playerB.init(1, nameB);
+		playerA.init(0, nameA,playerAType);
+		playerB.init(1, nameB,playerBType);
 	}
 
 	//TODO : explain C++ tricks
 	while(true)
-		if(printGrille(grille) && playerA->evaluate(grille) == -1 &&
+		if(printGrille(grille) && playerA.evaluate(grille) == -1 &&
 			printGrille(grille) && playerB.evaluate(grille) == -1)
-			onFinishHvH(grille, &playerA, &playerB);
+			onFinish(grille, &playerA, &playerB);
 	return 0;
 }
 
@@ -113,7 +111,7 @@ int main(int argc, char const *argv[])
 	printf("Welcome to AVALAM Game !\n");
 	printf("Select a game mode :\n");
 
-	void* playerA, playerB;
+	Player playerA, playerB;
 
 	do{
 	printf("1:Human vs Human\n2:Human vs IA\n3:IA vs IA\n");
@@ -121,15 +119,13 @@ int main(int argc, char const *argv[])
 	scanf("%d", &choice);
 	switch(choice) {
 		case 1:
-			playerA = malloc(sizeof(Player));
-			playerB = &b;
-			//play("human", "human");
+			play(PLAYER_TYPE_HUMAN, PLAYER_TYPE_HUMAN);
 			break;
 		case 2:
-			Player playerA, PlayerIA playerB;
+			play(PLAYER_TYPE_HUMAN, PLAYER_TYPE_IA);
 			break;
 		case 3:
-			printf("Not available now.\n");
+			play(PLAYER_TYPE_IA, PLAYER_TYPE_IA);
 			break;
 		case 4:
 			printf("See you soon !\n");
@@ -138,10 +134,7 @@ int main(int argc, char const *argv[])
 			printf("Please enter a choice between 1 and 4...\n");
 			break;
 	}
-	if(playerA && playerB) {
-		play(&playerA, &playerB);
-	}
 	} while(choice != 4);
 
-	return 1;
+	return 0;
 }

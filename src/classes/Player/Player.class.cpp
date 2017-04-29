@@ -70,9 +70,9 @@ int Player::getScore(Emplacement grille[TAILLE][TAILLE]) {
 		puts("> y : ");
 		scanf("%d", &y_d);
 
-		if(!mvt.init(x_s, y_s, x_d, y_d, grille))
+		if(mvt.init(x_s, y_s, x_d, y_d, grille) == -1)
 			return -1;
-
+		
 		mvt.apply(grille);
 		return 0;
 	}
