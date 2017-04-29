@@ -8,26 +8,30 @@
 // include global constants
 #include "../../config/constants.h"
 
-using namespace std;
 
 class Player
 {
 public:
 
+	int type;
 	int team;
-	string name;
+	std::string name;
 	int delay;
 	int points;
 
 	//int pions[TAILLE*TAILLE][2] = {-1};
 
-	int init(int newTeam, string newName = "Joueur"); //initialise le joueur
+	int init(int newTeam, std::string newName = "Joueur", int newType = PLAYER_TYPE_MIN); //initialise le joueur (default type -> IA)
 
-	string getName(); //returns name
+	std::string getName(); //returns name
 
 	int getScore(Emplacement grille[TAILLE][TAILLE]); //return le score de l'équipe du joueur
 
 	int evaluate(Emplacement grille[TAILLE][TAILLE]); //input un mouvement par le choisir
+
+	int HumanEvaluate(Emplacement grille[TAILLE][TAILLE]); //evaluate pour le human
+
+	int IAEvaluate(Emplacement grille[TAILLE][TAILLE]); //evaluate pour l'ia
 };
 
 #endif

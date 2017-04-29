@@ -215,3 +215,44 @@
 [Sam 29 avr 2017 22:57:41 CEST] ++ MovePlan : Run test success.
 [Sam 29 avr 2017 22:57:42 CEST] -- PlayerIA : Compilation success.
 [Sam 29 avr 2017 22:57:42 CEST] ++ PlayerIA : Run test success.
+[Sam 29 avr 2017 23:10:54 CEST] -- MovePlan : Compilation success.
+[Sam 29 avr 2017 23:10:54 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 23:10:55 CEST] -- PlayerIA : Compilation success.
+[Sam 29 avr 2017 23:10:55 CEST] ++ PlayerIA : Run test success.
+[Sam 29 avr 2017 23:12:05 CEST] -- MovePlan : Compilation success.
+[Sam 29 avr 2017 23:12:05 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 23:12:06 CEST] -- Player : Compilation failed.
+[Sam 29 avr 2017 23:12:07 CEST] -- PlayerIA : Compilation success.
+[Sam 29 avr 2017 23:12:07 CEST] ++ PlayerIA : Run test success.
+[Sam 29 avr 2017 23:13:01 CEST] -- MovePlan : Compilation success.
+[Sam 29 avr 2017 23:13:01 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 23:13:01 CEST] -- Player : Compilation failed.
+[Sam 29 avr 2017 23:13:02 CEST] -- PlayerIA : Compilation success.
+[Sam 29 avr 2017 23:13:02 CEST] ++ PlayerIA : Run test success.
+[Sam 29 avr 2017 23:14:19 CEST] -- MovePlan : Compilation success.
+[Sam 29 avr 2017 23:14:19 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 23:14:19 CEST] -- Player : Compilation failed.
+[Sam 29 avr 2017 23:14:20 CEST] -- PlayerIA : Compilation success.
+[Sam 29 avr 2017 23:14:20 CEST] ++ PlayerIA : Run test success.
+[Sam 29 avr 2017 23:14:47 CEST] -- MovePlan : Compilation success.
+[Sam 29 avr 2017 23:14:47 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 23:14:47 CEST] -- Player : Compilation failed.
+[Sam 29 avr 2017 23:14:48 CEST] -- PlayerIA : Compilation success.
+[Sam 29 avr 2017 23:14:48 CEST] ++ PlayerIA : Run test success.
+[Sam 29 avr 2017 23:15:21 CEST] -- MovePlan : Compilation success.
+[Sam 29 avr 2017 23:15:21 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 23:15:22 CEST] -- Player : Compilation failed.
+[Sam 29 avr 2017 23:15:23 CEST] -- PlayerIA : Compilation success.
+[Sam 29 avr 2017 23:15:23 CEST] ++ PlayerIA : Run test success.
+[Sam 29 avr 2017 23:15:40 CEST] -- MovePlan : Compilation success.
+[Sam 29 avr 2017 23:15:40 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 23:15:41 CEST] -- Player : Compilation success.
+[Sam 29 avr 2017 23:15:41 CEST] ++ Player : Run test success.
+[Sam 29 avr 2017 23:15:42 CEST] -- PlayerIA : Compilation success.
+[Sam 29 avr 2017 23:15:42 CEST] ++ PlayerIA : Run test success.
+[Sam 29 avr 2017 23:15:56 CEST] -- MovePlan : Compilation success.
+[Sam 29 avr 2017 23:15:56 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 23:15:57 CEST] -- Player : Compilation success.
+[Sam 29 avr 2017 23:15:57 CEST] ++ Player : Run test success.
+[Sam 29 avr 2017 23:15:58 CEST] -- PlayerIA : Compilation success.
+[Sam 29 avr 2017 23:15:58 CEST] ++ PlayerIA : Run test success.
