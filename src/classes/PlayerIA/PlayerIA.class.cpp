@@ -8,26 +8,29 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "../Emplacement/Emplacement.class.h"
-#include "../MovePlan/MovePlan.class.h"
 #include "PlayerIA.class.h"
+#include "../MovePlan/MovePlan.class.h"
 
-// include global constants
+// include global constants and macros
 #include "../../config/constants.h"
+#include "../../config/macros.h"
+
 
 using namespace std;
 
 /* Version en dev de l'IA */
 
-int PlayerIA::init(int newTeam, string newName = "IA") {
+int PlayerIA::init(int newTeam, std::string newName) { //default newName == IA
+	if(!AVAILABLE_TEAM(newTeam) || newName.empty())
+		return -1;
 	srand(time(NULL));
 	team = newTeam;
 	name = newName;
 	points = 0;
-	cout << "Bot " << name << " initialisé ! (équipe : "<< team <<")\n";
+	//cout << "IA " << name << " initialisé ! (équipe : "<< team <<")\n";
 
 
-	return 1;
+	return 0;
 }
 
 int PlayerIA::getScore(Emplacement grille[TAILLE][TAILLE]) {

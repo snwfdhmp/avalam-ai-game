@@ -3,12 +3,12 @@
 #include "../Emplacement/Emplacement.class.h"
 #include "../../config/constants.h"
 
+//include macros for unit test
+#include "../../config/macros.h"
+
 /*
 	UNIT TEST FOR MOVEPLAN
 */
-
-#define SHOULD_BE_TRUE(a) if(a == -1)err++;
-#define SHOULD_BE_FALSE(a) if(a != -1)err++;
 
 
 int main(int argc, char const *argv[])
@@ -68,11 +68,5 @@ int main(int argc, char const *argv[])
 		SHOULD_BE_TRUE(a.init(2, 8, 3, 7, team, grille))
 	}
 
-	if(err) {
-		printf("Test failed : %d errors.\n", err);
-		return -1;
-	}
-
-	printf("Test executed successfully.\n");
-	return 0;
+	UNIT_TEST_RETURN(err)
 }
