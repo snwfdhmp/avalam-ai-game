@@ -26,3 +26,18 @@
 [Sam 29 avr 2017 14:59:25 CEST] => MovePlan : Run test success.
 [Sam 29 avr 2017 14:59:36 CEST] => MovePlan : Run test success.
 [Sam 29 avr 2017 15:00:17 CEST] => MovePlan : Run test success.
+[Sam 29 avr 2017 18:24:54 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:05:18 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:08:58 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:09:23 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:10:22 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:10:49 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:11:46 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:12:10 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:12:27 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:12:57 CEST] -- MovePlan : Run test failed. (error code : 127)
+[Sam 29 avr 2017 21:19:33 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 21:19:40 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 21:19:51 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 21:25:12 CEST] ++ MovePlan : Run test success.
+[Sam 29 avr 2017 21:26:03 CEST] ++ MovePlan : Run test success.

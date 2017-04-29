@@ -19,7 +19,7 @@ MovePlan::MovePlan() {
 }
 
 int MovePlan::init(int x_s, int y_s, int x_d, int y_d, int newTeam, Emplacement grille[TAILLE][TAILLE]){
-	printf("init %d %d %d %d %d\n", x_s, y_s, x_d, y_d, newTeam);
+	//printf("init %d %d %d %d %d\n", x_s, y_s, x_d, y_d, newTeam);
 	if (AVAILABLE_TEAM(newTeam) && mvt.init(x_s, y_s, x_d, y_d, grille) != -1) {
 		//printf("OK\n");
 		team = newTeam;
@@ -41,7 +41,7 @@ int MovePlan::getPoints(Emplacement grille[TAILLE][TAILLE], int whichTeam) {
 }
 
 int MovePlan::calcScore(Emplacement grille[TAILLE][TAILLE]) {
-	if(!mvt.verify(grille)) {
+	if(mvt.verify(grille) == -1) {
 		score = -1;
 		return -1;
 	}

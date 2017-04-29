@@ -26,15 +26,17 @@ int Mouvement::isCorrect(int x_s, int y_s, int x_d, int y_d, Emplacement grille[
 		return -1;
 		//if(!different)
 		//	printf("==!C'est la même pièce!==\n");
+	//printf("%d, %d, %d\n", grille[x_d][y_d].hauteur, grille[x_s][y_s].hauteur, grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur);
 	if(!(grille[x_d][y_d].hauteur > 0 && grille[x_s][y_s].hauteur > 0 && grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur <= 5))
 		return -1;
 		//if(!hauteurLegale && grille[x_d][y_d].hauteur > 0 && grille[x_s][y_s].hauteur > 0)
 		//	printf("grille[x_d][y_d].hauteur [%d] > 0 && grille[x_s][y_s].hauteur [%d] > 0 && grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur [%d] <= 5\n",grille[x_d][y_d].hauteur, grille[x_s][y_s].hauteur, grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur);
+	//printf("OK\n");
 	return 0;
 }
 
 int Mouvement::init(int x_s, int y_s, int x_d, int y_d, Emplacement grille[TAILLE][TAILLE]) { //s = src, d= des 
-	printf("\tinit %d %d %d %d\n", x_s, y_s, x_d, y_d);
+	//printf("\tinit %d %d %d %d\n", x_s, y_s, x_d, y_d);
 	if (isCorrect(x_s, y_s, x_d, y_d, grille) == -1)
 		return -1;
 

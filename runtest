@@ -7,6 +7,8 @@ log_fail_path="logs/test_fails.logs"
 log_runtest_path="logs/runtest.logs"
 classes_dir="src/classes"
 tests_dir="src/tests"
+has_been_errors=0
+test_count=0
 
 rm $log_fail_path 2> /dev/null
 touch $log_fail_path
@@ -17,7 +19,7 @@ for i in $classes_dir/*/*.test.cpp
 do
 	fileName=$(basename $i)
 	testName="${fileName%%.*}"
-	echo "Processing $testName..."
+	echo "Starting to process $testName..."
 	ls $classes_dir/*-$testName.test > /dev/null 2> /dev/null
 	if [ $? -eq -1 ]; then
 		git add $i > /dev/null 2>&1
@@ -25,12 +27,13 @@ do
 		git push > /dev/null 2>&1
 		echo "[$(date)] => Added new test $testName to $tests_dir" >> logs/general.logs
 	fi
-        rm $tests_dir/$version-$testName.test > /dev/null 2> /dev/null
-		g++ $i -o "$tests_dir/$version-$testName.test" > /dev/null 2> /dev/null
-        if [ $? -eq -1 ]; then
-                echo "$testName : Compilation failed."
-                echo "[$(date)] -- $testName : Compilation failed." >> $log_runtest_path
-        	echo "g++ $i -o $tests_dir/$version-$testName.test" >> $log_fail_path
+	rm $tests_dir/$version-$testName.test > /dev/null 2> /dev/null
+	echo "Compilation of $testName test ... (=> $tests_dir/$version-$testName.test)"
+	g++ $i $(cat "${i%%.*}.test.dependencies") -o "$tests_dir/$version-$testName.test" #> /dev/null 2> /dev/null
+	if [ $? -eq -1 ]; then
+		echo "$testName : Compilation failed."
+		echo "[$(date)] -- $testName : Compilation failed." >> $log_runtest_path
+		echo "g++ $i -o $tests_dir/$version-$testName.test" >> $log_fail_path
 	else
 		chmod +x $tests_dir/$version-$testName.test > /dev/null
 		$tests_dir/$version-$testName.test
@@ -41,6 +44,17 @@ do
 		else
 			echo "$testName : Run test failed. (error code : $err)"
 			echo "[$(date)] -- $testName : Run test failed. (error code : $err)" >> $log_runtest_path
+			has_been_errors=$(($has_been_errors+1))
 		fi
+		test_count=$(($test_count+1))
 	fi
 done
+
+echo "All tests have been executed."
+if [ $has_been_errors -gt 0 ]; then
+	echo "$has_been_errors/$test_count tests have reported errors. Please see $log_fail_path to solve them."
+	exit -1
+else
+	echo "Runtest succeeded ! $test_count tests performed without errors."
+	exit 0
+fi
