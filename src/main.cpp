@@ -24,7 +24,7 @@ int printGrille(Emplacement grille[TAILLE][TAILLE]) {
 	int x,y;
 	int score[2] = {0, 0};
 	printf("=    ==0== ==1== ==2== ==3== ==4== ==5== ==6== ==7== ==8==  =\n");
-	for (y = 0; y < TAILLE; ++y)
+	for (y = 0;y < TAILLE; ++y)
 	{
 		printf("= %d: ", y);
 		for (x = 0; x < TAILLE; ++x)
@@ -41,7 +41,7 @@ int printGrille(Emplacement grille[TAILLE][TAILLE]) {
 		printf(" =\n");
 	}
 	printf("==== 0 : %d | 1 : %d ====\n", score[0], score[1]);
-	return 1;
+	return 0;
 }
 
 void initGrille(Emplacement grille[TAILLE][TAILLE]) {
@@ -49,12 +49,8 @@ void initGrille(Emplacement grille[TAILLE][TAILLE]) {
 
 	//on remplit case par case en changeant de couleur à chaque ligne
 	for (y = 0; y < TAILLE; ++y)
-	{
 		for (x = 0; x < TAILLE; ++x)
-		{
 			grille[x][y].init(y%2);
-		}
-	}
 
 	//maintenant on définit les cases qui sont vides par défaut
 	APPLY_DEFAULT_EMPTY(grille);
@@ -111,11 +107,9 @@ int main(int argc, char const *argv[])
 	printf("Welcome to AVALAM Game !\n");
 	printf("Select a game mode :\n");
 
-	Player playerA, playerB;
-
 	do{
 	printf("1:Human vs Human\n2:Human vs IA\n3:IA vs IA\n");
-	printf("4:Quit\nChoose : ");
+	printf("4:Quit\nChoice : ");
 	scanf("%d", &choice);
 	switch(choice) {
 		case 1:

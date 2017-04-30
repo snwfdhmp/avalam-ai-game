@@ -21,6 +21,18 @@ int Player::init(int newTeam, string newName, int newType) {
 	team = newTeam;
 	name = newName;
 	type = newType;
+	/* TODO : int(Player::*evaluate)(Emplacement[TAILLE][TAILLE]) function pointer
+	switch(type) {
+		case PLAYER_TYPE_HUMAN:
+			evaluate=&Player::HumanEvaluate;
+		break;
+		case PLAYER_TYPE_IA:
+			evaluate=&Player::IAEvaluate;
+		break;
+		default :
+			evaluate=&Player::HumanEvaluate;
+		break;
+	}*/
 	points = 0;
 	//cout << name << " a rejoint la partie ! (équipe : "<< team <<")\n";
 	return 0;
@@ -36,68 +48,62 @@ int Player::getScore(Emplacement grille[TAILLE][TAILLE]) {
 		for (y = 0; y < TAILLE; ++y)
 			if(grille[x][y].valeur == team) score++;
 		return score;
-	}
+}
 
+int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
+	Mouvement mvt;
+	int x_s, y_s, x_d, y_d;
 
-	int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
+	puts("====Quel pion bouger?====\n");
+	puts("> x : ");
+	scanf("%d", &x_s);
+	puts("> y : ");
+	scanf("%d", &y_s);
+	puts("==Vers quelle position?==\n");
+	puts("> x : ");
+	scanf("%d", &x_d);
+	puts("> y : ");
+	scanf("%d", &y_d);
 
-		switch(type) {
-			case PLAYER_TYPE_HUMAN:
+	if(mvt.init(x_s, y_s, x_d, y_d, grille) == -1)
+		return -1;
+
+	mvt.apply(grille);
+	return 0;
+}
+
+int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
+	switch(type) {
+		case PLAYER_TYPE_HUMAN:
 			return HumanEvaluate(grille);
-			break;
-			case PLAYER_TYPE_IA:
+		case PLAYER_TYPE_IA:
 			return IAEvaluate(grille);
-			break;
-			default:
-			printf("This type of player cannot play yet.\n");
-			return -1;
-			break;
-		}
+		default:
+			return HumanEvaluate(grille);
 	}
+}
 
-	int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
-		Mouvement mvt;
-		int x_s, y_s, x_d, y_d;
+int Player::IAEvaluate(Emplacement grille[TAILLE][TAILLE]) {
+	int x, y, k, l, len=0;
+	MovePlan bestmove, tmp;
+	int big = 0;
 
-		puts("====Quel pion bouger?====\n");
-		puts("> x : ");
-		scanf("%d", &x_s);
-		puts("> y : ");
-		scanf("%d", &y_s);
-		puts("==Vers quelle position?==\n");
-		puts("> x : ");
-		scanf("%d", &x_d);
-		puts("> y : ");
-		scanf("%d", &y_d);
+	for (x = 0; x < TAILLE; ++x)
+		for (y = 0; y < TAILLE; ++y)
+			if(grille[x][y].valeur == 2)
+				continue;
+			else
+				for (k = -1; k <= 1; ++k)
+					for (l = -1; l <= 1; ++l)
+						if(grille[x+l][y+k].valeur == 2) continue;
+					else
+						if(tmp.init(x, y, x+l, y+k, team, grille) > bestmove.getScore())
+							bestmove.init(x, y, x+l, y+k, team, grille);
 
-		if(mvt.init(x_s, y_s, x_d, y_d, grille) == -1)
-			return -1;
-		
-		mvt.apply(grille);
-		return 0;
-	}
-
-	int Player::IAEvaluate(Emplacement grille[TAILLE][TAILLE]) {
-		int x, y, k, l, len=0;
-		MovePlan bestmove, tmp;
-		int big = 0;
-
-		for (x = 0; x < TAILLE; ++x)
-			for (y = 0; y < TAILLE; ++y)
-				if(grille[x][y].valeur == 2)
-					continue;
-				else
-					for (k = -1; k <= 1; ++k)
-						for (l = -1; l <= 1; ++l)
-							if(grille[x+l][y+k].valeur == 2) continue;
-						else
-							if(tmp.init(x, y, x+l, y+k, team, grille) > bestmove.getScore())
-								bestmove.init(x, y, x+l, y+k, team, grille);
-
-		bestmove.calcScore(grille);
-		if(bestmove.score == -1) return -1;
-		bestmove.mvt.apply(grille);
-		return 0;
-	}
+						bestmove.calcScore(grille);
+						if(bestmove.score == -1) return -1;
+						bestmove.mvt.apply(grille);
+						return 0;
+					}
 
 #endif

@@ -18,6 +18,7 @@ public:
 	std::string name;
 	int delay;
 	int points;
+	//TODO : int(Player::*evaluate)(Emplacement[TAILLE][TAILLE]) function pointer
 
 	//int pions[TAILLE*TAILLE][2] = {-1};
 

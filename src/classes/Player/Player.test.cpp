@@ -19,8 +19,16 @@ int main(int argc, char const *argv[])
 		SHOULD_BE_TRUE(a.init(team, "L", PLAYER_TYPE_HUMAN))
 		SHOULD_BE_TRUE(a.init(team, "MARTIN", PLAYER_TYPE_HUMAN))
 		SHOULD_BE_FALSE(a.init(team, "", PLAYER_TYPE_HUMAN))
-		SHOULD_BE_TRUE(a.init(team, " ", PLAYER_TYPE_HUMAN))
+		SHOULD_BE_FALSE(a.init(team, "", PLAYER_TYPE_IA))
+		SHOULD_BE_TRUE(a.init(team, " ", PLAYER_TYPE_IA))
+		SHOULD_BE_TRUE(a.init(team, "Test", PLAYER_TYPE_IA))
+		SHOULD_BE_TRUE(a.init(team, " ", PLAYER_TYPE_Human))
+		SHOULD_BE_FALSE(a.init(team, "Martin", PLAYER_TYPE_MAX+1))
+		SHOULD_BE_FALSE(a.init(team, "", PLAYER_TYPE_MAX+1))
+		SHOULD_BE_FALSE(a.init(team, " ", PLAYER_TYPE_MAX+2))
 	}
+
+	SHOULD_BE_FALSE(a.init(3, "Martin", PLAYER_TYPE_HUMAN))
 
 	UNIT_TEST_RETURN(err)
 }
