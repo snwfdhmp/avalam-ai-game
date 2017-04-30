@@ -1,6 +1,7 @@
 #ifndef DISPLAY_CPP
 #define DISPLAY_CPP
 
+#include <string>
 #include "../GraphicComponent/GraphicComponent.class.h"
 
 class Display
@@ -16,11 +17,17 @@ public:
 
 	Display* initWindow();
 
+	int update();
+
 	Display* updateWindow();
 	
 	GraphicComponent* addComponent(GraphicComponent* componentToAdd);
 
 	GraphicComponent* getTargeted(int mouse_x, int mouse_y);
+
+	std::string* inputString(std::string question);
+	int* inputNumber(std::string question);
+	void* input(std::string question, int type);
 
 };
 #endif

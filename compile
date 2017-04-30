@@ -21,7 +21,7 @@ log_compile_path="logs/compile.logs"
 echo "Compilation de 'build/$AVALAM_COMPILE_ENV-$version.$suffix.exe'..."
 echo "[$(date)] ++ Compilation de 'build/$AVALAM_COMPILE_ENV-$version.$suffix.exe' ..." >> $log_compile_path
 
-g++ src/main.cpp src/classes/*/*.class.cpp -o build/$AVALAM_COMPILE_ENV-$version.$suffix.exe 
+g++ src/main.cpp src/classes/*/*.class.cpp -o build/$AVALAM_COMPILE_ENV-$version.$suffix.exe -Wall
 
 if [ $? -eq 0 ]; then
 	echo $suffix > config/compile_version_suffix

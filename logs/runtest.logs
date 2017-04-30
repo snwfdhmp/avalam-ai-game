@@ -256,3 +256,135 @@
 [Sam 29 avr 2017 23:15:57 CEST] ++ Player : Run test success.
 [Sam 29 avr 2017 23:15:58 CEST] -- PlayerIA : Compilation success.
 [Sam 29 avr 2017 23:15:58 CEST] ++ PlayerIA : Run test success.
+[Dim 30 avr 2017 12:49:39 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 12:49:39 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 12:49:39 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 12:49:40 CEST] -- Player : Compilation failed.
+[Dim 30 avr 2017 12:50:36 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 12:50:36 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 12:50:36 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 12:50:37 CEST] -- Player : Compilation failed.
+[Dim 30 avr 2017 12:50:59 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 12:51:00 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 12:51:00 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 12:51:00 CEST] -- Player : Compilation failed.
+[Dim 30 avr 2017 12:52:09 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 12:52:09 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 12:52:09 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 12:52:10 CEST] -- Player : Compilation failed.
+[Dim 30 avr 2017 12:52:54 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 12:52:54 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 12:52:54 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 12:52:55 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 12:52:55 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 12:53:10 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 12:53:11 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 12:53:11 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 12:53:11 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 12:53:11 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 12:54:00 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 12:54:01 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 12:54:01 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 12:54:02 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 12:54:02 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 12:54:42 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 12:54:43 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 12:54:43 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 12:54:43 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 12:54:43 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:13:26 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:13:26 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:13:26 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:13:27 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:13:27 CEST] -- Player : Run test failed. (Player.test.cpp returns 255)
+[Dim 30 avr 2017 13:14:22 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:14:22 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:14:22 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:14:23 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:14:23 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:17:31 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:17:31 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:17:31 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:17:32 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:17:32 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:30:41 CEST] -- GameInstance : Compilation success.
+[Dim 30 avr 2017 13:30:41 CEST] ++ GameInstance : Run test success.
+[Dim 30 avr 2017 13:30:41 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:30:41 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:30:42 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:30:42 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:31:30 CEST] -- GameInstance : Compilation success.
+[Dim 30 avr 2017 13:31:30 CEST] ++ GameInstance : Run test success.
+[Dim 30 avr 2017 13:31:30 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:31:30 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:31:31 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:31:31 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:46:07 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:46:07 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:46:07 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:47:02 CEST] -- GameInstance : Compilation success.
+[Dim 30 avr 2017 13:47:02 CEST] ++ GameInstance : Run test success.
+[Dim 30 avr 2017 13:47:03 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:47:03 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:47:04 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:47:04 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:51:04 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:51:04 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:51:04 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:51:05 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:51:05 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:51:13 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:51:13 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:51:13 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:51:14 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:51:14 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:54:27 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:54:27 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:54:27 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:54:28 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:54:28 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:55:06 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:55:07 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:55:07 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:55:08 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:55:08 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 13:55:28 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 13:55:28 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 13:55:28 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 13:55:29 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 13:55:29 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 14:01:53 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 14:01:53 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 14:01:53 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 14:01:54 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 14:01:54 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 14:02:01 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 14:02:01 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 14:02:01 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 14:02:02 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 14:02:02 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 14:02:07 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 14:02:07 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 14:02:07 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 14:02:08 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 14:02:08 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 14:02:18 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 14:02:19 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 14:02:19 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 14:02:20 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 14:02:20 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 14:02:26 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 14:02:26 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 14:02:26 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 14:02:27 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 14:02:27 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 14:03:01 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 14:03:01 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 14:03:01 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 14:03:02 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 14:03:02 CEST] ++ Player : Run test success.
+[Dim 30 avr 2017 14:03:06 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 14:03:06 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 14:03:06 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 14:03:07 CEST] -- Player : Compilation success.
+[Dim 30 avr 2017 14:03:07 CEST] ++ Player : Run test success.

@@ -13,4 +13,7 @@
 #define PLAYER_TYPE_HUMAN 1
 #define PLAYER_TYPE_IA 2
 
+#define INPUT_TYPE_STRING 1
+#define INPUT_TYPE_NUMBER 2
+
 #endif

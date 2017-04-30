@@ -84,9 +84,8 @@ int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
 }
 
 int Player::IAEvaluate(Emplacement grille[TAILLE][TAILLE]) {
-	int x, y, k, l, len=0;
+	int x, y, k, l;
 	MovePlan bestmove, tmp;
-	int big = 0;
 
 	for (x = 0; x < TAILLE; ++x)
 		for (y = 0; y < TAILLE; ++y)

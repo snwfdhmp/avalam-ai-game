@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
+#include <iostream>
 
 #include "../GraphicComponent/GraphicComponent.class.h"
 #include "Display.class.h"
@@ -37,6 +39,13 @@ Display* Display::initWindow() {
 	return this;
 };
 
+int Display::update() {
+	if(updateWindow() == NULL)
+		return -1;
+
+	return 0;
+}
+
 Display* Display::updateWindow() {
 	bool error = false;
 		// SDL clear la fenetre
@@ -51,6 +60,34 @@ Display* Display::updateWindow() {
 		return NULL;
 	return this;
 };
+
+std::string* Display::inputString(std::string question) {
+	std::string* rep = (std::string*) malloc(sizeof(std::string));
+	std::cout << question;
+	std::cin >> *rep;
+	return rep;
+}
+
+int* Display::inputNumber(std::string question) {
+	std::string rep = "-1";
+	std::cout << question;
+	std::cin >> rep;
+	int* repint;
+	repint=(int*) malloc(sizeof(int));
+	*repint = std::stoi(rep);
+	return repint;
+}
+
+void* Display::input(std::string question, int type) {
+	switch(type) {
+		case INPUT_TYPE_STRING:
+			return inputString(question);
+		case INPUT_TYPE_NUMBER:
+			return inputNumber(question);
+		default:
+		return NULL;
+	}
+}
 
 GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
 	components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
@@ -68,7 +105,7 @@ GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
 				continue;
 			else
 				return components[i];
-	return NULL;
-};
+			return NULL;
+		};
 
 #endif
