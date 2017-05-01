@@ -14,10 +14,12 @@ public:
 	Player *playerA, *playerB;
 	GameInstance(Display* setDisp, Player* setPlayerA, Player* setPlayerB);
 	~GameInstance();
+	void* (GameInstance::*start)(void*);
 
-	void *startGame(void* arg); //starts a game playerA vs player
 
-	void *askNames(void* arg);
+	void* startGame(void* arg); //starts a game playerA vs player
+
+	void* askNames(void* arg);
 
 	void initGrille();
 

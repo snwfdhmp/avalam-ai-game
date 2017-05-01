@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../GraphicComponent/GraphicComponent.class.h"
+#include "../../config/constants.h"
 
 class Display
 {
@@ -28,6 +29,8 @@ public:
 	std::string* inputString(std::string question);
 	int* inputNumber(std::string question);
 	void* input(std::string question, int type);
+
+	int printGridToConsole(Emplacement grille[TAILLE][TAILLE]);
 
 };
 #endif

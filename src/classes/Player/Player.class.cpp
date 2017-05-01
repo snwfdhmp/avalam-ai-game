@@ -54,15 +54,15 @@ int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 	Mouvement mvt;
 	int x_s, y_s, x_d, y_d;
 
-	puts("====Quel pion bouger?====\n");
-	puts("> x : ");
+	printf("====Quel pion bouger?====\n");
+	printf("> x : ");
 	scanf("%d", &x_s);
-	puts("> y : ");
+	printf("> y : ");
 	scanf("%d", &y_s);
-	puts("==Vers quelle position?==\n");
-	puts("> x : ");
+	printf("==Vers quelle position?==\n");
+	printf("> x : ");
 	scanf("%d", &x_d);
-	puts("> y : ");
+	printf("> y : ");
 	scanf("%d", &y_d);
 
 	if(mvt.init(x_s, y_s, x_d, y_d, grille) == -1)

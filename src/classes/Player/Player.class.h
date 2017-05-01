@@ -18,7 +18,7 @@ public:
 	std::string name;
 	int delay;
 	int points;
-	int(Player::*evaluate)(Emplacement[TAILLE][TAILLE]) = *Player->&(*IAEvaluate)(void * arg);
+	//TODO add int(Player::*evaluate)(Emplacement[TAILLE][TAILLE])
 
 	//int pions[TAILLE*TAILLE][2] = {-1};
 
