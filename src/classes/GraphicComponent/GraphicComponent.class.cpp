@@ -22,6 +22,7 @@ void GraphicComponent::initTexture(SDL_Renderer *renderer, SDL_Surface *surface)
 
 GraphicComponent* destroyTexture(SDL_Texture *texture){
 	SDL_DestroyTexture(texture);
+	return NULL;
 }
 
 /*GraphicComponent* createboard(SDL_Renderer *renderer){

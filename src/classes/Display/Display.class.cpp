@@ -12,27 +12,24 @@
 // include global constants
 #include "../../config/constants.h"
 
-Display::Display(int set_x, int set_y, int set_width, int set_height) {
+Display::Display(int set_x, int set_y, int set_width, int set_height, SDL_Window *window) {
 	components = (GraphicComponent**) malloc(sizeof(GraphicComponent*));
 	size = 0;
 	x = set_x;
 	y = set_y;
 	width = set_width;
 	height = set_height;
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	if(renderer == NULL)
+		printf("Erreur : Renderer non créé\n");
 };
 
 Display::~Display() {};
 
-Display* Display::initRenderer(SDL_Window *window){ //The renderer is where all the graphic components will be placed
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if(renderer == NULL)
-		printf("renderer non creer\n");
-
-	return 0;
-}
 
 Display* destroyRenderer(SDL_Renderer *renderer){
 	SDL_DestroyRenderer(renderer);
+	return NULL;
 }
 
 Display* Display::initWindow() { //TODO merge to initRenderer();

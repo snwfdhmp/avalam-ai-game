@@ -13,12 +13,11 @@ public:
 	unsigned int size;
 	GraphicComponent** components;
 
-	Display(int set_x, int set_y, int set_width, int set_height);
+	Display(int set_x, int set_y, int set_width, int set_height, SDL_Window *window);
 	
 	~Display();
 
 	Display* initWindow();
-	Display* initRenderer(SDL_Window *window);
 	Display* destroyRenderer(SDL_Renderer *renderer);
 	int update();
 

@@ -4,8 +4,10 @@
 #include "classes/Emplacement/Emplacement.class.h"
 #include "classes/Mouvement/Mouvement.class.h"
 #include "classes/Player/Player.class.h"
+#include "classes/Window/Window.class.h"
 #include "config/macros.h"
 #include "config/constants.h"
+#include "SDL2/SDL.h"
 
 using namespace std;
 
@@ -103,6 +105,10 @@ int play(int playerAType = PLAYER_TYPE_HUMAN, int playerBType = PLAYER_TYPE_HUMA
 
 int main(int argc, char const *argv[])
 {
+	Window fenetre("Avalam", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+
+
+	/*
 	int choice;
 	printf("Welcome to AVALAM Game !\n");
 	printf("Select a game mode :\n");
@@ -128,7 +134,7 @@ int main(int argc, char const *argv[])
 			printf("Please enter a choice between 1 and 4...\n");
 			break;
 	}
-	} while(choice != 4);
+	} while(choice != 4);*/
 
 	return 0;
 }

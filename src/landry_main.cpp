@@ -23,13 +23,11 @@ void clearConsole() {
 }
 
 int createMenu(SDL_Window *window){
-	Display intro(0, 0, 800, 600);
-	GraphicComponent* background;
-	GraphicComponent *menu;
-	intro.initRenderer(window);
-	string path = "resources/img/avalam_FI.bmp";
+	Display intro(0, 0, 800, 600, window);
+	GraphicComponent *background, *menu;
+	string path = "ressources/img/avalam_FI.bmp";
 	//background.initSurface("resources/img/avalam_FI.bmp");
-	background->surface = SDL_LoadBMP("resources/img/avalam_FI.bmp");
+	background->surface = SDL_LoadBMP("ressources/img/avalam_FI.bmp");
 	background->initTexture(intro.renderer, background->surface);
 	SDL_Rect position = {300, 300, 0, 0};
 	SDL_Delay(3000);
@@ -37,7 +35,7 @@ int createMenu(SDL_Window *window){
     SDL_BlitSurface(background->surface, NULL, background->surface, &position);
     SDL_RenderPresent(intro.renderer);
     //menu->initRenderer(window);
-    menu->surface = SDL_LoadBMP("resources/img/menu.bmp");
+    menu->surface = SDL_LoadBMP("ressources/img/menu.bmp");
     SDL_Rect menu_pos = {300, 300, 0, 0};
     
 
@@ -52,10 +50,10 @@ int createMenu(SDL_Window *window){
 	DestroyTexture(texture);
 	DestroyRenderer(renderer);
 
-	//Menu interface
+	Menu interface
 	 SDL_Renderer *menu_renderer = initrenderer(window);
 	 SDL_Surface *menu_background = SDL_LoadBMP("resources/img/menu_background.bmp");*/
-
+    return 0;
 }
 
 int printGrille(Emplacement grille[TAILLE][TAILLE]) {
@@ -145,39 +143,27 @@ int play(int playerAType = PLAYER_TYPE_HUMAN, int playerBType = PLAYER_TYPE_HUMA
 
 int main(int argc, char const *argv[])
 {
-	 SDL_Window *window = NULL;
-     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
-     window = SDL_CreateWindow("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
+	SDL_Window *window = NULL;
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
+    bool terminer = false;
+    window = SDL_CreateWindow("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+    //window = SDL_CreateWindow("Test SDL 2.0", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
 
-	SDL_Surface *icone = SDL_LoadBMP("resources/img/chess.bmp");
+	SDL_Surface *icone = SDL_LoadBMP("ressources/img/chess.bmp");
   	SDL_SetWindowIcon(window, icone);
-	
-	int choice;
-	printf("Welcome to AVALAM Game !\n");
-	printf("Select a game mode :\n");
+  	SDL_Event evenements;
 
-	do{
-	printf("1:Human vs Human\n2:Human vs IA\n3:IA vs IA\n");
-	printf("4:Quit\nChoice : ");
-	scanf("%d", &choice);
-	switch(choice) {
-		case 1:
-			play(PLAYER_TYPE_HUMAN, PLAYER_TYPE_HUMAN);
-			break;
-		case 2:
-			play(PLAYER_TYPE_HUMAN, PLAYER_TYPE_IA);
-			break;
-		case 3:
-			play(PLAYER_TYPE_IA, PLAYER_TYPE_IA);
-			break;
-		case 4:
-			printf("See you soon !\n");
-			break;
-		default :
-			printf("Please enter a choice between 1 and 4...\n");
-			break;
-	}
-	} while(choice != 4);
+    SDL_WaitEvent(&evenements);
+
+  	/*while(!terminer)
+    {
+        SDL_WaitEvent(&evenements);
+		
+        if(evenements.window.event == SDL_WINDOWEVENT_CLOSE)
+        terminer = true;
+    }*/
+	
+	SDL_Delay(3000);
 
 	return 0;
 }
