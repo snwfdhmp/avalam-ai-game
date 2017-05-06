@@ -34,7 +34,9 @@ void GameInstance::initGrille() {
 
 void* GameInstance::startGame(void *arg) {
 	if(playerA == NULL || playerB == NULL)
-		pthread_exit(NULL);
+		return 0;
+		//for further threading
+		//pthread_exit(NULL);
 	
 	initGrille();
 
