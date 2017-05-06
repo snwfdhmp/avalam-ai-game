@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "../GraphicComponent/GraphicComponent.class.h"
+#include "../Emplacement/Emplacement.class.h"
 #include "Display.class.h"
 
 // include global constants
@@ -26,6 +27,35 @@ Display::Display(int set_x, int set_y, int set_width, int set_height, SDL_Window
 
 Display::~Display() {};
 
+int Display::printGridToConsole(Emplacement grille[TAILLE][TAILLE]) {
+	printf("=========================\n");
+	printf("======== PLATEAU ========\n");
+	printf("=========================\n");
+	int x,y;
+	int score[2] = {0, 0};
+	printf("=    ==0== ==1== ==2== ==3== ==4== ==5== ==6== ==7== ==8==  =\n");
+	for (y = 0;y < TAILLE; ++y)
+	{
+		printf("= %d: ", y);
+		for (x = 0; x < TAILLE; ++x)
+		{
+			if (grille[x][y].valeur != 2) {
+				(grille[x][y].valeur)?printf("\033[31m"):printf("\033[32m");
+				printf("(%d:%d) ", grille[x][y].valeur, grille[x][y].hauteur);
+				printf("\033[39m");
+				score[grille[x][y].valeur]+=grille[x][y].hauteur;
+			}
+			else
+				printf("      ");
+		}
+		printf(" =\n");
+	}
+	printf("==== 0 : %d | 1 : %d ====\n", score[0], score[1]);
+	return 0;
+}
+
+Display* Display::initWindow() {
+	bool error = false;
 
 Display* destroyRenderer(SDL_Renderer *renderer){
 	SDL_DestroyRenderer(renderer);
@@ -59,9 +89,6 @@ int Display::update() {
 			target->onClick();
 	}
 
-
-
-
 	if(updateWindow() == NULL)
 		return -1;
 
@@ -83,33 +110,6 @@ Display* Display::updateWindow() {
 	return this;
 };
 
-std::string* Display::inputString(std::string question) {
-	std::string* rep = (std::string*) malloc(sizeof(std::string));
-	std::cout << question;
-	std::cin >> *rep;
-	return rep;
-}
-
-/*int* Display::inputNumber(std::string question) {
-	std::string rep = "-1";
-	std::cout << question;
-	std::cin >> rep;
-	int* repint;
-	repint=(int*) malloc(sizeof(int));
-	*repint = std::stoi(rep);
-	return repint;
-}*/
-
-void* Display::input(std::string question, int type) {
-	switch(type) {
-		case INPUT_TYPE_STRING:
-			return inputString(question);
-		//case INPUT_TYPE_NUMBER:
-			//return inputNumber(question);
-		default:
-		return NULL;
-	}
-}
 
 GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
 	components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);

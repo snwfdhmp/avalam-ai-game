@@ -4,6 +4,7 @@
 #include <string>
 #include "SDL2/SDL.h"
 #include "../GraphicComponent/GraphicComponent.class.h"
+#include "../../config/constants.h"
 
 class Display
 {
@@ -21,6 +22,8 @@ public:
 	Display* destroyRenderer(SDL_Renderer *renderer);
 	int update();
 
+	int update();
+
 	Display* updateWindow();
 	
 	GraphicComponent* addComponent(GraphicComponent* componentToAdd);
@@ -28,8 +31,5 @@ public:
 	GraphicComponent* getTargeted(int mouse_x, int mouse_y);
 
 	std::string* inputString(std::string question);
-	//int* inputNumber(std::string question);
-	void* input(std::string question, int type);
-
 };
 #endif

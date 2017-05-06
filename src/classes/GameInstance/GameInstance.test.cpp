@@ -18,11 +18,13 @@ int main(int argc, char const *argv[])
 	playerB.init(1, "Landry", PLAYER_TYPE_HUMAN);
 	GameInstance* game = new GameInstance(disp, &playerA, &playerB);
 	void* (GameInstance::*start)(void*) = &GameInstance::startGame;
-	pthread_t thread;
+	/*pthread_t thread;
 
 	pthread_create(&thread, NULL, (game->*start)(void*), NULL);
 
-	pthread_join(thread, NULL);
+	pthread_join(thread, NULL);*/
+
+	game.startGame();
 
 	return 0;
 }

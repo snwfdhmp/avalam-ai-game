@@ -18,8 +18,8 @@ public:
 	std::string name;
 	int delay;
 	int points;
-	//TODO : int(Player::*evaluate)(Emplacement[TAILLE][TAILLE]) function pointer
-
+	//TODO add int(Player::*evaluate)(Emplacement[TAILLE][TAILLE]) function pointer
+	
 	//int pions[TAILLE*TAILLE][2] = {-1};
 
 	int init(int newTeam, std::string newName = "Joueur", int newType = PLAYER_TYPE_MIN); //initialise le joueur (default type -> IA)

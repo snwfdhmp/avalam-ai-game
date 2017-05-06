@@ -6,7 +6,6 @@
 #include "../../SDL2/SDL.h"
 
 //Window class definition
-
 class Window
 {
 public:

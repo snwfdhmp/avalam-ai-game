@@ -388,3 +388,11 @@
 [Dim 30 avr 2017 14:03:06 CEST] ++ MovePlan : Run test success.
 [Dim 30 avr 2017 14:03:07 CEST] -- Player : Compilation success.
 [Dim 30 avr 2017 14:03:07 CEST] ++ Player : Run test success.
+<<<<<<< HEAD
+=======
+[Dim 30 avr 2017 23:34:00 CEST] -- GameInstance : Compilation failed.
+[Dim 30 avr 2017 23:34:00 CEST] -- MovePlan : Compilation success.
+[Dim 30 avr 2017 23:34:00 CEST] ++ MovePlan : Run test success.
+[Dim 30 avr 2017 23:34:01 CEST] -- Player : Compilation failed.
+[Dim 30 avr 2017 23:34:01 CEST] -- Window : Compilation failed.
+>>>>>>> master

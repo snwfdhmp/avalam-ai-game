@@ -17,6 +17,7 @@ GameInstance::GameInstance(Display* setDisp, Player* setPlayerA = NULL, Player* 
 	disp = setDisp;
 	playerA = setPlayerA;
 	playerB = setPlayerB;
+	start = &GameInstance::startGame;
 }
 
 void GameInstance::initGrille() {
@@ -33,18 +34,27 @@ void GameInstance::initGrille() {
 
 void* GameInstance::startGame(void *arg) {
 	if(playerA == NULL || playerB == NULL)
+		return 0;
+		//for further threading
 		//pthread_exit(NULL);
 	
 	initGrille();
 
 	while(true)
-		if(disp->update() && playerA->evaluate(grille) == -1 &&
-			disp->update() && playerB->evaluate(grille) == -1)
+		/*if(disp->update() && playerA->evaluate(grille) == -1 &&
+			disp->update() && playerB->evaluate(grille) == -1)*/
 			
+		if(!disp->printGridToConsole(grille) && playerA->evaluate(grille) == -1 &&
+			!disp->printGridToConsole(grille) && playerB->evaluate(grille) == -1)
+				return 0;
 			//onFinish(grille, &playerA, &playerB);
 
-	(void) arg;
-	//pthread_exit(NULL);
+
+	// For further threading
+	// (void) arg;
+	// pthread_exit(NULL);
+
+	return 0;
 }
 
 #endif
