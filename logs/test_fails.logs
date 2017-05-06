@@ -1,4 +1,0 @@
-#!/bin/bash
-g++ src/classes/GameInstance/GameInstance.test.cpp src/classes/Emplacement/Emplacement.class.cpp src/classes/Mouvement/Mouvement.class.cpp src/classes/Display/Display.class.cpp src/classes/Player/Player.class.cpp src/classes/GameInstance/GameInstance.class.cpp src/classes/MovePlan/MovePlan.class.cpp -o src/tests/dev-0.4.4.exe-GameInstance.test
-g++ src/classes/Player/Player.test.cpp src/classes/Player/Player.class.cpp src/classes/MovePlan/MovePlan.class.cpp src/classes/Emplacement/Emplacement.class.cpp src/classes/Mouvement/Mouvement.class.cpp  -o src/tests/dev-0.4.4.exe-Player.test
-g++ src/classes/Window/Window.test.cpp src/classes/Window/Window.class.cpp -o src/tests/dev-0.4.4.exe-Window.test

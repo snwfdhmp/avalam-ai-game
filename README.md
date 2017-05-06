@@ -186,3 +186,5 @@ Le projet est divisé en plusieurs répertoires :
     
 - [<code>compile</code>](https://github.com/snwfdhmp/avalam-ai-game/tree/master/compile)
   Shell-script utilisé pour la compilation, les logs, le versioning, etc.
+
+- Compilation windows : "g++ -I.\include -L.\lib src/*/*.class.cpp src/landry_main.cpp -lSDL2 -lSDL2main -lSDL2.dll"

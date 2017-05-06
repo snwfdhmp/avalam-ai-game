@@ -2,21 +2,25 @@
 #define DISPLAY_CPP
 
 #include <string>
+#include "SDL2/SDL.h"
 #include "../GraphicComponent/GraphicComponent.class.h"
 #include "../../config/constants.h"
 
 class Display
 {
 public:
-	GraphicComponent** components;
+	SDL_Renderer *renderer;
 	int x, y, width, height;
 	unsigned int size;
+	GraphicComponent** components;
 
-	Display(int set_x, int set_y, int set_width, int set_height);
+	Display(int set_x, int set_y, int set_width, int set_height, SDL_Window *window);
 	
 	~Display();
 
 	Display* initWindow();
+	Display* destroyRenderer(SDL_Renderer *renderer);
+	int update();
 
 	int update();
 
@@ -27,10 +31,5 @@ public:
 	GraphicComponent* getTargeted(int mouse_x, int mouse_y);
 
 	std::string* inputString(std::string question);
-	int* inputNumber(std::string question);
-	void* input(std::string question, int type);
-
-	int printGridToConsole(Emplacement grille[TAILLE][TAILLE]);
-
 };
 #endif
