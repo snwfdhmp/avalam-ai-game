@@ -7,18 +7,17 @@
 #include "GraphicComponent.class.h"
 #include "../Emplacement/Emplacement.class.h"
 
-GraphicComponent::GraphicComponent(int set_x, int set_y, int set_width, int set_height) {
-	x = set_x;
-	y = set_y;
-	width = set_width;
-	height = set_height;
+GraphicComponent::GraphicComponent(SDL_Renderer* renderer, const char* pathToImg) {
+	surface = SDL_LoadBMP(pathToImg);
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+}
+
+GraphicComponent::GraphicComponent(SDL_Renderer* renderer, SDL_Surface* set_surface) {
+	surface = set_surface;
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
 }
 
 GraphicComponent::~GraphicComponent(){};
-
-void GraphicComponent::initTexture(SDL_Renderer *renderer, SDL_Surface *surface){
-	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
-}
 
 GraphicComponent* destroyTexture(SDL_Texture *texture){
 	SDL_DestroyTexture(texture);
@@ -42,15 +41,15 @@ GraphicComponent* createmenu(SDL_window *window){
 }*/
 
 void GraphicComponent::onClick(){
-		printf("GraphicComponent at [%d;%d] has fired the onClick() function.\n", x, y);
+	//printf("GraphicComponent at [%d;%d] has fired the onClick() function.\n", x, y);
 }
 
 void GraphicComponent::onMouseOver(){
-	printf("GraphicComponent at [%d;%d] has fired the onMouseOver() function.\n", x, y);
+	//printf("GraphicComponent at [%d;%d] has fired the onMouseOver() function.\n", x, y);
 }
 
 void GraphicComponent::onMouseOut() {
-	printf("GraphicComponent at [%d;%d] has fired the onMouseOut() function.\n", x, y);
+	//printf("GraphicComponent at [%d;%d] has fired the onMouseOut() function.\n", x, y);
 }
 
 #endif

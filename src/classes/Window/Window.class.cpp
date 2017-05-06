@@ -19,9 +19,21 @@ Window::Window(const char* title, int x, int y, int w, int h, Uint32 flags) {
 }
 
 int Window::show() {
-    int status = SDL_WaitEvent(NULL);
-    printf("Window::show : %d\n", status);
-    return status;
+	return SDL_WaitEvent(&event);
+}
+
+int Window::update() {
+	show();
+
+	if(event.type==SDL_QUIT||event.type==SDL_APP_TERMINATING)
+		exit(1);
+
+	return 0;
+}
+
+void Window::setIcon(const char* pathToIcon) {
+	SDL_Surface *icon = SDL_LoadBMP(pathToIcon);
+  	SDL_SetWindowIcon(window, icon);
 }
 
 #endif

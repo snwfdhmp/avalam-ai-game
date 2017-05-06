@@ -10,11 +10,10 @@ public:
 	
 	SDL_Texture *texture;
 	SDL_Surface *surface;
-	int x, y;
-	int height, width;
 
 	
-	GraphicComponent(int set_x, int set_y, int set_width, int set_height);
+	GraphicComponent(SDL_Renderer* renderer, const char* pathToImg);
+	GraphicComponent(SDL_Renderer* renderer, SDL_Surface* set_surface);
 
 	~GraphicComponent();
 	

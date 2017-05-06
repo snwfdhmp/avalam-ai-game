@@ -7,27 +7,35 @@
 #include <iostream>
 
 #include "../GraphicComponent/GraphicComponent.class.h"
+#include "../../SDL2/SDL.h"
 #include "../Emplacement/Emplacement.class.h"
+#include "../Window/Window.class.h"
 #include "Display.class.h"
 
 // include global constants
 #include "../../config/constants.h"
 
-Display::Display(int set_x, int set_y, int set_width, int set_height, SDL_Window *window) {
+Display::Display(int set_x, int set_y, int set_width, int set_height, Window* window) {
 	components = (GraphicComponent**) malloc(sizeof(GraphicComponent*));
 	size = 0;
 	x = set_x;
 	y = set_y;
 	width = set_width;
 	height = set_height;
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED);
+	if(renderer == NULL)
+		printf("Erreur : Renderer non créé\n");
+};
+
+Display::Display(Window* window) {
+	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED);
 	if(renderer == NULL)
 		printf("Erreur : Renderer non créé\n");
 };
 
 Display::~Display() {};
 
-int Display::printGridToConsole(Emplacement grille[TAILLE][TAILLE]) {
+/*int Display::printGridToConsole(Emplacement grille[TAILLE][TAILLE]) {
 	printf("=========================\n");
 	printf("======== PLATEAU ========\n");
 	printf("=========================\n");
@@ -52,15 +60,12 @@ int Display::printGridToConsole(Emplacement grille[TAILLE][TAILLE]) {
 	}
 	printf("==== 0 : %d | 1 : %d ====\n", score[0], score[1]);
 	return 0;
-}
+}*/
 
-Display* Display::initWindow() {
-	bool error = false;
-
-Display* destroyRenderer(SDL_Renderer *renderer){
+/*Display* destroyRenderer(SDL_Renderer *renderer){
 	SDL_DestroyRenderer(renderer);
 	return NULL;
-}
+}*/
 
 Display* Display::initWindow() { //TODO merge to initRenderer();
 	bool error = false;
@@ -114,20 +119,21 @@ Display* Display::updateWindow() {
 GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
 	components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
 	components[size] = componentToAdd;
-	printf("Component [%d;%d] has been added to display [%d;%d] (%d:%d) [size : %d]\n", components[size]->x, components[size]->y, x, y, width, height, size);
+	//printf("Component [%d;%d] has been added to display [%d;%d] (%d:%d) [size : %d]\n", components[size]->x, components[size]->y, x, y, width, height, size);
 	return components[size++]; //size is incremented after he gets injected as index of array (post inc)
 };
 
 GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
-	if(mouse_x < x || mouse_x > x+width || mouse_y < y || mouse_y > y+height)
+	/*if(mouse_x < x || mouse_x > x+width || mouse_y < y || mouse_y > y+height)
 		return NULL;
 	else
-		for (int i = 0; i < size; ++i)
+		for (int i = 0; i < size; ++i) {
 			if(mouse_x < components[i]->x || mouse_x > components[i]->x+components[i]->width || mouse_y < components[i]->y || mouse_y > components[i]->y+components[i]->height)
 				continue;
 			else
 				return components[i];
-			return NULL;
-		};
+		}*/
+	return NULL;
+}
 
 #endif

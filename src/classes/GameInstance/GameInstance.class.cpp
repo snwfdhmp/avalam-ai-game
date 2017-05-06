@@ -41,12 +41,13 @@ void* GameInstance::startGame(void *arg) {
 	initGrille();
 
 	while(true)
-		/*if(disp->update() && playerA->evaluate(grille) == -1 &&
-			disp->update() && playerB->evaluate(grille) == -1)*/
-			
-		if(!disp->printGridToConsole(grille) && playerA->evaluate(grille) == -1 &&
-			!disp->printGridToConsole(grille) && playerB->evaluate(grille) == -1)
-				return 0;
+		if(disp->update() && playerA->evaluate(grille) == -1 &&
+			disp->update() && playerB->evaluate(grille) == -1)
+			return 0;
+
+		/*if(!disp->printGridToConsole(grille) && playerA->evaluate(grille) == -1 &&
+			!disp->printGridToConsole(grille) && playerB->evaluate(grille) == -1)*/
+				
 			//onFinish(grille, &playerA, &playerB);
 
 
