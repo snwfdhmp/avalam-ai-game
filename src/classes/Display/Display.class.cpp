@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
+#include <iostream>
 
 #include "../GraphicComponent/GraphicComponent.class.h"
 #include "Display.class.h"
@@ -17,13 +19,25 @@ Display::Display(int set_x, int set_y, int set_width, int set_height) {
 	y = set_y;
 	width = set_width;
 	height = set_height;
-
 };
+
 Display::~Display() {};
 
-Display* Display::initWindow() {
-	bool error = false;
+Display* Display::initRenderer(SDL_Window *window){ //The renderer is where all the graphic components will be placed
+	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	if(renderer == NULL)
+		printf("renderer non creer\n");
 
+	return 0;
+}
+
+Display* destroyRenderer(SDL_Renderer *renderer){
+	SDL_DestroyRenderer(renderer);
+}
+
+Display* Display::initWindow() { //TODO merge to initRenderer();
+	bool error = false;
+	//initRenderer(); 
 		/*
 			 SDL initialisation de la fenêtre
 
@@ -36,6 +50,26 @@ Display* Display::initWindow() {
 		return NULL;
 	return this;
 };
+
+int Display::update() {
+	//Move to Window class
+	SDL_Event event;
+	if(event.type == SDL_MOUSEBUTTONUP){
+		GraphicComponent* target = getTargeted(event.button.x, event.button.y);
+		if(target == NULL)
+			return -1;
+		else 
+			target->onClick();
+	}
+
+
+
+
+	if(updateWindow() == NULL)
+		return -1;
+
+	return 0;
+}
 
 Display* Display::updateWindow() {
 	bool error = false;
@@ -51,6 +85,34 @@ Display* Display::updateWindow() {
 		return NULL;
 	return this;
 };
+
+std::string* Display::inputString(std::string question) {
+	std::string* rep = (std::string*) malloc(sizeof(std::string));
+	std::cout << question;
+	std::cin >> *rep;
+	return rep;
+}
+
+/*int* Display::inputNumber(std::string question) {
+	std::string rep = "-1";
+	std::cout << question;
+	std::cin >> rep;
+	int* repint;
+	repint=(int*) malloc(sizeof(int));
+	*repint = std::stoi(rep);
+	return repint;
+}*/
+
+void* Display::input(std::string question, int type) {
+	switch(type) {
+		case INPUT_TYPE_STRING:
+			return inputString(question);
+		//case INPUT_TYPE_NUMBER:
+			//return inputNumber(question);
+		default:
+		return NULL;
+	}
+}
 
 GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
 	components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
@@ -68,7 +130,7 @@ GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
 				continue;
 			else
 				return components[i];
-	return NULL;
-};
+			return NULL;
+		};
 
 #endif

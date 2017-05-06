@@ -37,5 +37,22 @@ a[4][4].valeur = 2;\
 	a[7][8].valeur = 2;\
 	a[8][8].valeur = 2;
 
+#define AVAILABLE_TEAM(a)\
+	(a==1 || a==0)
+
+#define AVAILABLE_TYPE(a)\
+	(a >= PLAYER_TYPE_MIN && a <= PLAYER_TYPE_MAX)
+
+// For Unit Test
+#define SHOULD_BE_TRUE(a) if(a == -1)err++;
+
+#define SHOULD_BE_FALSE(a) if(a != -1)err++;
+
+#define UNIT_TEST_RETURN(a) if(a) {\
+		printf("Test failed : %d errors.\n", a);\
+		return -1;\
+	}\
+	printf("Test executed successfully.\n");\
+	return 0;
 
 #endif

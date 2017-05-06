@@ -3,6 +3,8 @@
 #include "Display.class.h"
 #include "GraphicComponent.cpp"
 
+// TODO -> unit test for this class
+
 int main(int argc, char const *argv[])
 {
 	Display* view = new Display(0, 0, 1080, 780); // Display(int set_x, int set_y, int set_width, int set_height) 

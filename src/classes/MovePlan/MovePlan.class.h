@@ -5,6 +5,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "../Mouvement/Mouvement.class.h"
+#include "../Emplacement/Emplacement.class.h"
 
 // include global constants
 #include "../../config/constants.h"
