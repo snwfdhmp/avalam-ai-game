@@ -26,7 +26,7 @@ int Window::update() {
 	show();
 
 	if(event.type==SDL_QUIT||event.type==SDL_APP_TERMINATING)
-		exit(1);
+		return -1;
 
 	return 0;
 }

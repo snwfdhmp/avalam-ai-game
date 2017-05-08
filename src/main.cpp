@@ -10,6 +10,7 @@
 #include "config/constants.h"
 #include "SDL2/SDL.h"
 #include "classes/GameInstance/GameInstance.class.h"
+#undef main
 
 using namespace std;
 
