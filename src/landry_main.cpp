@@ -1,15 +1,15 @@
-#include "SDL2/SDL.h"
-
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include "classes/Emplacement/Emplacement.class.h"
 #include "classes/Mouvement/Mouvement.class.h"
 #include "classes/Player/Player.class.h"
-#include "classes/Display/Display.class.h"
-#include "classes/GraphicComponent/GraphicComponent.class.h"
+#include "classes/Window/Window.class.h"
 #include "config/macros.h"
 #include "config/constants.h"
+#include "SDL2/SDL.h"
+#include "classes/GameInstance/GameInstance.class.h"
 #undef main
 
 using namespace std;

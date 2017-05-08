@@ -9,7 +9,15 @@
 
 GraphicComponent::GraphicComponent(SDL_Renderer* renderer, const char* pathToImg) {
 	surface = SDL_LoadBMP(pathToImg);
+	if(surface == NULL)
+		printf("surface non cree\n");
+
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if(texture == NULL)
+		printf("texture non cree\n");
+
+	width = surface->w;
+	height = surface->h;
 }
 
 GraphicComponent::GraphicComponent(SDL_Renderer* renderer, SDL_Surface* set_surface) {
