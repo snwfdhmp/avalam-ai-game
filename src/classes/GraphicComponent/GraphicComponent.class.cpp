@@ -27,9 +27,12 @@ GraphicComponent::GraphicComponent(SDL_Renderer* renderer, SDL_Surface* set_surf
 
 GraphicComponent::~GraphicComponent(){};
 
-GraphicComponent* destroyTexture(SDL_Texture *texture){
+void destroyTexture(SDL_Texture *texture){
 	SDL_DestroyTexture(texture);
-	return NULL;
+}
+
+void destroySurface(SDL_Surface *surface){
+	SDL_FreeSurface(surface);
 }
 
 /*GraphicComponent* createboard(SDL_Renderer *renderer){
@@ -44,12 +47,19 @@ GraphicComponent* destroyTexture(SDL_Texture *texture){
 
 }
 
-GraphicComponent* createmenu(SDL_window *window){
+GraphicComponent::destroyTexture(SDL_Texture *texture){
+	SDL_DestroyTexture(texture);
+}
+
+GraphicComponent::destroySurfacr(SDL_Surface *surface){
+	SDL_FreeSurface(surface);
+}
 	
 }*/
 
 void GraphicComponent::onClick(){
 	//printf("GraphicComponent at [%d;%d] has fired the onClick() function.\n", x, y);
+	
 }
 
 void GraphicComponent::onMouseOver(){

@@ -17,9 +17,12 @@ public:
 
 	~GraphicComponent();
 	
-	void initTexture(SDL_Renderer *renderer, SDL_Surface *surface);
-	GraphicComponent* destroyTexture(SDL_Texture *texture);
-	//GraphicComponent* initSurface(std::string path);
+	//void initTexture(SDL_Renderer *renderer, SDL_Surface *surface);
+	void destroyTexture(SDL_Texture *texture);
+	void destroySurface(SDL_Surface *surface);
+	//void initSurface(std::string path);
+	//GraphicComponent::destroyTexture(SDL_Texture *texture);
+	//GraphicComponent::destroySurfacr(SDL_Surface *surface);
 	void onClick(); // click handler function
 
 	void onMouseOver(); // mouseover handler function
