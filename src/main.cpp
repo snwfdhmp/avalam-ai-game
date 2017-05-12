@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include "classes/Buton/Buton.class.h"
 #include "classes/Emplacement/Emplacement.class.h"
 #include "classes/Mouvement/Mouvement.class.h"
 #include "classes/Player/Player.class.h"
@@ -15,20 +14,28 @@
 
 using namespace std;
 
-void createmenu(Window* window, Display *menu, GraphicComponent* background){
+void createMenu(Window* window, Display *menu){
+	GraphicComponent* background = new GraphicComponent(menu->renderer, "ressources/img/Avalam-menu.bmp"); //Init of surface and texture
+	menu->addComponent(background);
 	SDL_Rect position = {0, 0, background->width, background->height};
 	SDL_RenderCopy(menu->renderer, background->texture, NULL, &position);
     SDL_RenderPresent(menu->renderer);
+    
+    Play* play_button = new GraphicComponent(menu->renderer, "ressources/img/play_button.bmp");
+    menu->addComponent(play_button);
+    SDL_Rect play_pos = {195, 130, background->width, background->height};
+    SDL_RenderCopy(menu->renderer, background->texture, NULL, &play_button);
+    SDL_RenderPresent(menu->renderer);
 }
 
-void mouseover(Display* menu, const char* path){
+void mouseOver(Display* menu, const char* path){
 	 GraphicComponent* jouer_over = new GraphicComponent(menu->renderer, path);
      SDL_Rect position = {0, 0, jouer_over->width, jouer_over->height};
      SDL_RenderCopy(menu->renderer, jouer_over->texture, NULL, &position);
      SDL_RenderPresent(menu->renderer);
 }
 
-int creategame(){
+/*int creategame(){
 	Window* game = new Window("Avalam", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 900, 900, 0); //Window init
 	game->setIcon("ressources/img/chess.bmp"); //Icon init
 	Display* game_display = new Display(game);
@@ -112,7 +119,7 @@ int creategame(){
 
 // Toujours penser au rendu, sinon on n'obtient rien du tout
     SDL_RenderPresent(game_display->renderer);
-}
+}*/
 
 void handleEvent(Window *window, Display *menu, GraphicComponent *background){
 	int continuer = 1;
@@ -149,55 +156,34 @@ void handleEvent(Window *window, Display *menu, GraphicComponent *background){
             case SDL_MOUSEBUTTONUP : 
             	/*printf("Position en x : %d\n", event.motion.x);
        			printf("Position en y : %d\n", event.motion.y);*/
-            if (event.button.button == SDL_BUTTON_LEFT){
-       			if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 135 && event.motion.y <= 545){
-       				printf("Jouer!\n");
-       				background->destroyTexture(background->texture);
-       				background->destroySurface(background->surface);
-       				creategame();
-       			}
-       			if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 135 && event.motion.y <= 315){
-       				printf("Options\n");
-       			}
-       			if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 330 && event.motion.y <= 435){
-       				printf("themes\n");
-       			}
-       			if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 445 && event.motion.y <= 495){
-       				printf("Regles\n");
-       			}
-       			if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 505 && event.motion.y <= 550){
-       				printf("About\n");
-       			}
-       		}
+            GraphicComponent* target = display.getTargeted(event.motion.x, event.motion.y);
+            if(target == NULL) break;
+            target->onClick();
        		break;
 
        		case SDL_MOUSEMOTION :
        			if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 135 && event.motion.y <= 545){
        				printf("Jouer over!\n");
-       				mouseover(menu, "ressources/img/mock-jouer-mouseover.bmp");
+       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
        			}
        			else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 135 && event.motion.y <= 315){
        				printf("Options over\n");
-       				mouseover(menu, "ressources/img/mock-jouer-mouseover.bmp");
+       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
        			}
        			else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 330 && event.motion.y <= 435){
        				printf("Window: themes over\n");
-       				mouseover(menu, "ressources/img/mock-jouer-mouseover.bmp");
+       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
        			}
        			else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 445 && event.motion.y <= 495){
        				printf("Regles over\n");
-       				mouseover(menu, "ressources/img/mock-jouer-mouseover.bmp");
+       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
        			}
        			else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 505 && event.motion.y <= 550){
        				printf("About over\n");
-       				mouseover(menu, "ressources/img/mock-jouer-mouseover.bmp");
+       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
        			}
        			else createmenu(window, menu, background);
-       		/*case SDL_MOUSE:
-       			GraphicComponent* targeted = this->getTargeted();
-       			if(targeted != NULL)
-       				targeted->onMouse();*/
-       		break;
+ 	      		break;
         }
     }
     
@@ -209,11 +195,10 @@ int main(int argc, char const *argv[])
 	window->setIcon("ressources/img/chess.bmp"); //Icon init
 	
 	Display* menu = new Display(window);
-    GraphicComponent* background = new GraphicComponent(menu->renderer, "ressources/img/Avalam-menu.bmp"); //Init of surface and texture
-	
-	createmenu(window, menu, background);
+  	
+	createMenu(window, menu);
     
-    //todo : transform to $window->handleEvent(menu, background)
+    //todo : transform to window->handleEvent(menu, background)
     handleEvent(window, menu, background);
     SDL_DestroyWindow(window->window);
     SDL_Quit(); 

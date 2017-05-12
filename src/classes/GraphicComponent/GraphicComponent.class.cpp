@@ -20,7 +20,7 @@ GraphicComponent::GraphicComponent(SDL_Renderer* renderer, const char* pathToImg
 	height = surface->h;
 }
 
-GraphicComponent::GraphicComponent(SDL_Renderer* renderer, SDL_Surface* set_surface) {
+GraphicComponent::GraphicComponent(char* type, SDL_Renderer* renderer, SDL_Surface* set_surface) {
 	surface = set_surface;
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 }
@@ -33,6 +33,10 @@ void destroyTexture(SDL_Texture *texture){
 
 void destroySurface(SDL_Surface *surface){
 	SDL_FreeSurface(surface);
+}
+
+void isAttachedto(SDL_Display *gc_display){
+	this.display = gc_display;
 }
 
 /*GraphicComponent* createboard(SDL_Renderer *renderer){
@@ -58,8 +62,7 @@ GraphicComponent::destroySurfacr(SDL_Surface *surface){
 }*/
 
 void GraphicComponent::onClick(){
-	//printf("GraphicComponent at [%d;%d] has fired the onClick() function.\n", x, y);
-	
+	printf("A fonction is being active");
 }
 
 void GraphicComponent::onMouseOver(){

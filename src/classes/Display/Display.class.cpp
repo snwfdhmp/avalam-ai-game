@@ -35,6 +35,10 @@ Display::Display(Window* window) {
 
 Display::~Display() {};
 
+Display* destroyRenderer(SDL_Renderer *renderer){
+	SDL_DestroyRenderer(renderer);
+}
+
 /*int Display::printGridToConsole(Emplacement grille[TAILLE][TAILLE]) {
 	printf("=========================\n");
 	printf("======== PLATEAU ========\n");
@@ -124,15 +128,15 @@ GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
 };
 
 GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
-	/*if(mouse_x < x || mouse_x > x+width || mouse_y < y || mouse_y > y+height)
+	if(mouse_x < x || mouse_x > x+width || mouse_y < y || mouse_y > y+height)
 		return NULL;
 	else
-		for (int i = 0; i < size; ++i) {
+		for (int i = 0; i < (sizeof(components)/sizeof(components[0])); ++i){
 			if(mouse_x < components[i]->x || mouse_x > components[i]->x+components[i]->width || mouse_y < components[i]->y || mouse_y > components[i]->y+components[i]->height)
 				continue;
 			else
 				return components[i];
-		}*/
+		}
 	return NULL;
 }
 

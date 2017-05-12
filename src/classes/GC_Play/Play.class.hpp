@@ -3,14 +3,13 @@
 #ifndef BOUTON_CLASS_HPP
 	#define BOUTON_CLASS_HPP
     
-    #include "../GraphicComponent/GraphicComponent.class.h"
     //Bouton class definition
 
-    class Bouton : public GraphicComponent
+    class Bouton: public Bouton
     {
         public:
-        Bouton(); //class constructor
-        ~Bouton();
+        Play(); //class constructor
+        ~Play();
         void Onclick();
     };
 
