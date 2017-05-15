@@ -87,6 +87,19 @@ Display* Display::initWindow() { //TODO merge to initRenderer();
 	return this;
 };
 
+GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
+	if(mouse_x < x || mouse_x > x+width || mouse_y < y || mouse_y > y+height)
+		return NULL;
+	else
+		for (int i = 0; i < (sizeof(components)/sizeof(components[0])); ++i){
+			if(mouse_x < components[i]->x || mouse_x > components[i]->x+components[i]->width || mouse_y < components[i]->y || mouse_y > components[i]->y+components[i]->height)
+				continue;
+			else
+				return components[i];
+		}
+	return NULL;
+}
+
 int Display::update() {
 	//Move to Window class
 	SDL_Event event;
@@ -126,18 +139,5 @@ GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
 	//printf("Component [%d;%d] has been added to display [%d;%d] (%d:%d) [size : %d]\n", components[size]->x, components[size]->y, x, y, width, height, size);
 	return components[size++]; //size is incremented after he gets injected as index of array (post inc)
 };
-
-GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
-	if(mouse_x < x || mouse_x > x+width || mouse_y < y || mouse_y > y+height)
-		return NULL;
-	else
-		for (int i = 0; i < (sizeof(components)/sizeof(components[0])); ++i){
-			if(mouse_x < components[i]->x || mouse_x > components[i]->x+components[i]->width || mouse_y < components[i]->y || mouse_y > components[i]->y+components[i]->height)
-				continue;
-			else
-				return components[i];
-		}
-	return NULL;
-}
 
 #endif

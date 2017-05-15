@@ -12,7 +12,7 @@
     #include <stdio.h>
 	
     //class constructor
-    Play::Play(){
+    PlayBouton::PlayBouton(){
         // object initialization
     }
     

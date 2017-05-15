@@ -35,9 +35,9 @@ void destroySurface(SDL_Surface *surface){
 	SDL_FreeSurface(surface);
 }
 
-void isAttachedto(SDL_Display *gc_display){
+/*void isAttachedto(SDL_Display *gc_display){
 	this.display = gc_display;
-}
+}*/
 
 /*GraphicComponent* createboard(SDL_Renderer *renderer){
 	 SDL_Rect cases[TAILLE];

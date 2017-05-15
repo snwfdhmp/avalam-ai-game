@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include "classes/Emplacement/Emplacement.class.h"
 #include "classes/Mouvement/Mouvement.class.h"
+#include "classes/GC_Play/Play.class.hpp"
 #include "classes/Player/Player.class.h"
 #include "classes/Window/Window.class.h"
 #include "config/macros.h"
@@ -13,23 +14,22 @@
 #undef main
 
 using namespace std;
-
 void createMenu(Window* window, Display *menu){
 	GraphicComponent* background = new GraphicComponent(menu->renderer, "ressources/img/Avalam-menu.bmp"); //Init of surface and texture
 	menu->addComponent(background);
 	SDL_Rect position = {0, 0, background->width, background->height};
 	SDL_RenderCopy(menu->renderer, background->texture, NULL, &position);
-    SDL_RenderPresent(menu->renderer);
+  SDL_RenderPresent(menu->renderer);
     
-    Play* play_button = new GraphicComponent(menu->renderer, "ressources/img/play_button.bmp");
+    PlayBouton* play_button = new GraphicComponent(menu->renderer, "ressources/img/play_button.bmp");
     menu->addComponent(play_button);
-    SDL_Rect play_pos = {195, 130, background->width, background->height};
+    /*SDL_Rect play_pos = {195, 130, background->width, background->height};
     SDL_RenderCopy(menu->renderer, background->texture, NULL, &play_button);
-    SDL_RenderPresent(menu->renderer);
+    SDL_RenderPresent(menu->renderer);*/
 }
 
 void mouseOver(Display* menu, const char* path){
-	 GraphicComponent* jouer_over = new GraphicComponent(menu->renderer, path);
+	   GraphicComponent* jouer_over = new GraphicComponent(menu->renderer, path);
      SDL_Rect position = {0, 0, jouer_over->width, jouer_over->height};
      SDL_RenderCopy(menu->renderer, jouer_over->texture, NULL, &position);
      SDL_RenderPresent(menu->renderer);
@@ -156,7 +156,7 @@ void handleEvent(Window *window, Display *menu, GraphicComponent *background){
             case SDL_MOUSEBUTTONUP : 
             	/*printf("Position en x : %d\n", event.motion.x);
        			printf("Position en y : %d\n", event.motion.y);*/
-            GraphicComponent* target = display.getTargeted(event.motion.x, event.motion.y);
+            GraphicComponent* target = menu->getTargeted(event.motion.x, event.motion.y);
             if(target == NULL) break;
             target->onClick();
        		break;

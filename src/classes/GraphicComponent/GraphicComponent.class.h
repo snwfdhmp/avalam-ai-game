@@ -2,7 +2,7 @@
 #define GRAPHICCOMPONENT_H
 
 #include "SDL2/SDL.h"
-#include "../Display/Display.class.h"
+//#include "../Display/Display.class.h"
 #include <string>
 
 class GraphicComponent
@@ -11,13 +11,14 @@ public:
 	
 	SDL_Texture *texture;
 	SDL_Surface *surface;
-	Display *display;
+	//Display *display;
 	int x, y, width, height;
 	char* type;
 
 
 	GraphicComponent(SDL_Renderer* renderer, const char* pathToImg);
 	GraphicComponent(SDL_Renderer* renderer, SDL_Surface* set_surface);
+	GraphicComponent(SDL_Renderer *renderer, SDL_Surface, int x, int y, int w, int h);
 
 	~GraphicComponent();
 	
@@ -33,6 +34,7 @@ public:
 
 	void onMouseOut(); //mouseout handler function
 
+	//void isAttachedto(SDL_Display *gc_display);
 	
 };
 #endif

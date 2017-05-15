@@ -10,7 +10,8 @@
 class Display
 {
 public:
-	SDL_Renderer *renderer;
+	SDL_Renderer*renderer;
+	SDL_Window* window;
 	int x, y, width, height;
 	unsigned int size;
 	GraphicComponent** components;

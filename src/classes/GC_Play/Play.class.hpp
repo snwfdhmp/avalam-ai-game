@@ -3,13 +3,14 @@
 #ifndef BOUTON_CLASS_HPP
 	#define BOUTON_CLASS_HPP
     
+    #include "../Bouton/Bouton.class.h"
     //Bouton class definition
 
-    class Bouton: public Bouton
+    class PlayBouton: public Bouton
     {
         public:
-        Play(); //class constructor
-        ~Play();
+        PlayBouton(); //class constructor
+        ~PlayBouton();
         void Onclick();
     };
 
