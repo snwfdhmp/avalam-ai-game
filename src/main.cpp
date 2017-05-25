@@ -14,19 +14,6 @@
 #undef main
 
 using namespace std;
-void createMenu(Window* window, Display *menu){
-	GraphicComponent* background = new GraphicComponent(menu->renderer, "ressources/img/Avalam-menu.bmp"); //Init of surface and texture
-	menu->addComponent(background);
-	SDL_Rect position = {0, 0, background->width, background->height};
-	SDL_RenderCopy(menu->renderer, background->texture, NULL, &position);
-  SDL_RenderPresent(menu->renderer);
-    
-    PlayBouton* play_button = new GraphicComponent(menu->renderer, "ressources/img/play_button.bmp");
-    menu->addComponent(play_button);
-    /*SDL_Rect play_pos = {195, 130, background->width, background->height};
-    SDL_RenderCopy(menu->renderer, background->texture, NULL, &play_button);
-    SDL_RenderPresent(menu->renderer);*/
-}
 
 void mouseOver(Display* menu, const char* path){
 	   GraphicComponent* jouer_over = new GraphicComponent(menu->renderer, path);
@@ -154,11 +141,11 @@ void handleEvent(Window *window, Display *menu, GraphicComponent *background){
             break;
 
             case SDL_MOUSEBUTTONUP : 
-            	/*printf("Position en x : %d\n", event.motion.x);
-       			printf("Position en y : %d\n", event.motion.y);*/
-            GraphicComponent* target = menu->getTargeted(event.motion.x, event.motion.y);
+              printf("Position en x : %d\n", event.motion.x);
+       			  printf("Position en y : %d\n", event.motion.y);
+            /*GraphicComponent* target = menu->getTargeted(event.motion.x, event.motion.y);
             if(target == NULL) break;
-            target->onClick();
+            target->onClick();*/
        		break;
 
        		case SDL_MOUSEMOTION :
@@ -182,7 +169,7 @@ void handleEvent(Window *window, Display *menu, GraphicComponent *background){
        				printf("About over\n");
        				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
        			}
-       			else createmenu(window, menu, background);
+       			  //else createmenu(window, menu, background);
  	      		break;
         }
     }
@@ -191,20 +178,22 @@ void handleEvent(Window *window, Display *menu, GraphicComponent *background){
 
 int main(int argc, char const *argv[])
 {
+
 	Window* window = new Window("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1012, 568, SDL_WINDOW_SHOWN); //Window init
 	window->setIcon("ressources/img/chess.bmp"); //Icon init
 	
 	Display* menu = new Display(window);
   	
-	createMenu(window, menu);
-    
+	       //createMenu(window, menu);
+  menu->createmenu();
     //todo : transform to window->handleEvent(menu, background)
-    handleEvent(window, menu, background);
+    //handleEvent(window, menu, background);
     SDL_DestroyWindow(window->window);
     SDL_Quit(); 
-	/*while(true) {
+	
+ while(true) {
 		window->update();
-	}*/
+	}
 
 	return 0;
 }

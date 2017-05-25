@@ -10,8 +10,9 @@
 class Display
 {
 public:
-	SDL_Renderer*renderer;
+	SDL_Renderer* renderer;
 	SDL_Window* window;
+
 	int x, y, width, height;
 	unsigned int size;
 	GraphicComponent** components;
@@ -24,6 +25,7 @@ public:
 	Display* initWindow();
 	Display* destroyRenderer(SDL_Renderer *renderer);
 	int update();
+	void createmenu();
 
 	Display* updateWindow();
 	

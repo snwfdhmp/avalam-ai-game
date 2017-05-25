@@ -11,9 +11,9 @@
 	
 
     //class constructor
-    Bouton::Bouton(Display* display, char* path, int x, int y, int w,int h) {
+    Bouton::Bouton(SDL_Renderer *renderer, char* path, int x, int y, int w, int h) {
         // object initialization
-    GraphicComponent* bouton = new GraphicComponent(display->renderer, path);
+    GraphicComponent* bouton = new GraphicComponent(renderer, path);
    	SDL_Rect position =  {x, y, w, h}; //Advice for w and h use bouton->w and bouton->h
    	SDL_RenderCopy(display->renderer, bouton->texture, NULL, &position);
   	SDL_RenderPresent(display->renderer);

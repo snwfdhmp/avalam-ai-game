@@ -6,11 +6,12 @@
 #include <string>
 #include <iostream>
 
-#include "../GraphicComponent/GraphicComponent.class.h"
-#include "../../SDL2/SDL.h"
-#include "../Emplacement/Emplacement.class.h"
-#include "../Window/Window.class.h"
 #include "Display.class.h"
+#include "../Emplacement/Emplacement.class.h"
+#include "../GraphicComponent/GraphicComponent.class.h"
+#include "../GC_Play/Play.class.hpp"
+#include "../../SDL2/SDL.h"
+#include "../Window/Window.class.h"
 
 // include global constants
 #include "../../config/constants.h"
@@ -70,6 +71,17 @@ Display* destroyRenderer(SDL_Renderer *renderer){
 	SDL_DestroyRenderer(renderer);
 	return NULL;
 }*/
+void Display::createmenu(){
+
+	GraphicComponent* background = new GraphicComponent(this->renderer, "ressources/img/Avalam-menu.bmp"); //Init of surface and texture
+	this->addComponent(background);
+	SDL_Rect position = {0, 0, background->width, background->height};
+	SDL_RenderCopy(this->renderer, background->texture, NULL, &position);
+  	SDL_RenderPresent(this->renderer);
+    
+    PlayBouton* play_button = new PlayBouton(this->renderer, "ressources/img/play_button.bmp");
+    this->addComponent(play_button);
+}
 
 Display* Display::initWindow() { //TODO merge to initRenderer();
 	bool error = false;

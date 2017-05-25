@@ -19,6 +19,9 @@ public:
 	GraphicComponent(SDL_Renderer* renderer, const char* pathToImg);
 	GraphicComponent(SDL_Renderer* renderer, SDL_Surface* set_surface);
 	GraphicComponent(SDL_Renderer *renderer, SDL_Surface, int x, int y, int w, int h);
+	GraphicComponent(SDL_Renderer *renderer, char* path, int x, int y, int w, int h);
+	GraphicComponent(char* type, SDL_Renderer* renderer, SDL_Surface* set_surface);
+	//GraphicComponent(Display* display, char* path, int x, int y, int w, int h);
 
 	~GraphicComponent();
 	

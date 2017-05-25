@@ -6,18 +6,29 @@
     //Bouton class methods implementation
 
     #include "Play.class.hpp"
-    #include "../GraphicComponenent/GraphicComponenent.class.h"
+    #include "../GraphicComponent/GraphicComponent.class.h"
     #include "../Display/Display.class.h"
     #include "SDL2/SDL.h"
     #include <stdio.h>
 	
     //class constructor
-    PlayBouton::PlayBouton(){
+    PlayBouton::PlayBouton(SDL_Renderer* renderer, const char* pathToImg){
         // object initialization
+            surface = SDL_LoadBMP(pathToImg);
+        if(surface == NULL)
+            printf("surface non cree\n");
+
+        texture = SDL_CreateTextureFromSurface(renderer, surface);
+        if(texture == NULL)
+            printf("texture non cree\n");
+
+        width = surface->w;
+        height = surface->h;
     }
     
     void Onclick(){
         printf("Le play a a ete clique\n");
+    }
         /*DestroyRenderer(this.display);
         Window* game = new Window("Avalam", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 900, 900, 0); //Window init
         game->setIcon("ressources/img/chess.bmp"); //Icon init
