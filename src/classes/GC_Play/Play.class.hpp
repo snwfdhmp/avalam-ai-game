@@ -17,6 +17,7 @@
 
         PlayBouton(SDL_Renderer* renderer, const char* pathToImg); //class constructor
         ~PlayBouton();
+        void onMouseOver(SDL_Renderer* renderer);
         void Onclick();
         
     };

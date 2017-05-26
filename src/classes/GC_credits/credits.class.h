@@ -17,6 +17,7 @@
 
         creditsBouton(SDL_renderer* renderer, const char* pathToImg); //class constructor
         ~creditsBouton();
+        void onMouseOver(SDL_Renderer* renderer);
        void Onclick();
         
     };

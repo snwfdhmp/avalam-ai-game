@@ -26,8 +26,8 @@
         height = surface->h;
     }
 
-    void onMouseOver(SDL_Renderer* renderer, const char* path){
-        GraphicComponent* gc_over = new GraphicComponent(renderer, path);
+    void credits::onMouseOver(SDL_Renderer* renderer){
+        GraphicComponent* gc_over = new GraphicComponent(renderer, "ressources/img/mock-jouer-mouseover.bmp");
         SDL_Rect position = {0, 0, gc_over->width, gc_over->height};
         SDL_RenderCopy(renderer, gc_over->texture, NULL, &position);
         SDL_RenderPresent(renderer);

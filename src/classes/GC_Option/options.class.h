@@ -18,6 +18,7 @@
         optionsBouton(SDL_renderer* renderer, const char* pathToImg); //class constructor
         ~optionsBouton();
        void Onclick();
+       void onMouseOver(SDL_Renderer *renderer);
         
     };
 

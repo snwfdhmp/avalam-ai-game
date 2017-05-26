@@ -8,6 +8,7 @@
     class Pion
     {
         public:
+        int x, y, selected;
         Pion(); //class constructor
         ~Pion();
         

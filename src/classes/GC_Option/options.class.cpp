@@ -26,6 +26,12 @@
         height = surface->h;
     }
     
+    void options::onMouseOver(SDL_Renderer* renderer){
+        GraphicComponent* gc_over = new GraphicComponent(renderer, "ressources/img/mock-option-mouseover.bmp");
+        SDL_Rect position = {0, 0, gc_over->width, gc_over->height};
+        SDL_RenderCopy(renderer, gc_over->texture, NULL, &position);
+        SDL_RenderPresent(renderer);
+    }
     void Onclick(){
         printf("options a a ete clique\n");
     }

@@ -12,15 +12,15 @@
     {
       // object initialization
       printf("Creation du bouton...\n");
-      //GraphicComponent* bouton = new GraphicComponent(renderer, path, x, y, w, h);
-      /*surface = SDL_LoadBMP(path);
+      GraphicComponent* bouton = new GraphicComponent(renderer, path, x, y, w, h);
+      surface = SDL_LoadBMP(path);
       texture = SDL_CreateTextureFromSurface(renderer, surface);
       SDL_Rect position =  {x, y, w, h}; //Advice for w and h use bouton->w and bouton->h
       SDL_RenderCopy(renderer, texture, NULL, &position);
       SDL_RenderPresent(renderer);
 
-    width = surface->w;
-    height = surface->h;*/
+      width = surface->w;
+      height = surface->h;
    	
     /*SDL_Rect position =  {x, y, w, h}; //Advice for w and h use bouton->w and bouton->h
    	SDL_RenderCopy(renderer, bouton->texture, NULL, &position);
