@@ -189,4 +189,4 @@ Le projet est divisé en plusieurs répertoires :
 
 - Compilation UNIX : <code>g++ src/classes/\*/\*.class.cpp src/main.cpp -lSDL2</code>
 - Compilation UNIX avec [duck](http://github.com/snwfdhmp/duck) : <code>duck compile dev sdl</code>
-- Compilation windows : <code>g++ -I.\include -L.\lib src/classes/*/*.class.cpp src/landry_main.cpp -lSDL2 -lSDL2main -lSDL2.dll</code>
+- Compilation windows : <code>g++ -I.\include -L.\lib src/classes/*/*.class.cpp src/main.cpp -lSDL2 -lSDL2main -lSDL2.dll</code>

@@ -5,8 +5,9 @@
 
     //Bouton class methods implementation
 
-    #include "Bouton.class.h"
+  #include "Bouton.class.h"
 	#include "../GraphicComponent/GraphicComponent.class.h"
+  #include "../Display/Display.class.h"
 	#include <stdio.h>
 	
 
@@ -15,8 +16,8 @@
         // object initialization
     GraphicComponent* bouton = new GraphicComponent(renderer, path);
    	SDL_Rect position =  {x, y, w, h}; //Advice for w and h use bouton->w and bouton->h
-   	SDL_RenderCopy(display->renderer, bouton->texture, NULL, &position);
-  	SDL_RenderPresent(display->renderer);
+   	SDL_RenderCopy(renderer, bouton->texture, NULL, &position);
+  	SDL_RenderPresent(renderer);
     }
     
     void Onclick(){

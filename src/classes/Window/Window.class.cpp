@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include "../../SDL2/SDL.h"
+#include "../Display/Display.class.h"
 #include "Window.class.h"
 
 //class constructor
@@ -36,7 +37,7 @@ void Window::setIcon(const char* pathToIcon) {
   	SDL_SetWindowIcon(window, icon);
 }
 
-void handleEvent(Display* display){
+/*void handleEvent(Display* display){
 
 	int continuer = 1;
     SDL_Event event;
@@ -74,7 +75,7 @@ void handleEvent(Display* display){
        			printf("Position en y : %d\n", event.motion.y);
             /*GraphicComponent* target = menu->getTargeted(event.motion.x, event.motion.y);
             if(target == NULL) break;
-            target->onClick();*/
+            target->onClick();*
        		break;
 
        		case SDL_MOUSEMOTION :
@@ -102,6 +103,6 @@ void handleEvent(Display* display){
  	      		break;
         }
     }
-}
+}*/
 
 #endif

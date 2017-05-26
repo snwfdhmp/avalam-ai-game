@@ -188,10 +188,10 @@ int main(int argc, char const *argv[])
   menu->createmenu();
     //todo : transform to window->handleEvent(menu, background)
     //handleEvent(window, menu, background);
-    SDL_DestroyWindow(window->window);
-    SDL_Quit(); 
+  SDL_DestroyWindow(window->window);
+  SDL_Quit(); 
 	
- while(true) {
+  while(true) {
 		window->update();
 	}
 
