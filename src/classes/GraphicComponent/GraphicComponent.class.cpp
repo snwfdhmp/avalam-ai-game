@@ -20,9 +20,17 @@ GraphicComponent::GraphicComponent(SDL_Renderer* renderer, const char* pathToImg
 	height = surface->h;
 }
 
-GraphicComponent::GraphicComponent(char* type, SDL_Renderer* renderer, SDL_Surface* set_surface) {
+GraphicComponent::GraphicComponent(char* type, SDL_Renderer* renderer, SDL_Surface* set_surface){
 	surface = set_surface;
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
+}
+
+GraphicComponent::GraphicComponent(SDL_Renderer *renderer, char* path, int x, int y, int w, int h){
+	surface = SDL_LoadBMP(path);
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_Rect position =  {x, y, w, h}; //Advice for w and h use bouton->w and bouton->h
+   	SDL_RenderCopy(renderer, texture, NULL, &position);
+  	SDL_RenderPresent(renderer);
 }
 
 GraphicComponent::~GraphicComponent(){};

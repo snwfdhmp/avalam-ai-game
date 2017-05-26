@@ -11,7 +11,6 @@
     class Bouton : public GraphicComponent
     {
         public:
-
         SDL_Texture *texture;
         SDL_Surface *surface;
         int x, y, w, h;
@@ -22,7 +21,6 @@
         Bouton(SDL_Renderer *renderer, char* path, int x, int y, int w, int h);
         Bouton(SDL_Renderer *renderer, SDL_Surface, int x, int y, int w, int h);
 
-       
         Bouton(); //class constructor
         ~Bouton();
         void Onclick();
