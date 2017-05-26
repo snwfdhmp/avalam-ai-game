@@ -11,8 +11,6 @@
     class Bouton : public GraphicComponent
     {
         public:
-        SDL_Texture *texture;
-        SDL_Surface *surface;
         int x, y, w, h;
         char* type;
 

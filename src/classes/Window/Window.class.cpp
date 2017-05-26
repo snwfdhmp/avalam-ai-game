@@ -37,12 +37,11 @@ void Window::setIcon(const char* pathToIcon) {
   	SDL_SetWindowIcon(window, icon);
 }
 
-/*void handleEvent(Display* display){
-
-	int continuer = 1;
+void Window::handleEvent(Display* menu){
+  int continuer = 1;
     SDL_Event event;
  
-    while (continuer == 1)
+    while (continuer)
     {
         SDL_WaitEvent(&event);
         switch(event.type)
@@ -71,38 +70,38 @@ void Window::setIcon(const char* pathToIcon) {
             break;
 
             case SDL_MOUSEBUTTONUP : 
-            	printf("Position en x : %d\n", event.motion.x);
-       			printf("Position en y : %d\n", event.motion.y);
+              printf("Position en x : %d\n", event.motion.x);
+              printf("Position en y : %d\n", event.motion.y);
             /*GraphicComponent* target = menu->getTargeted(event.motion.x, event.motion.y);
             if(target == NULL) break;
-            target->onClick();*
-       		break;
+            target->onClick();*/
+          break;
 
-       		case SDL_MOUSEMOTION :
-       			if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 135 && event.motion.y <= 545){
-       				printf("Jouer over!\n");
-       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
-       			}
-       			else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 135 && event.motion.y <= 315){
-       				printf("Options over\n");
-       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
-       			}
-       			else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 330 && event.motion.y <= 435){
-       				printf("Window: themes over\n");
-       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
-       			}
-       			else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 445 && event.motion.y <= 495){
-       				printf("Regles over\n");
-       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
-       			}
-       			else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 505 && event.motion.y <= 550){
-       				printf("About over\n");
-       				mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
-       			}
-       			  //else createmenu(window, menu, background);
- 	      		break;
+          case SDL_MOUSEMOTION :
+            if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 135 && event.motion.y <= 545){
+              printf("Jouer over!\n");
+              mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
+            }
+            else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 135 && event.motion.y <= 315){
+              printf("Options over\n");
+              mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
+            }
+            else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 330 && event.motion.y <= 435){
+              printf("Window: themes over\n");
+              mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
+            }
+            else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 445 && event.motion.y <= 495){
+              printf("Regles over\n");
+              mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
+            }
+            else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 505 && event.motion.y <= 550){
+              printf("About over\n");
+              mouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
+            }
+            break;
         }
     }
-}*/
+    
+}
 
 #endif

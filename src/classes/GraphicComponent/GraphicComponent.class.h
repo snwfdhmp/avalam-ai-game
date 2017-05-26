@@ -33,7 +33,7 @@ public:
 	//GraphicComponent::destroySurfacr(SDL_Surface *surface);
 	void onClick(); // click handler function
 
-	void onMouseOver(); // mouseover handler function
+	void onMouseOver(SDL_Renderer* renderer, const char* path); // mouseover handler function
 
 	void onMouseOut(); //mouseout handler function
 
