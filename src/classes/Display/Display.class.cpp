@@ -23,15 +23,15 @@ Display::Display(int set_x, int set_y, int set_width, int set_height, Window* wi
 	y = set_y;
 	width = set_width;
 	height = set_height;
-	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(renderer == NULL)
-		printf("Erreur : Renderer non créé\n");
+		printf("Erreur : Renderer non cree\n");
 };
 
 Display::Display(Window* window) {
-	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(renderer == NULL)
-		printf("Erreur : Renderer non créé\n");
+		printf("Erreur : Renderer non cree\n");
 };
 
 Display::~Display() {};
@@ -143,7 +143,7 @@ Display* Display::updateWindow() {
 	return this;
 };
 
-void Display::handleEvent(Display* menu){
+/*void Display::handleEvent(Display* menu){
     int continuer = 1;
     SDL_Event event;
  
@@ -207,7 +207,7 @@ void Display::handleEvent(Display* menu){
             break;
         }
     }
-};
+};*/
 
 GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
 	components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
