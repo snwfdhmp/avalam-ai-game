@@ -37,7 +37,7 @@ void Window::setIcon(const char* pathToIcon) {
   	SDL_SetWindowIcon(window, icon);
 }
 
-void Window::handleEvent(Display* menu){
+/*void Window::handleEvent(Display* menu){
   int continuer = 1;
     SDL_Event event;
  
@@ -74,7 +74,7 @@ void Window::handleEvent(Display* menu){
               printf("Position en y : %d\n", event.motion.y);
             /*GraphicComponent* target = menu->getTargeted(event.motion.x, event.motion.y);
             if(target == NULL) break;
-            target->onClick();*/
+            target->onClick();
           break;
 
           case SDL_MOUSEMOTION :
@@ -100,8 +100,7 @@ void Window::handleEvent(Display* menu){
             }
             break;
         }
-    }
-    
-}
+    }    
+}*/
 
 #endif

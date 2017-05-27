@@ -43,12 +43,12 @@ void destroySurface(SDL_Surface *surface){
 	SDL_FreeSurface(surface);
 }
 
-void GraphicComponent::onMouseOver(SDL_Renderer* renderer, const char* path){
+/*void GraphicComponent::onMouseOver(SDL_Renderer* renderer, const char* path){
 	 GraphicComponent* gc_over = new GraphicComponent(renderer, path);
      SDL_Rect position = {0, 0, gc_over->width, gc_over->height};
      SDL_RenderCopy(renderer, gc_over->texture, NULL, &position);
      SDL_RenderPresent(renderer);
-}
+}*/
 
 /*void isAttachedto(SDL_Display *gc_display){
 	this.display = gc_display;
@@ -80,9 +80,9 @@ void GraphicComponent::onClick(){
 	printf("A fonction is being active");
 }
 
-void GraphicComponent::onMouseOver(){
+/*void GraphicComponent::onMouseOver(){
 	//printf("GraphicComponent at [%d;%d] has fired the onMouseOver() function.\n", x, y);
-}
+}*/
 
 void GraphicComponent::onMouseOut() {
 	//printf("GraphicComponent at [%d;%d] has fired the onMouseOut() function.\n", x, y);
