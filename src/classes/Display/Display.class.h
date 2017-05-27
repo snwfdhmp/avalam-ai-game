@@ -26,6 +26,7 @@ public:
 	Display* destroyRenderer(SDL_Renderer *renderer);
 	int update();
 	void createmenu();
+	void handleEvent(Display *display);
 
 	Display* updateWindow();
 	

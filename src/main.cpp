@@ -22,7 +22,7 @@ void onMouseOver(Display *display, char *path){
     SDL_RenderPresent(display->renderer);
 }
 
-void handleEvent(Display* menu){
+/*void handleEvent(Display* menu){
   int continuer = 1;
     SDL_Event event;
  
@@ -57,6 +57,9 @@ void handleEvent(Display* menu){
             case SDL_MOUSEBUTTONUP : 
               printf("Position en x : %d\n", event.motion.x);
               printf("Position en y : %d\n", event.motion.y);
+              if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 135 && event.motion.y <= 545){
+              	menu
+              }
           break;
 
           case SDL_MOUSEMOTION :
@@ -83,7 +86,7 @@ void handleEvent(Display* menu){
             break;
         }
     }
-}
+}*/
 
 
 int main(int argc, char const *argv[])
@@ -94,7 +97,7 @@ int main(int argc, char const *argv[])
 	
 	Display* menu = new Display(window);
   	menu->createmenu();
-  	handleEvent(menu);
+  	menu->handleEvent(menu);
 	//menu->createmenu();
 	//window->handleEvent(menu);
 

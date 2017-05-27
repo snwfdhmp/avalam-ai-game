@@ -23,7 +23,7 @@ public:
     ~Window(); //class destructor
     int show(); //show window (doesn't catch events), returns status
     int update(); //window update function, returns status
-    void handleEvent();
+    //void handleEvent(Display* display);
     void setIcon(const char* pathToIcon); //set app window icon
 
     //Display* addDisplay(Display* toAdd); //add Display to List, returns it
