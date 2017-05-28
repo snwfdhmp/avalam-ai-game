@@ -2,7 +2,8 @@
 #define DISPLAY_CPP
 
 #include <string>
-#include "SDL2/SDL.h"
+#include "../../SDL2/SDL.h"
+#include "../Emplacement/Emplacement.class.h"
 #include "../GraphicComponent/GraphicComponent.class.h"
 #include "../Window/Window.class.h"
 #include "../../config/constants.h"
@@ -27,6 +28,7 @@ public:
 	int update();
 	void createmenu();
 	void handleEvent(Display *display);
+	void printGrille(Emplacement grille[TAILLE][TAILLE]);
 
 	Display* updateWindow();
 	

@@ -11,6 +11,7 @@
 #include "config/constants.h"
 #include "SDL2/SDL.h"
 #include "classes/GameInstance/GameInstance.class.h"
+#define TAILLE 9
 #undef main
 
 using namespace std;
@@ -29,14 +30,19 @@ void onMouseOver(Display *display, char *path){
 }
 
 int creategame(Window *window, Display* game){
+  Emplacement grille[TAILLE][TAILLE];
 	Uint8 r,g,b,a;
 	int nbcases = 48, select = 0, selectedCase;
   SDL_SetWindowTitle(window->window, "Board");
 	
 	int rgb[48] = {0}, firstPiece;
 	SDL_Rect cases[48];
+
+  APPLY_DEFAULT_EMPTY(grille);
 	
-  SDL_SetRenderDrawColor(game->renderer, 0, 87, 122, 255);//Fond bleu
+  game->printGrille(grille);
+
+  /*SDL_SetRenderDrawColor(game->renderer, 0, 87, 122, 255);//Fond bleu
   SDL_RenderClear(game->renderer);
 
     //Coordonées de chaques pieces
@@ -73,7 +79,7 @@ int creategame(Window *window, Display* game){
     		SDL_RenderFillRect(game->renderer, &cases[i]);
     	}
       SDL_RenderPresent(game->renderer);
-    }
+    }*/
    
    for(int i = 0; i < 48; i++){
         if(cases[i].y == 180 || cases[i].y == 340 || cases[i].y == 500 || cases[i].y == 660)
@@ -198,6 +204,9 @@ void handleEvent(Display* menu){
     }
 }
 
+void creategrille(Emplacement *grille){
+
+}
 
 int main(int argc, char const *argv[])
 {

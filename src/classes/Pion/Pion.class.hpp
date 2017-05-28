@@ -4,6 +4,7 @@
     #define PION_CLASS_HPP
     
     #include "../../SDL2/SDL.h"
+    #include "../Display/Display.class.h"
     #include <stdio.h>
     //Pion class definition
 
@@ -14,7 +15,7 @@
         SDL_Rect pion;
         int x, y, w, h, hauteur, selected;
 
-        Pion(SDL_Rect pion); //class constructor
+        Pion(); //class constructor
         ~Pion();  
     };
 

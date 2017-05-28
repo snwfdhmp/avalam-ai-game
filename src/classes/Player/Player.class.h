@@ -4,7 +4,8 @@
 #include <string>
 
 #include "../Emplacement/Emplacement.class.h"
-
+#include "SDL2/SDL.h"
+#include "../Display/Display.class.h"
 // include global constants
 #include "../../config/constants.h"
 

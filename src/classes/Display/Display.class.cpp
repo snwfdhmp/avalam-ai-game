@@ -9,7 +9,6 @@
 #include "Display.class.h"
 #include "../Emplacement/Emplacement.class.h"
 #include "../GraphicComponent/GraphicComponent.class.h"
-//#include "../GC_Play/Play.class.hpp"
 #include "../../SDL2/SDL.h"
 #include "../Window/Window.class.h"
 
@@ -71,6 +70,36 @@ Display* destroyRenderer(SDL_Renderer *renderer){
 	SDL_DestroyRenderer(renderer);
 	return NULL;
 }*/
+
+void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
+	SDL_Rect pion;
+	x = 120; 
+	SDL_SetRenderDrawColor(renderer, 0, 87, 122, 255);//Fond bleu
+  	SDL_RenderClear(renderer);
+
+	for(int i = 0; i < TAILLE; i++){
+		y = 80;
+		SDL_Rect pion;
+		for(int j = 0; j < TAILLE; j++){
+			if(grille[i][j].valeur != 2){
+				pion.x = x;
+				pion.y = y;
+				pion.w = pion.h = PAWN_SIZE;
+			if(pion.y % (2*GAP) == 0){
+				SDL_SetRenderDrawColor(renderer, 206, 170, 62, 255); //Couleur jaune
+    			SDL_RenderFillRect(renderer, &pion);
+			}
+			else {
+				SDL_SetRenderDrawColor(renderer, 121, 17, 100, 255); //Couleur rouge
+    			SDL_RenderFillRect(renderer, &pion);
+    		}
+    	}
+    		y+=GAP;
+		}
+		x+=GAP;
+	}
+	SDL_RenderPresent(renderer);
+}
 
 void Display::createmenu(){
 

@@ -4,6 +4,7 @@
 // include global constants
 #include "../../config/constants.h"
 #include "../Emplacement/Emplacement.class.h"
+#include "../../SDL2/SDL.h"
 
 class Mouvement
 {

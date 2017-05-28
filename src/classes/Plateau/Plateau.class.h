@@ -11,12 +11,9 @@
     class Plateau
     {
         public:
-
-        Pion* cases[48];
-		int hauteur;
-        Plateau(Display*); //class constructor
+            
+        Plateau(); //class constructor
         ~Plateau();
-        
     };
 
     #endif

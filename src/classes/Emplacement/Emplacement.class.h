@@ -4,7 +4,7 @@
 class Emplacement
 {
 public:
-	int valeur; // 0 ou 1
+	int valeur; // entre 0 ou 2
 	int hauteur; // entre 0 et 5
 
 	void init(int val); // Initialise l'emplacement avec sa valeur

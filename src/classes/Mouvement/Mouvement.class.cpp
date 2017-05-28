@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "../Emplacement/Emplacement.class.h"
 #include "Mouvement.class.h"
+#include "../Display/Display.class.h"
 
 
 // include global constants

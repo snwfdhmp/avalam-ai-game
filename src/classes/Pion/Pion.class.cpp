@@ -8,13 +8,10 @@
     #include <stdio.h>
 	
     //class constructor
-    Pion::Pion(SDL_Rect pion) {
+    Pion::Pion() {
         // object initialization
-    	pion.x = x;
-    	pion.y = y;
-    	pion.w = w;
-    	pion.h = h;
-    	hauteur = 1;
     }
+
+    Pion::~Pion() {};
 
    #endif

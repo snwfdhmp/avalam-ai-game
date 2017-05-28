@@ -4,10 +4,12 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include "../Display/Display.class.h"
 #include "../Emplacement/Emplacement.class.h"
 #include "../Mouvement/Mouvement.class.h"
 #include "../MovePlan/MovePlan.class.h"
 #include "Player.class.h"
+#include "SDL2/SDL.h"
 
 // include global constants
 #include "../../config/constants.h"
