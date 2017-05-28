@@ -8,7 +8,6 @@
 #define TAILLE 9
 
 void Emplacement::init(int val) {
-
 if(val == 2) //si on souhaite créer une case vide
 	hauteur = 0;
 else { //TODO intégrer vérification de valeur

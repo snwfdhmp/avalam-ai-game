@@ -17,12 +17,13 @@
 
 using namespace std;
 
-int Player::init(int newTeam, string newName, int newType) {
+int Player::init(Display* display, int newTeam, string newName, int newType) {
 	if((!AVAILABLE_TEAM(newTeam)) || newName.empty() || (!AVAILABLE_TYPE(newType)))
 		return -1;
 	team = newTeam;
 	name = newName;
 	type = newType;
+	playerDisplay = display;
 	/* TODO : int(Player::*evaluate)(Emplacement[TAILLE][TAILLE]) function pointer
 	switch(type) {
 		case PLAYER_TYPE_HUMAN:
@@ -53,8 +54,12 @@ int Player::getScore(Emplacement grille[TAILLE][TAILLE]) {
 }
 
 int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
+	/*
 	Mouvement mvt;
 	int x_s, y_s, x_d, y_d;
+	vector<int> click(1);
+	Emplacement* first;
+	Emplacement* second;
 
 	puts("====Quel pion bouger?====\n");
 	puts("> x : ");
@@ -71,10 +76,30 @@ int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 		return -1;
 
 	mvt.apply(grille);
+
+	*/
+	Mouvement move;
+	int x_s, y_s, x_d, y_d;
+
+	Emplacement* first = NULL;
+	Emplacement* second = NULL;
+
+	while(first == NULL && second == NULL){
+		if(first == NULL)
+			first = playerDisplay->getSelect(grille);
+		else
+			second = playerDisplay->getSelect(grille);
+		}
+
+	if(move.init(first->x, first->y, second->x, second->y, grille) != -1)
+		move.apply(grille);
+
+		playerDisplay->printGrille(grille);
 	return 0;
 }
 
 int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
+	
 	switch(type) {
 		case PLAYER_TYPE_HUMAN:
 			return HumanEvaluate(grille);
@@ -83,6 +108,8 @@ int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
 		default:
 			return HumanEvaluate(grille);
 	}
+	
+	
 }
 
 int Player::IAEvaluate(Emplacement grille[TAILLE][TAILLE]) {
@@ -105,6 +132,6 @@ int Player::IAEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 						if(bestmove.score == -1) return -1;
 						bestmove.mvt.apply(grille);
 						return 0;
-					}
+	}
 
 #endif

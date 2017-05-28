@@ -4,7 +4,6 @@
 #include <pthread.h>
 #include "classes/Emplacement/Emplacement.class.h"
 #include "classes/Mouvement/Mouvement.class.h"
-//#include "classes/GC_Play/Play.class.hpp"
 #include "classes/Player/Player.class.h"
 #include "classes/Window/Window.class.h"
 #include "config/macros.h"
@@ -21,13 +20,13 @@ void handleEvent(Display*);
 void mouvement(SDL_Rect *, Display*);
 void onMouseOver(Display *, char*);
 
-
+/*
 void onMouseOver(Display *display, char *path){
     GraphicComponent* gc_over = new GraphicComponent(display->renderer, path);
     SDL_Rect position = {0, 0, gc_over->width, gc_over->height};
     SDL_RenderCopy(display->renderer, gc_over->texture, NULL, &position);
     SDL_RenderPresent(display->renderer);
-}
+}*/
 
 int creategame(Window *window, Display* game){
   Emplacement grille[TAILLE][TAILLE];
@@ -41,6 +40,7 @@ int creategame(Window *window, Display* game){
   APPLY_DEFAULT_EMPTY(grille);
 	
   game->printGrille(grille);
+
 
   /*SDL_SetRenderDrawColor(game->renderer, 0, 87, 122, 255);//Fond bleu
   SDL_RenderClear(game->renderer);
@@ -81,7 +81,7 @@ int creategame(Window *window, Display* game){
       SDL_RenderPresent(game->renderer);
     }*/
    
-   for(int i = 0; i < 48; i++){
+   /*for(int i = 0; i < 48; i++){
         if(cases[i].y == 180 || cases[i].y == 340 || cases[i].y == 500 || cases[i].y == 660)
     		rgb[i] = 121;
     	else if(cases[i].y == 100 || cases[i].y == 260 || cases[i].y == 420 || cases[i].y == 580 || cases[i].y == 740)
@@ -199,13 +199,17 @@ void handleEvent(Display* menu){
               printf("About over\n");
               onMouseOver(menu, "ressources/img/mock-jouer-mouseover.bmp");
             }
-            break;*/
+            break;
         }
-    }
+    }*/
 }
 
-void creategrille(Emplacement *grille){
-
+void initGrille(Emplacement grille[TAILLE][TAILLE]){
+  int i,j;
+  for (i = 0; i < TAILLE; ++i)
+    for (j = 0; j < TAILLE; ++j) {
+      grille[i][j].valeur = j%2;
+    }
 }
 
 int main(int argc, char const *argv[])
@@ -213,11 +217,21 @@ int main(int argc, char const *argv[])
 
 	Window* window = new Window("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1012, 800, SDL_WINDOW_SHOWN); //Window init
 	window->setIcon("ressources/img/chess.bmp"); //Icon init
+  Display* menu = new Display(window);
+
+	Player* player1 = new Player();
+  player1->init(menu, 1, "Martin", PLAYER_TYPE_HUMAN);
+  Player* player2 = new Player();
+  player2->init(menu, 1, "Landry", PLAYER_TYPE_HUMAN);
+
+  Emplacement grille[TAILLE][TAILLE];
+  initGrille(grille);
+
+  APPLY_DEFAULT_EMPTY(grille)
 	
-	Display* menu = new Display(window);
-  	//menu->createmenu();
-  	creategame(window, menu);
-  	handleEvent(menu);
+  creategame(window, menu);
+  while((player1->evaluate(grille) != -1) && (player2->evaluate(grille) != -1));
+  	//handleEvent(menu);
   	
 	//window->handleEvent(menu);
 

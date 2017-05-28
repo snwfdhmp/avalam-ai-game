@@ -31,6 +31,8 @@ public:
 	void printGrille(Emplacement grille[TAILLE][TAILLE]);
 
 	Display* updateWindow();
+
+	Emplacement* getSelect(Emplacement grille[TAILLE][TAILLE]);
 	
 	GraphicComponent* addComponent(GraphicComponent* componentToAdd);
 

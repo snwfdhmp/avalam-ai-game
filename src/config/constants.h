@@ -18,4 +18,5 @@
 
 #define GAP 80
 #define PAWN_SIZE 50
+
 #endif

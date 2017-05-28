@@ -28,6 +28,7 @@ Display::Display(int set_x, int set_y, int set_width, int set_height, Window* wi
 };
 
 Display::Display(Window* window) {
+	components = (GraphicComponent**) malloc(sizeof(GraphicComponent*));
 	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(renderer == NULL)
 		printf("Erreur : Renderer non cree\n");
@@ -71,34 +72,81 @@ Display* destroyRenderer(SDL_Renderer *renderer){
 	return NULL;
 }*/
 
+
 void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
 	SDL_Rect pion;
 	x = 120; 
 	SDL_SetRenderDrawColor(renderer, 0, 87, 122, 255);//Fond bleu
-  	SDL_RenderClear(renderer);
+	SDL_RenderClear(renderer);
 
 	for(int i = 0; i < TAILLE; i++){
 		y = 80;
 		SDL_Rect pion;
-		for(int j = 0; j < TAILLE; j++){
-			if(grille[i][j].valeur != 2){
-				pion.x = x;
-				pion.y = y;
-				pion.w = pion.h = PAWN_SIZE;
-			if(pion.y % (2*GAP) == 0){
+		for(int j = 0; j < TAILLE; j++) {
+			if(grille[i][j].valeur == 2) {
+				y+=GAP;
+				continue;
+			}
+			pion.x = x;
+			pion.y = y;
+			pion.w = pion.h = PAWN_SIZE;
+			if(grille[i][j].valeur == 1) {
+				if(grille[i][j].selected == 1){
+					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255);
+					SDL_RenderFillRect(renderer, &pion);
+				}
+				else {
 				SDL_SetRenderDrawColor(renderer, 206, 170, 62, 255); //Couleur jaune
-    			SDL_RenderFillRect(renderer, &pion);
+				SDL_RenderFillRect(renderer, &pion);
+			}
 			}
 			else {
+				if(grille[i][j].selected == 1){
+					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255);
+					SDL_RenderFillRect(renderer, &pion);
+				}
+				else {
 				SDL_SetRenderDrawColor(renderer, 121, 17, 100, 255); //Couleur rouge
-    			SDL_RenderFillRect(renderer, &pion);
-    		}
-    	}
-    		y+=GAP;
+				SDL_RenderFillRect(renderer, &pion);
+			}
+			}
+			y+=GAP;
 		}
 		x+=GAP;
 	}
 	SDL_RenderPresent(renderer);
+}
+
+Display::getSelect(Emplacement grille[TAILLE][TAILLE]){
+	int xClick, yClick;
+	SDL_Event click;
+	printGrille(grille);
+
+	while(true) {
+		SDL_WaitEvent(&click);
+
+		if(click.type == SDL_MOUSEBUTTONUP){
+			if(click.button.x-120 < 0 && click.button.y-80 < 0)
+				return NULL;
+			xClick = (click.button.x-120)/(GAP);
+			yClick = (click.button.y-80)/(GAP);
+			printf("X : %d Y: %d\n", xClick, yClick);
+			if(xClick >= TAILLE || yClick >= TAILLE)
+				return NULL;
+
+			if((click.button.x-120)%(GAP)-(PAWN_SIZE) > 0 || (click.button.y-80)%(GAP)-(PAWN_SIZE) > 0) {
+				printf("Click incorrect\n");
+				return NULL;
+			}
+			printf("Click correct\n");
+			std::vector<int>(2) rep;
+			rep[0]=xClick;
+			rep[1]=yClick;
+			grille[xClick][yClick].selected = 1;
+			return rep;
+		}
+		return NULL;
+	}
 }
 
 void Display::createmenu(){
@@ -107,8 +155,7 @@ void Display::createmenu(){
 	this->addComponent(background);
 	SDL_Rect position = {0, 0, background->width, background->height};
 	SDL_RenderCopy(renderer, background->texture, NULL, &position);
-  	SDL_RenderPresent(renderer);
-    //this->addComponent(play_button);
+	SDL_RenderPresent(renderer);
 }
 
 Display* Display::initWindow() { //TODO merge to initRenderer();
@@ -137,40 +184,40 @@ GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
 			else
 				return components[i];
 		}
-	return NULL;
-}
-
-int Display::update() {
-	//Move to Window class
-	SDL_Event event;
-	if(event.type == SDL_MOUSEBUTTONUP){
-		GraphicComponent* target = getTargeted(event.button.x, event.button.y);
-		if(target == NULL)
-			return -1;
-		else 
-			target->onClick();
+		return NULL;
 	}
 
-	if(updateWindow() == NULL)
-		return -1;
+	int Display::update() {
+	//Move to Window class
+		SDL_Event event;
+		if(event.type == SDL_MOUSEBUTTONUP){
+			GraphicComponent* target = getTargeted(event.button.x, event.button.y);
+			if(target == NULL)
+				return -1;
+			else 
+				target->onClick();
+		}
 
-	return 0;
-}
+		if(updateWindow() == NULL)
+			return -1;
 
-Display* Display::updateWindow() {
-	bool error = false;
+		return 0;
+	}
+
+	Display* Display::updateWindow() {
+		bool error = false;
 		// SDL clear la fenetre
 
-	for (int i = 0; i < size; ++i)
-	{
+		for (int i = 0; i < size; ++i)
+		{
 			// Ajouter le components[i] à la fenetre
 			// error = true si erreur
-	}
+		}
 
-	if(error)
-		return NULL;
-	return this;
-};
+		if(error)
+			return NULL;
+		return this;
+	};
 
 /*void Display::handleEvent(Display* menu){
     int continuer = 1;
@@ -238,9 +285,9 @@ Display* Display::updateWindow() {
     }
 };*/
 
-GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
-	components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
-	components[size] = componentToAdd;
+	GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
+		components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
+		components[size] = componentToAdd;
 	//printf("Component [%d;%d] has been added to display [%d;%d] (%d:%d) [size : %d]\n", components[size]->x, components[size]->y, x, y, width, height, size);
 	return components[size++]; //size is incremented after he gets injected as index of array (post inc)
 };
