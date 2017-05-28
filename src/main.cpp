@@ -60,7 +60,7 @@ int creategame(Window *window, Display* game){
     cases[42].y = cases[43].y = cases[44].y = cases[45].y = 660;
     cases[46].y = cases[47].y = 740;
 
-    for(int i = 0; i < 49; i++){
+    for(int i = 0; i < 48; i++){
     	cases[i].w = cases[i].h = 50; //taille d'une case : 50 x 50 pixels
 
     	if(cases[i].y == 100 || cases[i].y == 260 || cases[i].y == 420 || cases[i].y == 580 || cases[i].y == 740){
@@ -72,22 +72,22 @@ int creategame(Window *window, Display* game){
     		SDL_SetRenderDrawColor(game->renderer, 121, 17, 100, 255); //Couleur rouge
     		SDL_RenderFillRect(game->renderer, &cases[i]);
     	}
+      SDL_RenderPresent(game->renderer);
     }
    
-    SDL_RenderPresent(game->renderer);
-
-   for(int i = 0; i < 49; i++){
+   for(int i = 0; i < 48; i++){
         if(cases[i].y == 180 || cases[i].y == 340 || cases[i].y == 500 || cases[i].y == 660)
-    		rgb[i] = 50;
+    		rgb[i] = 121;
     	else if(cases[i].y == 100 || cases[i].y == 260 || cases[i].y == 420 || cases[i].y == 580 || cases[i].y == 740)
-    		rgb[i] = 50;
+    		rgb[i] = 206;
     }
     
     while(true){
     SDL_Event event;
 		SDL_WaitEvent(&event);
+
 		if(event.type == SDL_MOUSEBUTTONUP){
-			for(int i = 0; i < 49; i++){
+			for(int i = 0; i < 48; i++){
 				if(event.button.x >= cases[i].x && event.button.x <= (cases[i].x+cases[i].w) && event.button.y >= cases[i].y && event.button.y <= (cases[i].y+cases[i].h)){
 					if(select == 0){
             printf("Select : %d\n", select);
@@ -95,26 +95,26 @@ int creategame(Window *window, Display* game){
 						selectedCase = i;
             SDL_SetRenderDrawColor(game->renderer, 33, 204, 9, 255);
             SDL_RenderFillRect(game->renderer, &cases[i]);
-						//firstPiece = rgb[i];
+						firstPiece = rgb[i];
 					}
 
 					else if(select == 1){
-						select = 0;
             printf("Select : %d\n", select);
 						printf("Derniere case selectionee est %d et va sur la case %d\n\n", selectedCase, i);
 						SDL_GetRenderDrawColor(game->renderer, &r, &g, &b, &a);
 						
-						if(firstPiece == 232){
+						if(firstPiece == 206){
+              printf("jaune\n");
               SDL_SetRenderDrawColor(game->renderer, 0, 87, 122, 255); //Couleur bleue
     					SDL_RenderFillRect(game->renderer, &cases[selectedCase]);
 							SDL_SetRenderDrawColor(game->renderer, 206, 170, 62, 255); //Couleur jaune
     					SDL_RenderFillRect(game->renderer, &cases[i]);
-              rgb[i] = 232;
+              rgb[i] = 206;
     					cases[selectedCase].x = 0;
 							cases[selectedCase].y = 0;
     				}
     				else{
-              printf("Select : %d\n", select);
+              printf("rouge\n");
     					SDL_SetRenderDrawColor(game->renderer, 0, 87, 122, 255); //Couleur bleue
     					SDL_RenderFillRect(game->renderer, &cases[selectedCase]);
     					SDL_SetRenderDrawColor(game->renderer, 121, 17, 100, 255); //Couleur rouge
@@ -123,35 +123,13 @@ int creategame(Window *window, Display* game){
     					cases[selectedCase].x = 0;
 							cases[selectedCase].y = 0;
     					}
+              select = 0;
 					}
 				}	
 			}
 		}
 		SDL_RenderPresent(game->renderer);
     }
-}
-
-void mouvement(SDL_Rect* cases, Display* game){
-	SDL_Event event;
-	int select = 0, selectedCase = 0;
-	while(true){
-		SDL_WaitEvent(&event);
-		if(event.type == SDL_MOUSEBUTTONUP){
-			for(int i = 0; i < 49; i++){
-				if(event.button.x >= cases[i].x && event.button.x <= (cases[i].x+cases[i].w) && event.button.y >= cases[i].y && event.button.y <= (cases[i].y+cases[i].h) && select == 0){
-					select = 1;
-					selectedCase = i;
-					printf("La case %d a ete selectionee\n", i);
-				}
-				if(event.button.x >= cases[i].x && event.button.x <= (cases[i].x+cases[i].w) && event.button.y >= cases[i].y && event.button.y <= (cases[i].y+cases[i].h) && select == 1){
-					cases[selectedCase].x = cases[i].x;
-					cases[selectedCase].y = cases[i].y;
-					select = 0;
-					SDL_RenderPresent(game->renderer);
-				}
-			}
-		}
-	}
 }
 
 void handleEvent(Display* menu){
