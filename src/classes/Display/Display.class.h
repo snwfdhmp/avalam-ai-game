@@ -7,6 +7,7 @@
 #include "../GraphicComponent/GraphicComponent.class.h"
 #include "../Window/Window.class.h"
 #include "../../config/constants.h"
+#include <vector>
 
 class Display
 {
@@ -32,7 +33,7 @@ public:
 
 	Display* updateWindow();
 
-	Emplacement* getSelect(Emplacement grille[TAILLE][TAILLE]);
+	std::vector<int> getSelect(Emplacement grille[TAILLE][TAILLE]);
 	
 	GraphicComponent* addComponent(GraphicComponent* componentToAdd);
 

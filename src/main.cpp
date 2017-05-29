@@ -41,7 +41,7 @@ int creategame(Window *window, Display* game){
 	
   game->printGrille(grille);
 
-
+}
   /*SDL_SetRenderDrawColor(game->renderer, 0, 87, 122, 255);//Fond bleu
   SDL_RenderClear(game->renderer);
 
@@ -136,7 +136,7 @@ int creategame(Window *window, Display* game){
 		}
 		SDL_RenderPresent(game->renderer);
     }
-}
+}*/
 
 void handleEvent(Display* menu){
   int continuer = 1;
@@ -169,14 +169,9 @@ void handleEvent(Display* menu){
                   break;
             }
             break;
-
-            case SDL_MOUSEBUTTONUP : 
-              printf("Position en x : %d\n", event.motion.x);
-              printf("Position en y : %d\n", event.motion.y);
-              if((event.button.x >= 200 && event.button.x <= 500) && (event.button.y >= 135 && event.button.y <= 545)){
-              	printf("GAAAME\n");
-              }
-          break;
+        }
+      }
+  }
 
           /*case SDL_MOUSEMOTION :
             if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 135 && event.motion.y <= 545){
@@ -202,13 +197,13 @@ void handleEvent(Display* menu){
             break;
         }
     }*/
-}
+
 
 void initGrille(Emplacement grille[TAILLE][TAILLE]){
   int i,j;
   for (i = 0; i < TAILLE; ++i)
     for (j = 0; j < TAILLE; ++j) {
-      grille[i][j].valeur = j%2;
+      grille[i][j].init(j%2);
     }
 }
 
@@ -231,14 +226,14 @@ int main(int argc, char const *argv[])
 	
   creategame(window, menu);
   while((player1->evaluate(grille) != -1) && (player2->evaluate(grille) != -1));
-  	//handleEvent(menu);
-  	
+  handleEvent(menu);
+    SDL_DestroyWindow(window->window);
+    SDL_Quit(); 	
 	//window->handleEvent(menu);
 
     //todo : transform to window->handleEvent(menu, background)
     //handleEvent(window, menu, background);
-  	SDL_DestroyWindow(window->window);
-  	SDL_Quit(); 
+  
 	
 
 

@@ -6,6 +6,7 @@
 #include <string.h>
 #include <string>
 #include <iostream>
+#include <vector>
 
 #include "Display.class.h"
 #include "../Emplacement/Emplacement.class.h"
@@ -75,12 +76,13 @@ Display* destroyRenderer(SDL_Renderer *renderer){
 
 
 void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
+	
 	SDL_Rect pion, heightpositon;
 	x = 120; 
 	SDL_SetRenderDrawColor(renderer, 0, 87, 122, 255);//Fond bleu
 	SDL_RenderClear(renderer);
 	char imageName[10];
-	char caseHauteur;
+	char caseHauteur[10];
 
 	for(int i = 0; i < TAILLE; i++){
 		y = 80;
@@ -97,15 +99,18 @@ void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
 				if(grille[i][j].selected == 1){
 					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255);
 					SDL_RenderFillRect(renderer, &pion);
+					sprintf(imageName, "ressources/img/gheight%d.bmp", grille[i][j].hauteur);
+
+					SDL_Surface* caseheight = SDL_LoadBMP(imageName);
+					SDL_Texture* caseTexture = SDL_CreateTextureFromSurface(renderer, caseheight);
+					heightpositon = {x, y, PAWN_SIZE, PAWN_SIZE};
+					SDL_RenderCopy(renderer, caseTexture, NULL, &heightpositon);
 				}
 				else {
 					SDL_SetRenderDrawColor(renderer, 206, 170, 62, 255); //Couleur jaune
 					SDL_RenderFillRect(renderer, &pion);
+					sprintf(imageName, "ressources/img/yheight%d.bmp", grille[i][j].hauteur);
 
-					strcpy(imageName, "../ressources/img/yheight");
-					sprintf(caseHauteur, grille[i][j].hauteur);
-					strcat(imageName, caseHauteur);
-					strcat(imageName, ".bmp");
 					SDL_Surface* caseheight = SDL_LoadBMP(imageName);
 					SDL_Texture* caseTexture = SDL_CreateTextureFromSurface(renderer, caseheight);
 					heightpositon = {x, y, PAWN_SIZE, PAWN_SIZE};
@@ -117,26 +122,19 @@ void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
 					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255);
 					SDL_RenderFillRect(renderer, &pion);
 
-				
-					strcpy(imageName, "../ressources/img/gheight");
-					sprintf(caseHauteur, grille[i][j].hauteur);
-					strcat(imageName, caseHauteur);
-					strcat(imageName, ".bmp");
+					sprintf(imageName, "ressources/img/gheight%d.bmp", grille[i][j].hauteur);
 					SDL_Surface* caseheight = SDL_LoadBMP(imageName);
 					SDL_Texture* caseTexture = SDL_CreateTextureFromSurface(renderer, caseheight);
 					heightpositon = {x, y, PAWN_SIZE, PAWN_SIZE};
 					SDL_RenderCopy(renderer, caseTexture, NULL, &heightpositon);
 				}
-				}
 				else {
 					SDL_SetRenderDrawColor(renderer, 121, 17, 100, 255); //Couleur rouge
 					SDL_RenderFillRect(renderer, &pion);
-
-					strcpy(imageName, "../ressources/img/rheight");
-					sprintf(caseHauteur, grille[i][j].hauteur);
-					strcat(imageName, caseHauteur);
-					strcat(imageName, ".bmp");
+					sprintf(imageName, "ressources/img/rheight%d.bmp", grille[i][j].hauteur);
 					SDL_Surface* caseheight = SDL_LoadBMP(imageName);
+					if(caseheight == NULL)
+						printf("%s\n", imageName);
 					SDL_Texture* caseTexture = SDL_CreateTextureFromSurface(renderer, caseheight);
 					heightpositon = {x, y, PAWN_SIZE, PAWN_SIZE};
 					SDL_RenderCopy(renderer, caseTexture, NULL, &heightpositon);
@@ -149,35 +147,37 @@ void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
 	SDL_RenderPresent(renderer);
 }
 
-Display::getSelect(Emplacement grille[TAILLE][TAILLE]){
+std::vector<int> Display::getSelect(Emplacement grille[TAILLE][TAILLE]){
+	
 	int xClick, yClick;
 	SDL_Event click;
 	printGrille(grille);
+	std::vector<int> rep;
 
 	while(true) {
 		SDL_WaitEvent(&click);
 
 		if(click.type == SDL_MOUSEBUTTONUP){
 			if(click.button.x-120 < 0 && click.button.y-80 < 0)
-				return NULL;
+				return rep;
 			xClick = (click.button.x-120)/(GAP);
 			yClick = (click.button.y-80)/(GAP);
 			printf("X : %d Y: %d\n", xClick, yClick);
 			if(xClick >= TAILLE || yClick >= TAILLE)
-				return NULL;
+				return rep;
 
 			if((click.button.x-120)%(GAP)-(PAWN_SIZE) > 0 || (click.button.y-80)%(GAP)-(PAWN_SIZE) > 0) {
 				printf("Click incorrect\n");
-				return NULL;
+				return rep;
 			}
 			printf("Click correct\n");
-			std::vector<int>(2) rep;
-			rep[0]=xClick;
-			rep[1]=yClick;
+			
+			rep.push_back(xClick);
+			rep.push_back(yClick);
 			grille[xClick][yClick].selected = 1;
 			return rep;
 		}
-		return NULL;
+		return rep;
 	}
 }
 

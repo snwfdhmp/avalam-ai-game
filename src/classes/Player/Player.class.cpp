@@ -9,6 +9,7 @@
 #include "../Mouvement/Mouvement.class.h"
 #include "../MovePlan/MovePlan.class.h"
 #include "Player.class.h"
+#include <vector>
 #include "SDL2/SDL.h"
 
 // include global constants
@@ -81,19 +82,24 @@ int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 	Mouvement move;
 	int x_s, y_s, x_d, y_d;
 
-	Emplacement* first = NULL;
-	Emplacement* second = NULL;
+	std::vector<int> first;
+	std::vector<int> second;
 
-	while(first == NULL && second == NULL){
-		if(first == NULL)
+	int continuer = 1;
+    SDL_Event event;
+ 
+	while(first.size() == 0 && second.size() == 0){
+		if(first.size() == 0)
 			first = playerDisplay->getSelect(grille);
 		else
 			second = playerDisplay->getSelect(grille);
-		}
+	}
 
-	if(move.init(first->x, first->y, second->x, second->y, grille) != -1)
+	if(move.init(first[0], first[0], second[0], second[0], grille) != -1)
 		move.apply(grille);
 
+		grille[first[0]][first[1]].selected = 0;
+		grille[second[0]][second[1]].selected = 0;
 		playerDisplay->printGrille(grille);
 	return 0;
 }
@@ -108,8 +114,6 @@ int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
 		default:
 			return HumanEvaluate(grille);
 	}
-	
-	
 }
 
 int Player::IAEvaluate(Emplacement grille[TAILLE][TAILLE]) {
