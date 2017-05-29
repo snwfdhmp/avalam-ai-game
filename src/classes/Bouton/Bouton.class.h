@@ -11,17 +11,15 @@
     class Bouton : public GraphicComponent
     {
         public:
+        SDL_Renderer* renderer;
         int x, y, w, h;
         char* type;
 
-        Bouton(SDL_Renderer* renderer, const char* pathToImg);
-        Bouton(SDL_Renderer* renderer, SDL_Surface* set_surface);
         Bouton(SDL_Renderer *renderer, char* path, int x, int y, int w, int h);
-        Bouton(SDL_Renderer *renderer, SDL_Surface, int x, int y, int w, int h);
-
-        Bouton(); //class constructor
+        
+        Bouton()=default; //class constructor
         ~Bouton();
-        void Onclick();
+        //void Onclick();
         SDL_Surface* createBouton(Display* display, int x, int y, int w, int h);
     };
 

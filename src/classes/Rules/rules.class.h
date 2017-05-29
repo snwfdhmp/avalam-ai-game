@@ -13,9 +13,10 @@
     {
 
         public:
+        int x, y, w, h;
         SDL_Renderer* renderer;
 
-        rulesBouton(SDL_renderer* renderer, const char* pathToImg); //class constructor
+        rulesBouton(SDL_Renderer *renderer, char* path, int _x, int _y, int width, int heigth); //class constructor
         ~rulesBouton();
         void Onclick();
         

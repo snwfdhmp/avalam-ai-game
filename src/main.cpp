@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include "classes/Emplacement/Emplacement.class.h"
+#include "classes/GraphicComponent/GraphicComponent.class.h"
+#include "classes/Bouton/Bouton.class.h"
+#include "classes/Play/Play.class.hpp"
 #include "classes/Mouvement/Mouvement.class.h"
 #include "classes/Player/Player.class.h"
 #include "classes/Window/Window.class.h"
@@ -212,9 +215,21 @@ int main(int argc, char const *argv[])
 
 	Window* window = new Window("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1012, 800, SDL_WINDOW_SHOWN); //Window init
 	window->setIcon("ressources/img/chess.bmp"); //Icon init
-  Display* menu = new Display(window);
 
-	Player* player1 = new Player();
+  Display* menu = new Display(window);
+  menu->setBackground(window, "ressources/img/mock-menu.bmp");
+  playBouton* p_bouton = new playBouton(menu->renderer, "ressources/img/Play_bouton.bmp", 200, 200, 310, 600);
+  GraphicComponent comp = *p_bouton;
+  printf("!main : %d %d\n", p_bouton->x, p_bouton->y);
+  menu->addComponent(p_bouton);
+  menu->printComponents();
+  menu->update();
+  SDL_Delay(3000);
+
+  SDL_Event event;
+  SDL_WaitEvent(&event);
+
+	/*Player* player1 = new Player();
   player1->init(menu, 1, "Martin", PLAYER_TYPE_HUMAN);
   Player* player2 = new Player();
   player2->init(menu, 1, "Landry", PLAYER_TYPE_HUMAN);
@@ -232,7 +247,7 @@ int main(int argc, char const *argv[])
 	//window->handleEvent(menu);
 
     //todo : transform to window->handleEvent(menu, background)
-    //handleEvent(window, menu, background);
+    //handleEvent(window, menu, background);*/
   
 	
 

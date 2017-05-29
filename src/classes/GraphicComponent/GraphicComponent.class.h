@@ -15,17 +15,18 @@ public:
 	int x, y, width, height;
 	char* type;
 
-
+	GraphicComponent()=default;
 	GraphicComponent(SDL_Renderer* renderer, const char* pathToImg);
 	GraphicComponent(SDL_Renderer* renderer, SDL_Surface* set_surface);
-	GraphicComponent(SDL_Renderer *renderer, SDL_Surface, int x, int y, int w, int h);
-	GraphicComponent(SDL_Renderer *renderer, char* path, int x, int y, int w, int h);
+	GraphicComponent(SDL_Renderer *renderer, SDL_Surface, int _x, int _y, int w, int h);
+	GraphicComponent(SDL_Renderer *renderer, char* path, int _x, int _y, int w, int h);
 	GraphicComponent(char* type, SDL_Renderer* renderer, SDL_Surface* set_surface);
 	//GraphicComponent(Display* display, char* path, int x, int y, int w, int h);
 
 	~GraphicComponent();
 	
 	//void initTexture(SDL_Renderer *renderer, SDL_Surface *surface);
+	
 	void destroyTexture(SDL_Texture *texture);
 	void destroySurface(SDL_Surface *surface);
 	//void initSurface(std::string path);

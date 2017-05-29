@@ -12,21 +12,20 @@
     #include <stdio.h>
 	
     //class constructor
-    rulesBouton::rulesBouton(SDL_Renderer* renderer, const char* pathToImg){
+    rulesBouton::rulesBouton(SDL_Renderer *renderer, char* path, int _x, int _y, int width, int heigth){
         // object initialization
-            surface = SDL_LoadBMP(pathToImg);
-        if(surface == NULL)
-            printf("surface non cree\n");
-
-        texture = SDL_CreateTextureFromSurface(renderer, surface);
-        if(texture == NULL)
-            printf("texture non cree\n");
-
-        width = surface->w;
-        height = surface->h;
+      
+     Bouton *rulesBouton = new Bouton(renderer, path, x, y, w, h);
+       
+       x = _x;
+       y = _y;
+       w = width;
+       h = height;
     }
     
-    void Onclick(){
+    rulesBouton::~rulesBouton(){};
+
+    void rulesBouton::Onclick(){
         printf("Rules a a ete clique\n");
     }
 

@@ -14,7 +14,7 @@
         public:
         SDL_Renderer* renderer;
 
-        themesBouton(SDL_renderer* renderer, const char* pathToImg); //class constructor
+        themesBouton(SDL_Renderer *renderer, char* path, int _x, int _y, int width, int heigth); //class constructor
         ~themesBouton();
         void Onclick();
     };

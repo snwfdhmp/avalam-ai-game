@@ -12,28 +12,25 @@
     #include <stdio.h>
 	
     //class constructor
-    creditsBouton::creditsBouton(SDL_Renderer* renderer, const char* pathToImg){
-        // object initialization
-        surface = SDL_LoadBMP(pathToImg);
-        if(surface == NULL)
-            printf("surface non cree\n");
-
-        texture = SDL_CreateTextureFromSurface(renderer, surface);
-        if(texture == NULL)
-            printf("texture non cree\n");
-
-        width = surface->w;
-        height = surface->h;
+    creditsBouton::creditsBouton(SDL_Renderer *renderer, char* path, int _x, int _y, int width, int height){
+       
+       // object initialization
+       Bouton *creditsBouton = new Bouton(renderer, path, x, y, w, h);
+       
+       x = _x;
+       y = _y;
+       w = width;
+       h = height;
     }
 
-    void credits::onMouseOver(SDL_Renderer* renderer){
+    void creditsBouton::onMouseOver(SDL_Renderer* renderer){
         GraphicComponent* gc_over = new GraphicComponent(renderer, "ressources/img/mock-jouer-mouseover.bmp");
         SDL_Rect position = {0, 0, gc_over->width, gc_over->height};
         SDL_RenderCopy(renderer, gc_over->texture, NULL, &position);
         SDL_RenderPresent(renderer);
     }
     
-    void Onclick(){
+    void creditsBouton::Onclick(){
         printf("Credits a a ete clique\n");
     }
  

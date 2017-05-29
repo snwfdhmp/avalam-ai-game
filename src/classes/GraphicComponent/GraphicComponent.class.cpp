@@ -25,12 +25,19 @@ GraphicComponent::GraphicComponent(char* type, SDL_Renderer* renderer, SDL_Surfa
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 }
 
-GraphicComponent::GraphicComponent(SDL_Renderer *renderer, char* path, int x, int y, int w, int h){
+GraphicComponent::GraphicComponent(SDL_Renderer *renderer, char* path, int _x, int _y, int w, int h){
 	surface = SDL_LoadBMP(path);
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_Rect position =  {x, y, w, h}; //Advice for w and h use bouton->w and bouton->h
    	SDL_RenderCopy(renderer, texture, NULL, &position);
   	SDL_RenderPresent(renderer);
+
+  	x = _x;
+  	printf("X du GraphicComponent : %d\n", x);
+  	y = _y;
+  	printf("Y du GraphicComponent : %d\n", y);
+  	width = surface->w;
+  	height = surface->h;
 }
 
 GraphicComponent::~GraphicComponent(){};

@@ -17,7 +17,7 @@ public:
 
 	int x, y, width, height;
 	unsigned int size;
-	GraphicComponent** components;
+	std::vector<GraphicComponent*> components; 
 
 	Display(int set_x, int set_y, int set_width, int set_height, Window* window);
 	Display(Window* window);
@@ -30,6 +30,8 @@ public:
 	void createmenu();
 	void handleEvent(Display *display);
 	void printGrille(Emplacement grille[TAILLE][TAILLE]);
+	void setBackground(Window*, char*);
+	void printComponents();
 
 	Display* updateWindow();
 

@@ -13,12 +13,14 @@
     {
 
         public:
+        int x, y, w, h;
         SDL_Renderer* renderer;
 
-        optionsBouton(SDL_renderer* renderer, const char* pathToImg); //class constructor
+        optionsBouton(SDL_Renderer *renderer, char* path, int _x, int _y, int width, int height); //class constructor
         ~optionsBouton();
-       void Onclick();
-       void onMouseOver(SDL_Renderer *renderer);
+        
+        void Onclick();
+        void onMouseOver(SDL_Renderer *renderer);
         
     };
 

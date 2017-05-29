@@ -5,7 +5,7 @@
     
     #include "../Bouton/Bouton.class.h"
     #include "../GraphicComponent/GraphicComponent.class.h"
-    #include "SDL2/SDL.h"
+    #include "../../SDL2/SDL.h"
    
     //Bouton class definition
 
@@ -13,12 +13,14 @@
     {
 
         public:
+        int x, y, w, h;
         SDL_Renderer* renderer;
 
-        creditsBouton(SDL_renderer* renderer, const char* pathToImg); //class constructor
+        creditsBouton(SDL_Renderer *renderer, char* path, int _x, int _y, int width, int height); //class constructor
         ~creditsBouton();
+        
         void onMouseOver(SDL_Renderer* renderer);
-       void Onclick();
+        void Onclick();
         
     };
 
