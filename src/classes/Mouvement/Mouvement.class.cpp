@@ -33,6 +33,7 @@ int Mouvement::isCorrect(int x_s, int y_s, int x_d, int y_d, Emplacement grille[
 		//if(!hauteurLegale && grille[x_d][y_d].hauteur > 0 && grille[x_s][y_s].hauteur > 0)
 		//	printf("grille[x_d][y_d].hauteur [%d] > 0 && grille[x_s][y_s].hauteur [%d] > 0 && grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur [%d] <= 5\n",grille[x_d][y_d].hauteur, grille[x_s][y_s].hauteur, grille[x_s][y_s].hauteur+grille[x_d][y_d].hauteur);
 	//printf("OK\n");
+	
 	return 0;
 }
 

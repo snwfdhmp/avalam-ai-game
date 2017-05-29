@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <string>
 #include <iostream>
 
@@ -74,10 +75,12 @@ Display* destroyRenderer(SDL_Renderer *renderer){
 
 
 void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
-	SDL_Rect pion;
+	SDL_Rect pion, heightpositon;
 	x = 120; 
 	SDL_SetRenderDrawColor(renderer, 0, 87, 122, 255);//Fond bleu
 	SDL_RenderClear(renderer);
+	char imageName[10];
+	char caseHauteur;
 
 	for(int i = 0; i < TAILLE; i++){
 		y = 80;
@@ -96,19 +99,48 @@ void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
 					SDL_RenderFillRect(renderer, &pion);
 				}
 				else {
-				SDL_SetRenderDrawColor(renderer, 206, 170, 62, 255); //Couleur jaune
-				SDL_RenderFillRect(renderer, &pion);
-			}
+					SDL_SetRenderDrawColor(renderer, 206, 170, 62, 255); //Couleur jaune
+					SDL_RenderFillRect(renderer, &pion);
+
+					strcpy(imageName, "../ressources/img/yheight");
+					sprintf(caseHauteur, grille[i][j].hauteur);
+					strcat(imageName, caseHauteur);
+					strcat(imageName, ".bmp");
+					SDL_Surface* caseheight = SDL_LoadBMP(imageName);
+					SDL_Texture* caseTexture = SDL_CreateTextureFromSurface(renderer, caseheight);
+					heightpositon = {x, y, PAWN_SIZE, PAWN_SIZE};
+					SDL_RenderCopy(renderer, caseTexture, NULL, &heightpositon);
+				}
 			}
 			else {
 				if(grille[i][j].selected == 1){
 					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255);
 					SDL_RenderFillRect(renderer, &pion);
+
+				
+					strcpy(imageName, "../ressources/img/gheight");
+					sprintf(caseHauteur, grille[i][j].hauteur);
+					strcat(imageName, caseHauteur);
+					strcat(imageName, ".bmp");
+					SDL_Surface* caseheight = SDL_LoadBMP(imageName);
+					SDL_Texture* caseTexture = SDL_CreateTextureFromSurface(renderer, caseheight);
+					heightpositon = {x, y, PAWN_SIZE, PAWN_SIZE};
+					SDL_RenderCopy(renderer, caseTexture, NULL, &heightpositon);
+				}
 				}
 				else {
-				SDL_SetRenderDrawColor(renderer, 121, 17, 100, 255); //Couleur rouge
-				SDL_RenderFillRect(renderer, &pion);
-			}
+					SDL_SetRenderDrawColor(renderer, 121, 17, 100, 255); //Couleur rouge
+					SDL_RenderFillRect(renderer, &pion);
+
+					strcpy(imageName, "../ressources/img/rheight");
+					sprintf(caseHauteur, grille[i][j].hauteur);
+					strcat(imageName, caseHauteur);
+					strcat(imageName, ".bmp");
+					SDL_Surface* caseheight = SDL_LoadBMP(imageName);
+					SDL_Texture* caseTexture = SDL_CreateTextureFromSurface(renderer, caseheight);
+					heightpositon = {x, y, PAWN_SIZE, PAWN_SIZE};
+					SDL_RenderCopy(renderer, caseTexture, NULL, &heightpositon);
+				}
 			}
 			y+=GAP;
 		}
