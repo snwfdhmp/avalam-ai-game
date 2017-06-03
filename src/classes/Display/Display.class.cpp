@@ -18,6 +18,7 @@
 #include "../../config/constants.h"
 
 Display::Display(int set_x, int set_y, int set_width, int set_height, Window* window) {
+	components = (GraphicComponent**) malloc(sizeof(GraphicComponent*));
 	size = 0;
 	x = set_x;
 	y = set_y;
@@ -29,25 +30,11 @@ Display::Display(int set_x, int set_y, int set_width, int set_height, Window* wi
 };
 
 Display::Display(Window* window) {
+	components = (GraphicComponent**) malloc(sizeof(GraphicComponent*));
 	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(renderer == NULL)
 		printf("Erreur : Renderer non cree\n");
 };
-
-void Display::setBackground(Window* window, char* path){
-
-    SDL_Surface *backgroundSprite = SDL_LoadBMP(path);
-    if(backgroundSprite == NULL)
-    	printf("Image not found (Maybe check the path)\n");
-
-    SDL_Texture* backgroundText = SDL_CreateTextureFromSurface(renderer, backgroundSprite); // Préparation du sprite
-   	if(backgroundText == NULL)
-   		printf("texture not loaded\n");
-   
-   SDL_Rect backgroundPosition = {0, 0, backgroundSprite->w, backgroundSprite->h};
-   SDL_RenderCopy(renderer, backgroundText, NULL, &backgroundPosition); // Copie du sprite grâce au SDL_Renderer
-   SDL_RenderPresent(renderer); // Affichage
-}
 
 Display::~Display() {};
 
@@ -164,32 +151,45 @@ std::vector<int> Display::getSelect(Emplacement grille[TAILLE][TAILLE]){
 	
 	int xClick, yClick;
 	SDL_Event click;
-	printGrille(grille);
 	std::vector<int> rep;
-
-	while(true) {
-		SDL_WaitEvent(&click);
-
-		if(click.type == SDL_MOUSEBUTTONUP){
-			if(click.button.x-120 < 0 && click.button.y-80 < 0)
-				return rep;
-			xClick = (click.button.x-120)/(GAP);
-			yClick = (click.button.y-80)/(GAP);
-			printf("X : %d Y: %d\n", xClick, yClick);
-			if(xClick >= TAILLE || yClick >= TAILLE)
-				return rep;
-
-			if((click.button.x-120)%(GAP)-(PAWN_SIZE) > 0 || (click.button.y-80)%(GAP)-(PAWN_SIZE) > 0) {
-				printf("Click incorrect\n");
-				return rep;
-			}
-			printf("Click correct\n");
-			
-			rep.push_back(xClick);
-			rep.push_back(yClick);
-			grille[xClick][yClick].selected = 1;
+	
+	SDL_WaitEvent(&click);
+	
+	if(click.type == SDL_MOUSEBUTTONUP){
+		if(click.button.x-120 < 0 && click.button.y-80 < 0){
+			printf("Click en dehors de l'ecran %d\n", rep[0]);
 			return rep;
 		}
+
+		xClick = (click.button.x- 120)/(GAP);
+		yClick = (click.button.y-80)/(GAP);
+		printf("X : %d Y: %d\n", xClick, yClick);
+
+		if(xClick >= TAILLE || yClick >= TAILLE)
+			return rep;
+
+		if((click.button.x- 120)%(GAP)-(PAWN_SIZE) > 0 || (click.button.y-80)%(GAP)-(PAWN_SIZE) > 0){
+			printf("Click incorrect\n");
+			return rep;
+		}
+
+		if(grille[xClick][yClick].valeur == 2)
+			return rep;
+
+		printf("Click correct\n");
+
+		rep.push_back(xClick);
+		rep.push_back(yClick);
+		for(int i = 0; i < TAILLE; i++){
+			for(int j = 0; j < TAILLE; j++){
+				grille[i][j].selected = 0;
+			}
+		}
+		grille[xClick][yClick].selected = 1;
+
+		printf("rep[0] : %d rep[1] : %d\n", rep[0], rep[1]);
+		printGrille(grille);
+
 		return rep;
 	}
 }
@@ -235,12 +235,7 @@ GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
 	int Display::update() {
 	//Move to Window class
 		SDL_Event event;
-		while(event.type != SDL_MOUSEBUTTONUP){
-			SDL_WaitEvent(&event);
-
-			SDL_RenderPresent(renderer);
-		}
-		/*if(event.type == SDL_MOUSEBUTTONUP){
+		if(event.type == SDL_MOUSEBUTTONUP){
 			GraphicComponent* target = getTargeted(event.button.x, event.button.y);
 			if(target == NULL)
 				return -1;
@@ -249,7 +244,7 @@ GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
 		}
 
 		if(updateWindow() == NULL)
-			return -1;*/
+			return -1;
 
 		return 0;
 	}
@@ -336,21 +331,10 @@ GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
 };*/
 
 	GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
- 		printf("%d %d %d\n", componentToAdd->x, componentToAdd->y, componentToAdd->width);
-		components.push_back(componentToAdd);
+		components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
+		components[size] = componentToAdd;
 	//printf("Component [%d;%d] has been added to display [%d;%d] (%d:%d) [size : %d]\n", components[size]->x, components[size]->y, x, y, width, height, size);
-	return components[components.size()]; //size is incremented after he gets injected as index of array (post inc)
+	return components[size++]; //size is incremented after he gets injected as index of array (post inc)
 };
-
- void Display::printComponents(){
- 	int i = 0;
-
- 	for(i = 0; i < components.size(); i++){
- 		printf("%d %d %d\n", components[i]->x, components[i]->y, components[i]->width);
- 		SDL_Rect position = {components[i]->x, components[i]->y, components[i]->width, components[i]->height};
- 	  	SDL_RenderCopy(renderer, components[i]->texture, NULL, &position);
-        SDL_RenderPresent(renderer);
- 	}
- }
 
 #endif

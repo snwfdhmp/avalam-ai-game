@@ -3,9 +3,6 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include "classes/Emplacement/Emplacement.class.h"
-#include "classes/GraphicComponent/GraphicComponent.class.h"
-#include "classes/Bouton/Bouton.class.h"
-#include "classes/Play/Play.class.hpp"
 #include "classes/Mouvement/Mouvement.class.h"
 #include "classes/Player/Player.class.h"
 #include "classes/Window/Window.class.h"
@@ -18,7 +15,7 @@
 
 using namespace std;
 
-int creategame(Window*, Display*);
+int creategame(Display*, Emplacement grille[TAILLE][TAILLE]);
 void handleEvent(Display*);
 void mouvement(SDL_Rect *, Display*);
 void onMouseOver(Display *, char*);
@@ -31,19 +28,18 @@ void onMouseOver(Display *display, char *path){
     SDL_RenderPresent(display->renderer);
 }*/
 
-int creategame(Window *window, Display* game){
-  Emplacement grille[TAILLE][TAILLE];
-	Uint8 r,g,b,a;
-	int nbcases = 48, select = 0, selectedCase;
-  SDL_SetWindowTitle(window->window, "Board");
-	
-	int rgb[48] = {0}, firstPiece;
-	SDL_Rect cases[48];
 
+void initGrille(Emplacement grille[TAILLE][TAILLE]){
+  int i,j;
+  for (i = 0; i < TAILLE; ++i)
+    for (j = 0; j < TAILLE; ++j) {
+      grille[i][j].init(j%2);
+    }
+}
+
+int creategame(Display* game, Emplacement grille[TAILLE][TAILLE]){
   APPLY_DEFAULT_EMPTY(grille);
-	
   game->printGrille(grille);
-
 }
   /*SDL_SetRenderDrawColor(game->renderer, 0, 87, 122, 255);//Fond bleu
   SDL_RenderClear(game->renderer);
@@ -145,8 +141,6 @@ void handleEvent(Display* menu){
   int continuer = 1;
     SDL_Event event;
  
-    while (continuer)
-    {
         SDL_WaitEvent(&event);
         switch(event.type)
         {
@@ -174,7 +168,6 @@ void handleEvent(Display* menu){
             break;
         }
       }
-  }
 
           /*case SDL_MOUSEMOTION :
             if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 135 && event.motion.y <= 545){
@@ -202,53 +195,34 @@ void handleEvent(Display* menu){
     }*/
 
 
-void initGrille(Emplacement grille[TAILLE][TAILLE]){
-  int i,j;
-  for (i = 0; i < TAILLE; ++i)
-    for (j = 0; j < TAILLE; ++j) {
-      grille[i][j].init(j%2);
-    }
-}
 
 int main(int argc, char const *argv[])
 {
 
 	Window* window = new Window("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1012, 800, SDL_WINDOW_SHOWN); //Window init
 	window->setIcon("ressources/img/chess.bmp"); //Icon init
+  Display* game = new Display(window);
 
-  Display* menu = new Display(window);
-  /*menu->setBackground(window, "ressources/img/mock-menu.bmp");
-  playBouton* p_bouton = new playBouton(menu->renderer, "ressources/img/Play_bouton.bmp", 200, 200, 310, 600);
-  GraphicComponent comp = (GraphicComponent)*p_bouton;
-  printf("!main : %d %d\n", p_bouton->x, p_bouton->y);
-  printf("!main gc : %d %d\n", comp.x, comp.y);
-  menu->addComponent(p_bouton);
-  menu->printComponents();*/
-  menu->update();
-  SDL_Delay(3000);
-
-  SDL_Event event;
-  SDL_WaitEvent(&event);
-
-	/*Player* player1 = new Player();
-  player1->init(menu, 1, "Martin", PLAYER_TYPE_HUMAN);
+	Player* player1 = new Player();
+  player1->init(game, 1, "Martin", PLAYER_TYPE_HUMAN);
   Player* player2 = new Player();
-  player2->init(menu, 1, "Landry", PLAYER_TYPE_HUMAN);
+  player2->init(game, 1, "Landry", PLAYER_TYPE_HUMAN);
 
   Emplacement grille[TAILLE][TAILLE];
   initGrille(grille);
+  creategame(game, grille);
 
-  APPLY_DEFAULT_EMPTY(grille)
-	
-  creategame(window, menu);
-  while((player1->evaluate(grille) != -1) && (player2->evaluate(grille) != -1));
-  handleEvent(menu);
+    while((player1->evaluate(grille) != -1) && (player2->evaluate(grille) != -1));
+    //player1->evaluate(grille);
+
+      handleEvent(game);
+
     SDL_DestroyWindow(window->window);
     SDL_Quit(); 	
 	//window->handleEvent(menu);
 
     //todo : transform to window->handleEvent(menu, background)
-    //handleEvent(window, menu, background);*/
+    //handleEvent(window, menu, background);
   
 	
 

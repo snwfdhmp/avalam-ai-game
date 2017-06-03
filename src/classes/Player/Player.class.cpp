@@ -79,40 +79,47 @@ int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 	mvt.apply(grille);
 
 	*/
-	
-	Mouvement move;
+Mouvement move;
 	int x_s, y_s, x_d, y_d;
 
-	std::vector<std::vector<int>> first;
-	std::vector<std::vector<int>> second;
+	std::vector<int> first;
+	std::vector<int> second;
+	std::vector<int> selection;
+	SDL_Event event;
 
-	int continuer = 1;
-    SDL_Event event;
-    
- 	if(playerDisplay != NULL)
- 		printf("Le joueur a un display\n");
+			
+	while(first.size() == 0 || second.size() == 0){
+		selection = playerDisplay->getSelect(grille);
+	if(selection.size() == 2){
+		printf("Taille de selection %d\n", selection.size());
+		printf("Select!!\n");
 
-	/*while(first.size() == 0 && second.size() == 0){
-		printf("HumanEvaluate\n");
 		if(first.size() == 0){
-			if(first.push_back(playerDisplay->getSelect(grille)));
-				printf("First : %d\n", first[0]);
-			else
-				printf("Probleme dans le getselect\n");
+			first.push_back(selection[0]);
+			first.push_back(selection[1]);
+			printf("first[0] : %d\n", first[0]);
+			printf("first[1] : %d\n", first[1]);
 		}
 		else{
-			if(second.push_back(playerDisplay->getSelect(grille)));
-				printf("Second %d\n", second[0]);
-			else printf("Probleme dans le getSelect\n");
+			second.push_back(selection[0]);
+			second.push_back(selection[1]);
+			printf("Second[0] %d\n", second[0]);
+			printf("second[1] : %d\n", second[1]);
 		}
 	}
+	else{
+		printf("Nothing selected\n");
+	}
+	
+	
+	}
+		if(move.init(first[0], first[1], second[0], second[1], grille) != -1){
+			move.apply(grille);
+			grille[first[0]][first[1]].selected = 0;
+			grille[second[0]][second[1]].selected = 0;
+		}
+	playerDisplay->printGrille(grille);
 
-	if(move.init(first[0], first[0], second[0], second[0], grille) != -1)
-		move.apply(grille);
-
-		grille[first[0]][first[1]].selected = 0;
-		grille[second[0]][second[1]].selected = 0;
-		playerDisplay->printGrille(grille);*/
 
 	return 0;
 }
@@ -121,16 +128,11 @@ int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
 	
 	switch(type) {
 		case PLAYER_TYPE_HUMAN:
-			printf("HumanEvaluate\n");
 			return HumanEvaluate(grille);
-			break;
 		case PLAYER_TYPE_IA:
-			printf("IAEvaluate\n");
 			return IAEvaluate(grille);
-			break;
 		default:
 			return HumanEvaluate(grille);
-			break;
 	}
 }
 
