@@ -217,12 +217,13 @@ int main(int argc, char const *argv[])
 	window->setIcon("ressources/img/chess.bmp"); //Icon init
 
   Display* menu = new Display(window);
-  menu->setBackground(window, "ressources/img/mock-menu.bmp");
+  /*menu->setBackground(window, "ressources/img/mock-menu.bmp");
   playBouton* p_bouton = new playBouton(menu->renderer, "ressources/img/Play_bouton.bmp", 200, 200, 310, 600);
-  GraphicComponent comp = *p_bouton;
+  GraphicComponent comp = (GraphicComponent)*p_bouton;
   printf("!main : %d %d\n", p_bouton->x, p_bouton->y);
+  printf("!main gc : %d %d\n", comp.x, comp.y);
   menu->addComponent(p_bouton);
-  menu->printComponents();
+  menu->printComponents();*/
   menu->update();
   SDL_Delay(3000);
 

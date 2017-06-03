@@ -22,12 +22,12 @@
             printf("Texture non cree\n");
     SDL_Rect position =  {_x, _y, width, height}; 
   
-        x = _x;
+       this-> x = _x;
         printf("X du bouton jouer : %d\n", x);
-        y = _y; 
+        this->y = _y; 
         printf("Y du bouton jouer : %d\n", y);
-        w = width;
-        h = height;
+        this->w = width;
+        this->h = height;
     }
     
     void playBouton::Onclick(){

@@ -79,20 +79,32 @@ int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 	mvt.apply(grille);
 
 	*/
+	
 	Mouvement move;
 	int x_s, y_s, x_d, y_d;
 
-	std::vector<int> first;
-	std::vector<int> second;
+	std::vector<std::vector<int>> first;
+	std::vector<std::vector<int>> second;
 
 	int continuer = 1;
     SDL_Event event;
- 
-	while(first.size() == 0 && second.size() == 0){
-		if(first.size() == 0)
-			first = playerDisplay->getSelect(grille);
-		else
-			second = playerDisplay->getSelect(grille);
+    
+ 	if(playerDisplay != NULL)
+ 		printf("Le joueur a un display\n");
+
+	/*while(first.size() == 0 && second.size() == 0){
+		printf("HumanEvaluate\n");
+		if(first.size() == 0){
+			if(first.push_back(playerDisplay->getSelect(grille)));
+				printf("First : %d\n", first[0]);
+			else
+				printf("Probleme dans le getselect\n");
+		}
+		else{
+			if(second.push_back(playerDisplay->getSelect(grille)));
+				printf("Second %d\n", second[0]);
+			else printf("Probleme dans le getSelect\n");
+		}
 	}
 
 	if(move.init(first[0], first[0], second[0], second[0], grille) != -1)
@@ -100,7 +112,8 @@ int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 
 		grille[first[0]][first[1]].selected = 0;
 		grille[second[0]][second[1]].selected = 0;
-		playerDisplay->printGrille(grille);
+		playerDisplay->printGrille(grille);*/
+
 	return 0;
 }
 
@@ -108,11 +121,16 @@ int Player::evaluate(Emplacement grille[TAILLE][TAILLE]) {
 	
 	switch(type) {
 		case PLAYER_TYPE_HUMAN:
+			printf("HumanEvaluate\n");
 			return HumanEvaluate(grille);
+			break;
 		case PLAYER_TYPE_IA:
+			printf("IAEvaluate\n");
 			return IAEvaluate(grille);
+			break;
 		default:
 			return HumanEvaluate(grille);
+			break;
 	}
 }
 

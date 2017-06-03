@@ -13,6 +13,7 @@
     {
 
         public:
+        int x, y, width, height;
 
         playBouton(SDL_Renderer *renderer, char* path, int _x, int _y, int width, int height); //class constructor
         ~playBouton();
