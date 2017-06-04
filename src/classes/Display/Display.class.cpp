@@ -18,7 +18,6 @@
 #include "../../config/constants.h"
 
 Display::Display(int set_x, int set_y, int set_width, int set_height, Window* window) {
-	components = (GraphicComponent**) malloc(sizeof(GraphicComponent*));
 	size = 0;
 	x = set_x;
 	y = set_y;
@@ -30,7 +29,6 @@ Display::Display(int set_x, int set_y, int set_width, int set_height, Window* wi
 };
 
 Display::Display(Window* window) {
-	components = (GraphicComponent**) malloc(sizeof(GraphicComponent*));
 	renderer = SDL_CreateRenderer(window->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(renderer == NULL)
 		printf("Erreur : Renderer non cree\n");
@@ -97,7 +95,7 @@ void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
 			pion.w = pion.h = PAWN_SIZE;
 			if(grille[i][j].valeur == 1) {
 				if(grille[i][j].selected == 1){
-					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255); //couleur verte
+					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255);
 					SDL_RenderFillRect(renderer, &pion);
 					sprintf(imageName, "ressources/img/gheight%d.bmp", grille[i][j].hauteur);
 
@@ -185,18 +183,18 @@ std::vector<int> Display::getSelect(Emplacement grille[TAILLE][TAILLE]){
 				grille[i][j].selected = 0;
 			}
 		}
-
 		if(click.button.button == SDL_BUTTON_LEFT)
 			grille[xClick][yClick].selected = 1;
 
 		if(click.button.button == SDL_BUTTON_RIGHT)
 			grille[xClick][yClick].selected = 0;
-	
+
 		printf("rep[0] : %d rep[1] : %d\n", rep[0], rep[1]);
 		printGrille(grille);
 
 		return rep;
 	}
+	return rep;
 }
 
 void Display::createmenu(){
@@ -335,11 +333,9 @@ GraphicComponent* Display::getTargeted(int mouse_x, int mouse_y) {
     }
 };*/
 
-	GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
-		components = (GraphicComponent**) realloc(components, sizeof(GraphicComponent*) * size + 1);
-		components[size] = componentToAdd;
-	//printf("Component [%d;%d] has been added to display [%d;%d] (%d:%d) [size : %d]\n", components[size]->x, components[size]->y, x, y, width, height, size);
-	return components[size++]; //size is incremented after he gets injected as index of array (post inc)
+		GraphicComponent* Display::addComponent(GraphicComponent* componentToAdd) {
+		components.push_back(componentToAdd);
+		//printf("Component [%d;%d] has been added to display [%d;%d] (%d:%d) [size : %d]\n", components[size]->x, components[size]->y, x, y, width, height, size);
+	return components[components.size()];
 };
-
 #endif
