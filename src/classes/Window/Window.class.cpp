@@ -37,4 +37,7 @@ void Window::setIcon(const char* pathToIcon) {
   	SDL_SetWindowIcon(window, icon);
 }
 
+void Window::destroyWindow(){
+	 SDL_DestroyWindow(window);
+}
 #endif

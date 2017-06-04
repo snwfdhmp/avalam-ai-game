@@ -25,7 +25,7 @@ public:
     int update(); //window update function, returns status
     //void handleEvent(Display* display);
     void setIcon(const char* pathToIcon); //set app window icon
-
+    void destroyWindow();
     //Display* addDisplay(Display* toAdd); //add Display to List, returns it
 };
 
