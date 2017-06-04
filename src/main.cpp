@@ -16,9 +16,12 @@
 
 using namespace std;
 
-int creategame(Display*, Emplacement grille[TAILLE][TAILLE]);
-void handleEvent(Display*);
+int createGame(Window *window, Display* game);
+void gameEvents(Window*, Display*);
+void initGrille(Emplacement grille[TAILLE][TAILLE]);
+bool isOver(Emplacement grille[TAILLE][TAILLE]);
 void onMouseOver(Display *, char*);
+
 
 /*
 void onMouseOver(Display *display, char *path){
@@ -28,7 +31,7 @@ void onMouseOver(Display *display, char *path){
     SDL_RenderPresent(display->renderer);
 }*/
 
-int loadMusic(){
+/*int loadMusic(){
   Mix_Music *music;
   music = Mix_LoadMUS("ressources/musics/name.wav");
 
@@ -38,7 +41,7 @@ if(music != NULL){
 }
   
   return -1;
-} 
+} */
 
 void initGrille(Emplacement grille[TAILLE][TAILLE]){
   int i,j;
@@ -48,13 +51,51 @@ void initGrille(Emplacement grille[TAILLE][TAILLE]){
     }
 }
 
-int creategame(Display* game, Emplacement grille[TAILLE][TAILLE]){
+int createGame(Window *window, Display* game){
+  
+  //Initialistion des joueurs
+  Player* player1 = new Player();
+  player1->init(game, 0, "Martin", PLAYER_TYPE_HUMAN);
+  Player* player2 = new Player();
+  player2->init(game, 1, "Landry", PLAYER_TYPE_IA);
+  Emplacement grille[TAILLE][TAILLE];
+
   initGrille(grille);
   APPLY_DEFAULT_EMPTY(grille);
   game->printGrille(grille);
+
+  while(isOver(grille) == false){
+    gameEvents(window, game);
+    while(player1->evaluate(grille) == -1);
+    game->printGrille(grille);
+    SDL_Delay(900);
+    while(player2->evaluate(grille) == -1);
+    game->printGrille(grille);
+  }
+
+  printf("FIN DU JEU!!\n");
+  int score1 = player1->getScore(grille);
+  int score2 = player2->getScore(grille);
+  printf("Le joueur 1 a fait %d et le joueur 2 a fait %d\n", score1, score2);
 }
 
-void handleEvent(Window* window, Display* menu){
+bool isOver(Emplacement grille[TAILLE][TAILLE]){
+Mouvement tmp;
+int x,y,k,l;
+  for (x = 0; x < TAILLE; ++x)
+    for (y = 0; y < TAILLE; ++y)
+      if(grille[x][y].valeur == 2)
+        continue;
+      else
+        for (k = -1; k <= 1; ++k)
+          for (l = -1; l <= 1; ++l)
+            if(tmp.init(x, y, x+l, y+k, grille) != -1)
+              return false;
+
+return true;
+}
+
+void gameEvents(Window* window, Display* menu){
   int continuer = 1;
     SDL_Event event;
       
@@ -88,8 +129,7 @@ void handleEvent(Window* window, Display* menu){
             }
             break;
         }
-        
-      }
+ }
         /*case SDL_MOUSEMOTION :
             if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 135 && event.motion.y <= 545){
               printf("Jouer over!\n");
@@ -116,52 +156,14 @@ void handleEvent(Window* window, Display* menu){
     }*/
 
 
-bool isOver(Emplacement grille[TAILLE][TAILLE]){
-Mouvement tmp;
-int x,y,k,l;
-  for (x = 0; x < TAILLE; ++x)
-    for (y = 0; y < TAILLE; ++y)
-      if(grille[x][y].valeur == 2)
-        continue;
-      else
-        for (k = -1; k <= 1; ++k)
-          for (l = -1; l <= 1; ++l)
-            if(tmp.init(x, y, x+l, y+k, grille) != -1)
-              return false;
-
-return true;
-}
-
 int main(int argc, char const *argv[])
 {
   //Creation de la fenetre
 	Window* window = new Window("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1012, 800, SDL_WINDOW_SHOWN); //Window init
 	window->setIcon("ressources/img/chess.bmp"); //Icon init
   Display* game = new Display(window);
-
-	//Initialistion des joueurs
-  Player* player1 = new Player();
-  player1->init(game, 0, "Martin", PLAYER_TYPE_HUMAN);
-  Player* player2 = new Player();
-  player2->init(game, 1, "Landry", PLAYER_TYPE_IA);
-
-  Emplacement grille[TAILLE][TAILLE];
-  creategame(game, grille);
-
-  while(isOver(grille) == false){
-    while(player1->evaluate(grille) == -1);
-    game->printGrille(grille);
-    SDL_Delay(900);
-    while(player2->evaluate(grille) == -1);
-    game->printGrille(grille);
-    
-  }
-
-  printf("FIN DU JEU!!\n");
-  int score1 = player1->getScore(grille);
-  int score2 = player2->getScore(grille);
-  printf("Le joueur 1 a fait %d et le joueur 2 a fait %d\n", score1, score2);
+  
+  createGame(window, game);
  
-  while(true) handleEvent(window, game);
 	return 0;
 }
