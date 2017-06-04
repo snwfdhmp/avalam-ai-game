@@ -1,0 +1,9 @@
+Tutorial : 
+
+Avalam est un jeu de strategie qui se joue a 2 joueurs maximum.
+Le but du jeu est de pouvoir, en empilant les pions avoir le plus de pion possible de notre couleur.
+Ici c'est tres simple. Vous selectionez un pion grace a un clique gauche et vous pouvez le deplacer n'importe ou a une case de celui-ci.
+Si vous souhaitez annulez la selection faite un clique droit.
+
+Conception du projet : 
+Notre volonte lors de la conception de ce projet etais de nous rapprocher le plus possible de projets open-source en laissant la possibilé a d'autres devellopeurs de facilement modifer le projet d'ou la creation de differentes pour chaques objets utilisé. Vous avez acces aussi au differentes etpaes de la conception de notre projet sur notre Github : https://github.com/snwfdhmp/avalam-ai-game.

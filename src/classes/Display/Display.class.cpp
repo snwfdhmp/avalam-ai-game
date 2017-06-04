@@ -185,8 +185,13 @@ std::vector<int> Display::getSelect(Emplacement grille[TAILLE][TAILLE]){
 				grille[i][j].selected = 0;
 			}
 		}
-		grille[xClick][yClick].selected = 1;
 
+		if(click.button.button == SDL_BUTTON_LEFT)
+			grille[xClick][yClick].selected = 1;
+
+		if(click.button.button == SDL_BUTTON_RIGHT)
+			grille[xClick][yClick].selected = 0;
+	
 		printf("rep[0] : %d rep[1] : %d\n", rep[0], rep[1]);
 		printGrille(grille);
 
