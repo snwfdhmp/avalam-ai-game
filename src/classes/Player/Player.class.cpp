@@ -77,49 +77,45 @@ int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 		return -1;
 
 	mvt.apply(grille);
-
 	*/
-Mouvement move;
-	int x_s, y_s, x_d, y_d;
 
+	Mouvement move;
 	std::vector<int> first;
 	std::vector<int> second;
 	std::vector<int> selection;
-	SDL_Event event;
-
-			
+		
 	while(first.size() == 0 || second.size() == 0){
+
 		selection = playerDisplay->getSelect(grille);
-	if(selection.size() == 2){
-		printf("Taille de selection %d\n", selection.size());
-		printf("Select!!\n");
 
-		if(first.size() == 0){
-			first.push_back(selection[0]);
-			first.push_back(selection[1]);
-			printf("first[0] : %d\n", first[0]);
-			printf("first[1] : %d\n", first[1]);
-		}
-		else{
-			second.push_back(selection[0]);
-			second.push_back(selection[1]);
-			printf("Second[0] %d\n", second[0]);
-			printf("second[1] : %d\n", second[1]);
+		if(selection.size() == 2){
+
+			if(first.size() == 0){
+				first.push_back(selection[0]);
+				first.push_back(selection[1]);
+				printf("first[0] : %d\n", first[0]);
+				printf("first[1] : %d\n", first[1]);
+			}
+
+			else{
+				second.push_back(selection[0]);
+				second.push_back(selection[1]);
+				printf("Second[0] %d\n", second[0]);
+				printf("second[1] : %d\n", second[1]);
+			}
 		}
 	}
-	else{
-		printf("Nothing selected\n");
+
+	if(move.init(first[0], first[1], second[0], second[1], grille) != -1){
+		move.apply(grille);
+		grille[first[0]][first[1]].selected = 0;
+		grille[second[0]][second[1]].selected = 0;
 	}
-	
-	
+	else{ 
+		printf("Uncorrect move\n"); 
+		return -1;
 	}
-		if(move.init(first[0], first[1], second[0], second[1], grille) != -1){
-			move.apply(grille);
-			grille[first[0]][first[1]].selected = 0;
-			grille[second[0]][second[1]].selected = 0;
-		}
 	playerDisplay->printGrille(grille);
-
 
 	return 0;
 }

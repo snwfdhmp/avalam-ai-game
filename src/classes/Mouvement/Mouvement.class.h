@@ -23,6 +23,8 @@ public:
 
 	int apply(Emplacement grille[TAILLE][TAILLE]); //applique le mouvement
 
+	// bool isOver(Emplacement grille[TAILLE][TAILLE]);
+
 };
 
 #endif

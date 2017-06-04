@@ -97,7 +97,7 @@ void Display::printGrille(Emplacement grille[TAILLE][TAILLE]){
 			pion.w = pion.h = PAWN_SIZE;
 			if(grille[i][j].valeur == 1) {
 				if(grille[i][j].selected == 1){
-					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255);
+					SDL_SetRenderDrawColor(renderer, 33, 204, 9, 255); //couleur verte
 					SDL_RenderFillRect(renderer, &pion);
 					sprintf(imageName, "ressources/img/gheight%d.bmp", grille[i][j].hauteur);
 

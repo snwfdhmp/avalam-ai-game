@@ -23,6 +23,4 @@ bool Emplacement::isVide() {
 	return hauteur==0;
 }
 
-
-
 #endif
