@@ -204,7 +204,6 @@ else{
     SDL_WaitEvent(&event);
     switch(event.type){
       case SDL_MOUSEMOTION : 
-        printf("X : %d Y : %d\n", event.motion.x, event.motion.y);
         break;
         case SDL_MOUSEBUTTONUP : 
           if(event.motion.x >= 370 && event.motion.x <= 640 && event.motion.y <= 385 && event.motion.y <= 480){
