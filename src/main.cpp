@@ -17,19 +17,20 @@
 
 using namespace std;
 
+int createCredits(Window* window);
 int createGame(int type1 , int type2);
 int createMenu();
 int createRules(Window* window);
 void gameEvents(Window*, Display*);
 void initGrille(Emplacement grille[TAILLE][TAILLE]);
 bool isOver(Emplacement grille[TAILLE][TAILLE]);
-GraphicComponent* onMouseOver(Display *, char*);
+GraphicComponent* loadImage(Display *display, char *path, int x, int y);
 
 
 
-GraphicComponent* onMouseOver(Display *display, char *path){
+GraphicComponent* loadImage(Display *display, char *path, int x = 0, int y = 0){
     GraphicComponent* gc_over = new GraphicComponent(display->renderer, path);
-    SDL_Rect position = {0, 0, gc_over->width, gc_over->height};
+    SDL_Rect position = {x, y, gc_over->width, gc_over->height};
     SDL_RenderCopy(display->renderer, gc_over->texture, NULL, &position);
     SDL_RenderPresent(display->renderer);
 
@@ -46,7 +47,7 @@ void initGrille(Emplacement grille[TAILLE][TAILLE]){
 
 int createMenu(){
 
-  int continuer = 1;
+  bool launch = false;
   SDL_Event event;
   Window* window = new Window("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 561, SDL_WINDOW_SHOWN); //Window init
   window->setIcon("ressources/img/chess.bmp"); //Icon init
@@ -60,50 +61,56 @@ int createMenu(){
   SDL_RenderCopy(menu->renderer, menuText, NULL, &position);
   SDL_RenderPresent(menu->renderer);
   
-  while(continuer){
+  while(!launch){
     SDL_WaitEvent(&event);
     
     switch(event.type){
 
-      case SDL_MOUSEMOTION : 
+      case SDL_MOUSEMOTION :
+
         if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 130 && event.motion.y <= 545){
-              onMouseOver(menu, "ressources/img/jouer-over.bmp");
+              loadImage(menu, "ressources/img/jouer-over.bmp");
             }
-            else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 135 && event.motion.y <= 315){
-              onMouseOver(menu, "ressources/img/options-over.bmp");
+            else if((event.motion.x >= 510 && event.motion.x <= 806) && event.motion.y >= 125 && event.motion.y <= 310){
+              loadImage(menu, "ressources/img/options-over.bmp");
             }
-            else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 330 && event.motion.y <= 435){
-              onMouseOver(menu, "ressources/img/themes-over.bmp");
+            else if((event.motion.x >= 510 && event.motion.x <= 806) && event.motion.y >= 320 && event.motion.y <= 420){
+              loadImage(menu, "ressources/img/themes-over.bmp");
             }
-            else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 445 && event.motion.y <= 495){
-              onMouseOver(menu, "ressources/img/rules-over.bmp");
+            else if((event.motion.x >= 510 && event.motion.x <= 806) && event.motion.y >= 435 && event.motion.y <= 480){
+              loadImage(menu, "ressources/img/rules-over.bmp");
             }
-            else if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 505 && event.motion.y <= 550){
-              onMouseOver(menu, "ressources/img/about-over.bmp");
+            else if((event.motion.x >= 510 && event.motion.x <= 806) && event.motion.y >= 490 && event.motion.y <= 535){
+              loadImage(menu, "ressources/img/about-over.bmp");
             }
-            else onMouseOver(menu, "ressources/img/menu.bmp");
+            else loadImage(menu, "ressources/img/menu.bmp");
             break;
 
             case SDL_MOUSEBUTTONUP :
                if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 130 && event.motion.y <= 260){
-                  continuer = 0;
+                  launch = false;
                   window->destroyWindow();
                   createGame(PLAYER_TYPE_HUMAN, PLAYER_TYPE_HUMAN);
             }
              if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 270 && event.motion.y <= 400){
-                  continuer = 0;
+                  launch = false;
                   window->destroyWindow();
                   createGame(PLAYER_TYPE_HUMAN, PLAYER_TYPE_IA);
               }
               if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 410 && event.motion.y <= 545){
-                  continuer = 0;
+                  launch = false;
                   window->destroyWindow();
                   createGame(PLAYER_TYPE_IA, PLAYER_TYPE_IA);
             }
             if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 445 && event.motion.y <= 495){
-                  continuer = 0;
+                  launch = false;
                   menu->destroyRenderer();
                   createRules(window);
+            }
+            if((event.motion.x >= 510 && event.motion.x <= 806) && event.motion.y >= 490 && event.motion.y <= 535){
+              launch = false;
+              menu->destroyRenderer();
+              createCredits(window);
             }
             break;
       }
@@ -116,6 +123,8 @@ int createGame(int type1, int type2){
   window->setIcon("ressources/img/chess.bmp"); //Icon init
 
   Display* game = new Display(window);
+  SDL_Event event;
+  bool leave = false;
   //Initialistion des joueurs
   Player* player1 = new Player();
   player1->init(game, 0, "Martin", type1);
@@ -162,6 +171,21 @@ else{
   printf("FIN DU JEU!!\n");
   int score1 = player1->getScore(grille);
   int score2 = player2->getScore(grille);
+
+  /*if(score1 > score2){
+    loadImage(game, "ressources/img/redwon.bmp", 500, 500);
+  }
+  if(score2 > score1)
+    loadImage(game, "ressources/img/yellowon.bmp", 500, 500);
+
+  while(!leave){
+    switch(event.type){
+      case SDL_MOUSEMOTION : 
+        printf("X : %d Y : %d\n", event.motion.x, event.motion.y);
+        break;
+    }
+  }*/
+
   printf("Le joueur 1 a fait %d et le joueur 2 a fait %d\n", score1, score2);
   window->destroyWindow();
   createMenu();
@@ -190,7 +214,7 @@ int createRules(Window* window){
   char rules[7];
 
   sprintf(rules, "ressources/img/rules%d.bmp", num);
-  GraphicComponent* page =  onMouseOver(display, rules);
+  GraphicComponent* page =  loadImage(display, rules);
   
   while(num < 7){
     SDL_WaitEvent(&event);
@@ -204,7 +228,7 @@ int createRules(Window* window){
         if(num <= 0)
           num = 0;
         sprintf(rules, "ressources/img/rules%d.bmp", num);
-        GraphicComponent* page =  onMouseOver(display, rules);
+        GraphicComponent* page =  loadImage(display, rules);
       }
 
       if(event.key.keysym.sym == SDLK_RIGHT){
@@ -213,12 +237,35 @@ int createRules(Window* window){
           if(num >= 6)
           num = 6;
         sprintf(rules, "ressources/img/rules%d.bmp", num);
-        GraphicComponent* page =  onMouseOver(display, rules);
+        GraphicComponent* page =  loadImage(display, rules);
       }
       if(event.key.keysym.sym == SDLK_ESCAPE){
         window->destroyWindow();
         createMenu();
       }
+    }
+  }
+}
+
+int createCredits(Window* window){
+  SDL_Event event;
+  Display* credits = new Display(window);
+  loadImage(credits, "ressources/img/credits.bmp");
+  bool leave = false;
+
+  while(!leave){
+
+    SDL_WaitEvent(&event);
+
+    switch(event.type){
+      case SDL_MOUSEBUTTONUP :
+        if(event.motion.x < 120 && event.motion.y >= 460 && event.motion.y <= 500){
+          leave = true;
+          credits->destroyRenderer();
+          window->destroyWindow();
+          createMenu();
+          break;
+        }
     }
   }
 }
@@ -261,7 +308,15 @@ void gameEvents(Window* window, Display* menu){
   
 int main(int argc, char const *argv[])
 {
-  //Creation de la fenetre
+
+  Window* intro = new Window("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1243, 700, SDL_WINDOW_SHOWN);
+  intro->setIcon("ressources/img/chess.bmp");
+
+  Display* introDisp = new Display(intro);
+  loadImage(introDisp, "ressources/img/intro.bmp");
+  SDL_Delay(5000);
+  introDisp->destroyRenderer();
+  intro->destroyWindow();
   createMenu();
   //createGame();
  

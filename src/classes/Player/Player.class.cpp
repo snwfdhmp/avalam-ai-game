@@ -83,11 +83,12 @@ int Player::HumanEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 	std::vector<int> first;
 	std::vector<int> second;
 	std::vector<int> selection;
+	SDL_Event event;
 		
 	while(first.size() == 0 || second.size() == 0){
-
+		SDL_WaitEvent(&event);
 		selection = playerDisplay->getSelect(grille);
-
+	
 		if(selection.size() == 2){
 
 			if(first.size() == 0){
