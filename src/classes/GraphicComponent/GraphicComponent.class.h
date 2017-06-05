@@ -27,8 +27,8 @@ public:
 	
 	//void initTexture(SDL_Renderer *renderer, SDL_Surface *surface);
 	
-	void destroyTexture(SDL_Texture *texture);
-	void destroySurface(SDL_Surface *surface);
+	void destroyTexture();
+	void destroySurface();
 	//void initSurface(std::string path);
 	//GraphicComponent::destroyTexture(SDL_Texture *texture);
 	//GraphicComponent::destroySurfacr(SDL_Surface *surface);

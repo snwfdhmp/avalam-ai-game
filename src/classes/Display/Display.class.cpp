@@ -36,7 +36,7 @@ Display::Display(Window* window) {
 
 Display::~Display() {};
 
-Display* destroyRenderer(SDL_Renderer *renderer){
+void Display::destroyRenderer(){
 	SDL_DestroyRenderer(renderer);
 }
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <pthread.h>
 #include "classes/Emplacement/Emplacement.class.h"
 #include "classes/Mouvement/Mouvement.class.h"
@@ -18,31 +19,22 @@ using namespace std;
 
 int createGame(int type1 , int type2);
 int createMenu();
+int createRules(Window* window);
 void gameEvents(Window*, Display*);
 void initGrille(Emplacement grille[TAILLE][TAILLE]);
 bool isOver(Emplacement grille[TAILLE][TAILLE]);
-void onMouseOver(Display *, char*);
+GraphicComponent* onMouseOver(Display *, char*);
 
 
 
-void onMouseOver(Display *display, char *path){
+GraphicComponent* onMouseOver(Display *display, char *path){
     GraphicComponent* gc_over = new GraphicComponent(display->renderer, path);
     SDL_Rect position = {0, 0, gc_over->width, gc_over->height};
     SDL_RenderCopy(display->renderer, gc_over->texture, NULL, &position);
     SDL_RenderPresent(display->renderer);
-}
 
-/*int loadMusic(){
-  Mix_Music *music;
-  music = Mix_LoadMUS("ressources/musics/name.wav");
-
-if(music != NULL){ 
-  Mix_PlayMusic(music, -1);
-  return 0;
+    return gc_over;
 }
-  
-  return -1;
-} */
 
 void initGrille(Emplacement grille[TAILLE][TAILLE]){
   int i,j;
@@ -108,6 +100,12 @@ int createMenu(){
                   window->destroyWindow();
                   createGame(PLAYER_TYPE_IA, PLAYER_TYPE_IA);
             }
+            if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 445 && event.motion.y <= 495){
+                  continuer = 0;
+                  menu->destroyRenderer();
+                  createRules(window);
+            }
+            break;
       }
   }
 }
@@ -129,14 +127,37 @@ int createGame(int type1, int type2){
   APPLY_DEFAULT_EMPTY(grille);
   game->printGrille(grille);
 
-  while(isOver(grille) == false){
-    gameEvents(window, game);
-    while(player1->evaluate(grille) == -1);
-    game->printGrille(grille);
-    SDL_Delay(900);
-    while(player2->evaluate(grille) == -1);
-    game->printGrille(grille);
+  if(type1 == PLAYER_TYPE_IA && type2 == PLAYER_TYPE_IA){
+    while(isOver(grille) == false){
+      gameEvents(window, game);
+      SDL_Delay(1500);
+      while(player1->evaluate(grille) == -1);
+      game->printGrille(grille);
+      SDL_Delay(1500);
+      while(player2->evaluate(grille) == -1);
+      game->printGrille(grille);
+    }
   }
+
+  else if(type1 == PLAYER_TYPE_HUMAN && type2 == PLAYER_TYPE_IA){
+    while(isOver(grille) == false){
+      gameEvents(window, game);
+      while(player1->evaluate(grille) == -1);
+      game->printGrille(grille);
+      SDL_Delay(900);
+      while(player2->evaluate(grille) == -1);
+      game->printGrille(grille);
+  }
+}
+else{
+   while(isOver(grille) == false){
+      gameEvents(window, game);
+      while(player1->evaluate(grille) == -1);
+      game->printGrille(grille);
+      while(player2->evaluate(grille) == -1);
+      game->printGrille(grille);
+  }
+}
 
   printf("FIN DU JEU!!\n");
   int score1 = player1->getScore(grille);
@@ -160,6 +181,46 @@ int x,y,k,l;
               return false;
 
 return true;
+}
+
+int createRules(Window* window){
+  Display* display = new Display(window);
+  SDL_Event event;
+  int num = 1;
+  char rules[7];
+
+  sprintf(rules, "ressources/img/rules%d.bmp", num);
+  GraphicComponent* page =  onMouseOver(display, rules);
+  
+  while(num < 7){
+    SDL_WaitEvent(&event);
+    if(event.type == SDL_KEYDOWN){
+      page->destroyTexture();
+      page->destroySurface();
+
+      if(event.key.keysym.sym == SDLK_LEFT){
+        printf("left\n");
+        num--;
+        if(num <= 0)
+          num = 0;
+        sprintf(rules, "ressources/img/rules%d.bmp", num);
+        GraphicComponent* page =  onMouseOver(display, rules);
+      }
+
+      if(event.key.keysym.sym == SDLK_RIGHT){
+        printf("right\n");
+        num++;
+          if(num >= 6)
+          num = 6;
+        sprintf(rules, "ressources/img/rules%d.bmp", num);
+        GraphicComponent* page =  onMouseOver(display, rules);
+      }
+      if(event.key.keysym.sym == SDLK_ESCAPE){
+        window->destroyWindow();
+        createMenu();
+      }
+    }
+  }
 }
 
 void gameEvents(Window* window, Display* menu){

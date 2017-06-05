@@ -189,4 +189,4 @@ Le projet est divisé en plusieurs répertoires :
 
 - Compilation UNIX : <code>g++ src/classes/\*/\*.class.cpp src/main.cpp -lSDL2</code>
 - Compilation UNIX avec [duck](http://github.com/snwfdhmp/duck) : <code>duck compile dev sdl</code>
-- Compilation windows : <code>g++ -I.\include -Lsrc\lib src/classes/*/*.class.cpp src/main.cpp -lSDL2 -lSDL2main -lSDL2.dll -std=c++11</code>
+- Compilation windows : <code>g++ -w -I.\include -Lsrc\lib src/classes/*/*.class.cpp src/main.cpp -lSDL2 -lSDL2main -lSDL2.dll -std=c++11</code>

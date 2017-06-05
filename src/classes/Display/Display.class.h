@@ -25,7 +25,7 @@ public:
 	~Display();
 
 	Display* initWindow();
-	Display* destroyRenderer(SDL_Renderer *renderer);
+	void destroyRenderer();
 	int update();
 	void createmenu();
 	void handleEvent(Display *display);

@@ -42,11 +42,11 @@ GraphicComponent::GraphicComponent(SDL_Renderer *renderer, char* path, int _x, i
 
 GraphicComponent::~GraphicComponent(){};
 
-void destroyTexture(SDL_Texture *texture){
+void GraphicComponent::destroyTexture(){
 	SDL_DestroyTexture(texture);
 }
 
-void destroySurface(SDL_Surface *surface){
+void GraphicComponent::destroySurface(){
 	SDL_FreeSurface(surface);
 }
 
