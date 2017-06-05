@@ -88,27 +88,27 @@ int createMenu(){
 
             case SDL_MOUSEBUTTONUP :
                if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 130 && event.motion.y <= 260){
-                  launch = false;
+                  launch = true;
                   window->destroyWindow();
                   createGame(PLAYER_TYPE_HUMAN, PLAYER_TYPE_HUMAN);
             }
              if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 270 && event.motion.y <= 400){
-                  launch = false;
+                  launch = true;
                   window->destroyWindow();
                   createGame(PLAYER_TYPE_HUMAN, PLAYER_TYPE_IA);
               }
               if((event.motion.x >= 200 && event.motion.x <= 500) && event.motion.y >= 410 && event.motion.y <= 545){
-                  launch = false;
+                  launch = true;
                   window->destroyWindow();
                   createGame(PLAYER_TYPE_IA, PLAYER_TYPE_IA);
             }
             if((event.motion.x >= 515 && event.motion.x <= 815) && event.motion.y >= 445 && event.motion.y <= 495){
-                  launch = false;
+                  launch = true;
                   menu->destroyRenderer();
                   createRules(window);
             }
             if((event.motion.x >= 510 && event.motion.x <= 806) && event.motion.y >= 490 && event.motion.y <= 535){
-              launch = false;
+              launch = true;
               menu->destroyRenderer();
               createCredits(window);
             }
@@ -139,10 +139,10 @@ int createGame(int type1, int type2){
   if(type1 == PLAYER_TYPE_IA && type2 == PLAYER_TYPE_IA){
     while(isOver(grille) == false){
       gameEvents(window, game);
-      SDL_Delay(1500);
+      //SDL_Delay(1500);
       while(player1->evaluate(grille) == -1);
       game->printGrille(grille);
-      SDL_Delay(1500);
+      //SDL_Delay(1500);
       while(player2->evaluate(grille) == -1);
       game->printGrille(grille);
     }
@@ -158,6 +158,7 @@ int createGame(int type1, int type2){
       game->printGrille(grille);
   }
 }
+
 else{
    while(isOver(grille) == false){
       gameEvents(window, game);
@@ -171,24 +172,48 @@ else{
   printf("FIN DU JEU!!\n");
   int score1 = player1->getScore(grille);
   int score2 = player2->getScore(grille);
+  printf("Le joueur 1 a fait %d et le joueur 2 a fait %d\n", score1, score2);
 
-  /*if(score1 > score2){
-    loadImage(game, "ressources/img/redwon.bmp", 500, 500);
+  if(score1 > score2){
+    SDL_Surface* gameSurf = SDL_LoadBMP("ressources/img/redwon.bmp");
+    SDL_Texture* gameText = SDL_CreateTextureFromSurface(game->renderer, gameSurf);
+    SDL_Rect position = {270, 300, gameSurf->w, gameSurf->h};
+    
+    SDL_RenderCopy(game->renderer, gameText, NULL, &position);
+    SDL_RenderPresent(game->renderer);
   }
-  if(score2 > score1)
-    loadImage(game, "ressources/img/yellowon.bmp", 500, 500);
 
-  while(!leave){
+  if(score2 > score1){
+    SDL_Surface* gameSurf = SDL_LoadBMP("ressources/img/yellowon.bmp");
+    SDL_Texture* gameText = SDL_CreateTextureFromSurface(game->renderer, gameSurf);
+    SDL_Rect position = {270, 300, gameSurf->w, gameSurf->h};
+    
+    SDL_RenderCopy(game->renderer, gameText, NULL, &position);
+    SDL_RenderPresent(game->renderer);
+  }
+  if(score1 == score2){
+     SDL_Surface* gameSurf = SDL_LoadBMP("ressources/img/egalite.bmp");
+    SDL_Texture* gameText = SDL_CreateTextureFromSurface(game->renderer, gameSurf);
+    SDL_Rect position = {270, 300, gameSurf->w, gameSurf->h};
+    
+    SDL_RenderCopy(game->renderer, gameText, NULL, &position);
+    SDL_RenderPresent(game->renderer);
+  }
+
+  while(leave == false){
+    SDL_WaitEvent(&event);
     switch(event.type){
       case SDL_MOUSEMOTION : 
         printf("X : %d Y : %d\n", event.motion.x, event.motion.y);
         break;
+        case SDL_MOUSEBUTTONUP : 
+          if(event.motion.x >= 370 && event.motion.x <= 640 && event.motion.y <= 385 && event.motion.y <= 480){
+            leave = true;
+            window->destroyWindow();
+            createMenu();
+          }
     }
-  }*/
-
-  printf("Le joueur 1 a fait %d et le joueur 2 a fait %d\n", score1, score2);
-  window->destroyWindow();
-  createMenu();
+  }
 }
 
 bool isOver(Emplacement grille[TAILLE][TAILLE]){
@@ -223,7 +248,6 @@ int createRules(Window* window){
       page->destroySurface();
 
       if(event.key.keysym.sym == SDLK_LEFT){
-        printf("left\n");
         num--;
         if(num <= 0)
           num = 0;
@@ -232,8 +256,7 @@ int createRules(Window* window){
       }
 
       if(event.key.keysym.sym == SDLK_RIGHT){
-        printf("right\n");
-        num++;
+          num++;
           if(num >= 6)
           num = 6;
         sprintf(rules, "ressources/img/rules%d.bmp", num);
@@ -309,7 +332,7 @@ void gameEvents(Window* window, Display* menu){
 int main(int argc, char const *argv[])
 {
 
-  Window* intro = new Window("Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1243, 700, SDL_WINDOW_SHOWN);
+  Window* intro = new Window("  Welcome in Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1243, 700, SDL_WINDOW_SHOWN);
   intro->setIcon("ressources/img/chess.bmp");
 
   Display* introDisp = new Display(intro);
