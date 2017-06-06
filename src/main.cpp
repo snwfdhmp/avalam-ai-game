@@ -21,7 +21,6 @@ int createCredits(Window* window);
 int createGame(int type1 , int type2);
 int createMenu();
 int createRules(Window* window);
-void gameEvents(Window*, SDL_Event);
 void initGrille(Emplacement grille[TAILLE][TAILLE]);
 bool isOver(Emplacement grille[TAILLE][TAILLE]);
 GraphicComponent* loadImage(Display *display, char *path, int x, int y);
@@ -143,7 +142,6 @@ int createGame(int type1, int type2){
 
   if(type1 == PLAYER_TYPE_IA && type2 == PLAYER_TYPE_IA){
     while(isOver(grille) == false){
-      //gameEvents(window, event);
       SDL_Delay(1500);
       while(player1->evaluate(grille) == -1);
       game->printGrille(grille);
@@ -155,7 +153,6 @@ int createGame(int type1, int type2){
 
   else if(type1 == PLAYER_TYPE_HUMAN && type2 == PLAYER_TYPE_IA){
     while(isOver(grille) == false){
-      //gameEvents(window, event);
       while(player1->evaluate(grille) == -1);
       game->printGrille(grille);
       SDL_Delay(900);
@@ -166,7 +163,6 @@ int createGame(int type1, int type2){
 
 else{
    while(isOver(grille) == false){
-      //gameEvents(window, event);
       while(player1->evaluate(grille) == -1);
       game->printGrille(grille);
       while(player2->evaluate(grille) == -1);
@@ -303,52 +299,18 @@ int createCredits(Window* window){
     }
   }
 }
-
-void gameEvents(Window* window, SDL_Event event){
-  int continuer = 1;
-    
-      
-        SDL_WaitEvent(&event);
-        switch(event.type)
-        {
-            //Si il appuie sur la croix on ferme
-            case SDL_QUIT:
-                printf("Quitter\n");
-                window->destroyWindow();
-                SDL_Quit(); 
-                break;
-            
-            case SDL_KEYDOWN:
-            switch (event.key.keysym.sym)
-            {
-                //SI on appuie sur echap ou q on save et on quitte..
-                case SDLK_ESCAPE: 
-                    //save();
-                    printf("Quitter\n");
-                    window->destroyWindow();
-                    SDL_Quit(); 
-                    continuer = 0;
-                    break;
-                case SDLK_q : 
-                  //save();
-                  printf("Quitter\n");
-                  window->destroyWindow();
-                  SDL_Quit(); 
-                  break;
-            }
-            break;
-        }
- }
   
 int main(int argc, char const *argv[])
 {
-
   Window* intro = new Window("  Welcome in Avalam by Joly and Monga", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1243, 700, SDL_WINDOW_SHOWN);
   intro->setIcon("ressources/img/chess.bmp");
 
   Display* introDisp = new Display(intro);
-  loadImage(introDisp, "ressources/img/intro.bmp");
+  GraphicComponent* menuImage =  loadImage(introDisp, "ressources/img/intro.bmp");
   SDL_Delay(5000);
+  
+  menuImage->destroySurface();
+  menuImage->destroyTexture();
   introDisp->destroyRenderer();
   intro->destroyWindow();
   createMenu();

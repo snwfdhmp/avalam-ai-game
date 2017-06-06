@@ -189,4 +189,4 @@ Le projet est divisé en plusieurs répertoires :
 
 - Compilation UNIX : <code>g++ src/classes/\*/\*.class.cpp src/main.cpp -lSDL2</code>
 - Compilation UNIX avec [duck](http://github.com/snwfdhmp/duck) : <code>duck compile dev sdl</code>
-- Compilation windows : <code>g++ -w -I.\include -Lsrc\lib src/classes/*/*.class.cpp src/main.cpp -lSDL2 -lSDL2main -lSDL2.dll -lmingw32 -std=c++11</code>
+- Compilation windows : <code>g++ -w -I.\include -Lsrc\lib src/classes/Display/Display.class.cpp  src/classes/Emplacement/Emplacement.class.cpp src/classes/GameInstance/GameInstance.class.cpp src/classes/GraphicComponent/GraphicComponent.class.cpp src/classes/Mouvement/Mouvement.class.cpp src/classes/MovePlan/MovePlan.class.cpp src/classes/Player/Player.class.cpp src/classes/Window/Window.class.cpp src/main.cpp -lSDL2 -lSDL2main -lSDL2.dll -lmingw32 -std=c++11 -static-libgcc -static-libstdc++</code>
