@@ -21,7 +21,7 @@ int createCredits(Window* window);
 int createGame(int type1 , int type2);
 int createMenu();
 int createRules(Window* window);
-void gameEvents(Window*, Display*);
+void gameEvents(Window*, SDL_Event);
 void initGrille(Emplacement grille[TAILLE][TAILLE]);
 bool isOver(Emplacement grille[TAILLE][TAILLE]);
 GraphicComponent* loadImage(Display *display, char *path, int x, int y);
@@ -113,7 +113,12 @@ int createMenu(){
               createCredits(window);
             }
             break;
-      }
+
+           case SDL_QUIT : 
+                window->destroyWindow();
+                SDL_Quit();
+          break;
+        }
   }
 }
 
@@ -138,11 +143,11 @@ int createGame(int type1, int type2){
 
   if(type1 == PLAYER_TYPE_IA && type2 == PLAYER_TYPE_IA){
     while(isOver(grille) == false){
-      gameEvents(window, game);
-      //SDL_Delay(1500);
+      //gameEvents(window, event);
+      SDL_Delay(1500);
       while(player1->evaluate(grille) == -1);
       game->printGrille(grille);
-      //SDL_Delay(1500);
+      SDL_Delay(1500);
       while(player2->evaluate(grille) == -1);
       game->printGrille(grille);
     }
@@ -150,7 +155,7 @@ int createGame(int type1, int type2){
 
   else if(type1 == PLAYER_TYPE_HUMAN && type2 == PLAYER_TYPE_IA){
     while(isOver(grille) == false){
-      gameEvents(window, game);
+      //gameEvents(window, event);
       while(player1->evaluate(grille) == -1);
       game->printGrille(grille);
       SDL_Delay(900);
@@ -161,7 +166,7 @@ int createGame(int type1, int type2){
 
 else{
    while(isOver(grille) == false){
-      gameEvents(window, game);
+      //gameEvents(window, event);
       while(player1->evaluate(grille) == -1);
       game->printGrille(grille);
       while(player2->evaluate(grille) == -1);
@@ -211,6 +216,13 @@ else{
             window->destroyWindow();
             createMenu();
           }
+          break;
+
+          case SDL_QUIT : 
+                window->destroyWindow();
+                SDL_Quit();
+          break;
+
     }
   }
 }
@@ -281,7 +293,7 @@ int createCredits(Window* window){
 
     switch(event.type){
       case SDL_MOUSEBUTTONUP :
-        if(event.motion.x < 120 && event.motion.y >= 460 && event.motion.y <= 500){
+        if(event.motion.x < 120 && event.motion.y >= 460 && event.motion.y <= 580){
           leave = true;
           credits->destroyRenderer();
           window->destroyWindow();
@@ -292,9 +304,9 @@ int createCredits(Window* window){
   }
 }
 
-void gameEvents(Window* window, Display* menu){
+void gameEvents(Window* window, SDL_Event event){
   int continuer = 1;
-    SDL_Event event;
+    
       
         SDL_WaitEvent(&event);
         switch(event.type)
