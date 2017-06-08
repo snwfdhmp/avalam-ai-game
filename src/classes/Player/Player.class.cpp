@@ -149,7 +149,7 @@ int Player::IAEvaluate(Emplacement grille[TAILLE][TAILLE]) {
 							bestmove.init(x, y, x+l, y+k, team, grille);
 
 						bestmove.calcScore(grille);
-						if(bestmove.score == -1) return -1;
+						if(bestmove.score == -1) return -2;
 						bestmove.mvt.apply(grille);
 						return 0;
 	}
