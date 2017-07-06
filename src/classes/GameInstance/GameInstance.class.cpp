@@ -2,8 +2,6 @@
 #define GAMEINSTANCE_CLASS_CPP
 
 #include <stdio.h>
-#include <pthread.h>
-
 #include "../Mouvement/Mouvement.class.h"
 #include "../MovePlan/MovePlan.class.h"
 #include "../Display/Display.class.h"

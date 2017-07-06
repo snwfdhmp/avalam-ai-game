@@ -2,9 +2,11 @@
 #define PLAYER_H
 
 #include <string>
+#include <vector>
 
 #include "../Emplacement/Emplacement.class.h"
-
+#include "SDL2/SDL.h"
+#include "../Display/Display.class.h"
 // include global constants
 #include "../../config/constants.h"
 
@@ -18,11 +20,15 @@ public:
 	std::string name;
 	int delay;
 	int points;
+
+	Display* playerDisplay;
 	//TODO add int(Player::*evaluate)(Emplacement[TAILLE][TAILLE]) function pointer
 	
 	//int pions[TAILLE*TAILLE][2] = {-1};
 
-	int init(int newTeam, std::string newName = "Joueur", int newType = PLAYER_TYPE_MIN); //initialise le joueur (default type -> IA)
+	Player() = default;
+
+	int init(Display* display, int newTeam, std::string newName = "Joueur", int newType = PLAYER_TYPE_MIN); //initialise le joueur (default type -> IA)
 
 	std::string getName(); //returns name
 

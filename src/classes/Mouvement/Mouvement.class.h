@@ -4,6 +4,7 @@
 // include global constants
 #include "../../config/constants.h"
 #include "../Emplacement/Emplacement.class.h"
+#include "../../SDL2/SDL.h"
 
 class Mouvement
 {
@@ -21,6 +22,8 @@ public:
 	int verify(Emplacement grille[TAILLE][TAILLE]); // Réinitialise avec les mêmes valeurs
 
 	int apply(Emplacement grille[TAILLE][TAILLE]); //applique le mouvement
+
+	// bool isOver(Emplacement grille[TAILLE][TAILLE]);
 
 };
 

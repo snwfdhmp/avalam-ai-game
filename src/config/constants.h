@@ -16,4 +16,7 @@
 #define INPUT_TYPE_STRING 1
 #define INPUT_TYPE_NUMBER 2
 
+#define GAP 80
+#define PAWN_SIZE 50
+
 #endif
